@@ -3,13 +3,13 @@
     "id": 5888,
     "sender": "kusuma093",
     "content": "Same issue on Readm 8  with image_picker 0.6.7+17",
-    "createdAt": "2020-12-22T15:14:58Z"
+    "createdAt": "2026-12-22T15:14:58Z"
   },
   {
     "id": 5889,
     "sender": "alex9153",
     "content": "Same issue in image_picker: ^0.6.7+17 (Asus Zen phone max pro) \r\nMy app uses landscape mode. Maybe this is the reason ?",
-    "createdAt": "2020-12-27T14:07:15Z"
+    "createdAt": "2026-12-27T14:07:15Z"
   },
   {
     "id": 5890,

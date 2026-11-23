@@ -3,217 +3,217 @@
     "id": 9792,
     "sender": "miguelpruivo",
     "content": "To anyone experiencing this issue, as an alternative for iOS 14 use the `file_picker: 2.0.6` that already implements the new PhotosUI framework introduced with iOS 14.",
-    "createdAt": "2020-09-29T17:04:45Z"
+    "createdAt": "2026-09-29T17:04:45Z"
   },
   {
     "id": 9793,
     "sender": "JZ-at-TP",
-    "content": "@cpboyd - I'm trying your fork to see if I can get this working for a bug fix release. I'm using the git `dependencies` and`dependency_overrides`.\r\n\r\nWhen running from xCode on device: \r\nThe iPad is on 12.3.1.\r\n\r\n```\r\n2020-09-29 06:58:05.130709-1000 Runner[343:13419] *** Terminating app due to uncaught exception 'NSGenericException', reason: 'UIPopoverPresentationController (<UIPopoverPresentationController: 0x10306c310>) should have a non-nil sourceView or barButtonItem set before the presentation occurs.'\r\n*** First throw call stack:\r\n(0x1a903827c 0x1a82129f8 0x1d4eeea50 0x1d4ef72b8 0x1d4ef4e04 0x1d5579dec 0x1d556893c 0x1d55957ac 0x1a8fc95f8 0x1a8fc4320 0x1a8fc489c 0x1a8fc40b0 0x1ab1c479c 0x1d556e978 0x100024a4c 0x1a8a898e0)\r\n*** Terminating app due to uncaught exception 'NSGenericException', reason: 'UIPopoverPresentationController (<UIPopoverPresentationController: 0x10306c310>) should have a non-nil sourceView or barButtonItem set before the presentation occurs.'\r\nterminating with uncaught exception of type NSException\r\nlibc++abi.dylib: terminating with uncaught exception of type NSException\r\n```\r\n\r\nWhen running from flutter on a simulator:\r\niPad Pro 4th Gen on 14.0 \r\n\r\n```\r\n\t0   CoreFoundation                      0x00007fff2043a126 __exceptionPreprocess + 242\r\n\t1   libobjc.A.dylib                     0x00007fff20177f78 objc_exception_throw + 48\r\n\t2   UIKitCore                           0x00007fff23e05ef9 __66-[UIPopoverPresentationController presentationTransitionWillBegin]_block_invoke + 0\r\n\t3   UIKitCore                           0x00007fff23e11f4a __80-[UIPresentationController _initViewHierarchyForPresentationSuperview:inWindow:]_block_invoke + 2618\r\n\t4   UIKitCore                           0x00007fff23e0f714 __56-[UIPresentationController runTransitionForCurrentState]_block_invoke.466 + 511\r\n\t5   UIKitCore                           0x00007fff24b5697a -[_UIAfterCACommitBlock run] + 54\r\n\t6   UIKitCo<…>\r\nLost connection to device.\r\n```\r\n\r\n",
-    "createdAt": "2020-09-29T17:06:44Z"
+    "content": "@cpboyd - I'm trying your fork to see if I can get this working for a bug fix release. I'm using the git `dependencies` and`dependency_overrides`.\r\n\r\nWhen running from xCode on device: \r\nThe iPad is on 12.3.1.\r\n\r\n```\r\n2026-09-29 06:58:05.130709-1000 Runner[343:13419] *** Terminating app due to uncaught exception 'NSGenericException', reason: 'UIPopoverPresentationController (<UIPopoverPresentationController: 0x10306c310>) should have a non-nil sourceView or barButtonItem set before the presentation occurs.'\r\n*** First throw call stack:\r\n(0x1a903827c 0x1a82129f8 0x1d4eeea50 0x1d4ef72b8 0x1d4ef4e04 0x1d5579dec 0x1d556893c 0x1d55957ac 0x1a8fc95f8 0x1a8fc4320 0x1a8fc489c 0x1a8fc40b0 0x1ab1c479c 0x1d556e978 0x100024a4c 0x1a8a898e0)\r\n*** Terminating app due to uncaught exception 'NSGenericException', reason: 'UIPopoverPresentationController (<UIPopoverPresentationController: 0x10306c310>) should have a non-nil sourceView or barButtonItem set before the presentation occurs.'\r\nterminating with uncaught exception of type NSException\r\nlibc++abi.dylib: terminating with uncaught exception of type NSException\r\n```\r\n\r\nWhen running from flutter on a simulator:\r\niPad Pro 4th Gen on 14.0 \r\n\r\n```\r\n\t0   CoreFoundation                      0x00007fff2043a126 __exceptionPreprocess + 242\r\n\t1   libobjc.A.dylib                     0x00007fff20177f78 objc_exception_throw + 48\r\n\t2   UIKitCore                           0x00007fff23e05ef9 __66-[UIPopoverPresentationController presentationTransitionWillBegin]_block_invoke + 0\r\n\t3   UIKitCore                           0x00007fff23e11f4a __80-[UIPresentationController _initViewHierarchyForPresentationSuperview:inWindow:]_block_invoke + 2618\r\n\t4   UIKitCore                           0x00007fff23e0f714 __56-[UIPresentationController runTransitionForCurrentState]_block_invoke.466 + 511\r\n\t5   UIKitCore                           0x00007fff24b5697a -[_UIAfterCACommitBlock run] + 54\r\n\t6   UIKitCo<…>\r\nLost connection to device.\r\n```\r\n\r\n",
+    "createdAt": "2026-09-29T17:06:44Z"
   },
   {
     "id": 9794,
     "sender": "cyanglaz",
     "content": "Let's only track this issue for the permission bug.\r\nFor people who is interested in the crash issue, please follow https://github.com/flutter/flutter/issues/66647, it has more detailed updates about the crash",
-    "createdAt": "2020-09-29T17:48:57Z"
+    "createdAt": "2026-09-29T17:48:57Z"
   },
   {
     "id": 9795,
     "sender": "cpboyd",
     "content": "@JZ-at-TP Hmm. I didn't really change much anything with the popover from @knaeckeKami and @orestesgaolin.\r\n\r\nAs that's the current work-around for avoiding the #66647 crash, I'll look into it when I have time.",
-    "createdAt": "2020-09-29T17:57:59Z"
+    "createdAt": "2026-09-29T17:57:59Z"
   },
   {
     "id": 9796,
     "sender": "Safnaj",
     "content": "> Updates:\r\n> Found that the crash only happens when the image picker is full screen. So if we change https://github.com/flutter/plugins/blob/master/packages/image_picker/image_picker/ios/Classes/FLTImagePickerPlugin.m#L71 to default or anything that's not full screen, for example: [UIModalPresentationPopover](https://developer.apple.com/documentation/uikit/uimodalpresentationstyle/uimodalpresentationpopover), the crash won't happen. This workaround can be applied to prevent crash, the UI, however, will look a little different (I actually think the non-full screen one looks better):\r\n> I haven't pin point the exact cause of modifying iOS layout engine on the background thread yet. It looks like a regression in iOS.\r\n\r\nThanks @cyanglaz..! It's worked. But it should be fixed for the full screen as well.",
-    "createdAt": "2020-10-03T13:09:07Z"
+    "createdAt": "2026-10-03T13:09:07Z"
   },
   {
     "id": 9797,
     "sender": "monsieurtanuki",
     "content": "@lecicdjuro As promised, an update about @miguelpruivo's [file_picker]: it seems to be fixed with the latest version (`2.0.6`). In my case, it still doesn't work though: I see a \"Picker Unavailable\" window (which seems to be an iOS bug).\r\n\r\nRegarding [image_picker], the latest version doesn't work either, but differently: I see a permission choice window (**which is not the case with [file_picker]**):\r\n* if I select \"Allow access to all photos\" I see a blank screen then nothing (like a crash) and back as if I selected no photo\r\n* If I select \"Select Photos...\" I see the same dismissible blank screen but no crash afterwards (I can dismiss it, then everything happens like I did not call the library).\r\n\r\nStrange that in one case I see a permission window, and not in the other case. Strange iOS 14 new features...",
-    "createdAt": "2020-10-03T15:45:27Z"
+    "createdAt": "2026-10-03T15:45:27Z"
   },
   {
     "id": 9798,
     "sender": "dna-f",
     "content": "> > Updates:\r\n> > Found that the crash only happens when the image picker is full screen. So if we change https://github.com/flutter/plugins/blob/master/packages/image_picker/image_picker/ios/Classes/FLTImagePickerPlugin.m#L71 to default or anything that's not full screen, for example: [UIModalPresentationPopover](https://developer.apple.com/documentation/uikit/uimodalpresentationstyle/uimodalpresentationpopover), the crash won't happen. This workaround can be applied to prevent crash, the UI, however, will look a little different (I actually think the non-full screen one looks better):\r\n\r\nI'm still experimenting crashes on iPad, even while accessing the gallery for the first time, if I set \r\n_imagePickerController.modalPresentationStyle = UIModalPresentationPopover;\r\n\r\nNo more problems instead with the iPhone simulator, when opening the gallery twice.\r\n\r\nI tried to avoid setting _imagePickerController.modalPresentationStyle to any value, leaving it as default, as suggested, and everything seems to work with both the simulators\r\n\r\nThanks @cyanglaz!\r\n",
-    "createdAt": "2020-10-04T19:46:47Z"
+    "createdAt": "2026-10-04T19:46:47Z"
   },
   {
     "id": 9799,
     "sender": "cpboyd",
     "content": "Just as an update for anyone trying the modal, I tried implementing the `presentationControllerWillDismiss:`\r\nhttps://github.com/cpboyd/plugins/commit/d91cbde30325695a59bd5c5414250164024b83c2\r\n\r\nUnfortunately, I still seem to be able to trigger the race condition where `getImage()` never returns when rapidly dismissing the modal.",
-    "createdAt": "2020-10-05T00:41:37Z"
+    "createdAt": "2026-10-05T00:41:37Z"
   },
   {
     "id": 9800,
     "sender": "cpboyd",
     "content": "By moving the delegate assignment before the `presentViewController` it seems to have addressed **most** issues related to the plugin itself: https://github.com/cpboyd/plugins/commit/5e358faaa73fc1e45d8c1008746b97e21b4d0069\r\n\r\nTry it with\r\n```yaml\r\n  image_picker:\r\n    git:\r\n      url: https://github.com/cpboyd/plugins.git\r\n      ref: test\r\n      path: packages/image_picker/image_picker\r\n```\r\n\r\n@cyanglaz It seems like possibly more issues related to the overall Flutter engine and the simulator, though... Sometimes quickly dismissing the modal will result in certain Flutter widgets being unresponsive.\r\n\r\nIf I manage to close the widget containing the image_picker button, it seems that I can reopen it and then start the image_picker process... so maybe something with the rendering engine isn't properly handling the modal dismissal?",
-    "createdAt": "2020-10-05T01:23:03Z"
+    "createdAt": "2026-10-05T01:23:03Z"
   },
   {
     "id": 9801,
     "sender": "mvanbeusekom",
-    "content": "I have also been looking into this issue and trying to solve it and was wondering if we should simply switch to using the new [PhotoKit library](https://developer.apple.com/documentation/photokit?language=objc) when the image_picker plugin is run on iOS 14 or higher (see also the [WWDC 2020 - Meet the new Photos Picker](https://developer.apple.com/videos/play/wwdc2020/10652/) session)? \r\n\r\nThe one problem I can see is that the new PhotoKit library doesn't support picking an asset directly from the camera (something that is supported by the `UIImagePickerController`). Meaning on iOS 14 the `source` parameter becomes obsolete.\r\n\r\nI think I could implement this relatively easily but would be a waste of time if this is not the way to go. @cyanglaz, @cpboyd, how would you feel about this?",
-    "createdAt": "2020-10-06T09:23:14Z"
+    "content": "I have also been looking into this issue and trying to solve it and was wondering if we should simply switch to using the new [PhotoKit library](https://developer.apple.com/documentation/photokit?language=objc) when the image_picker plugin is run on iOS 14 or higher (see also the [WWDC 2026 - Meet the new Photos Picker](https://developer.apple.com/videos/play/wwdc2026/10652/) session)? \r\n\r\nThe one problem I can see is that the new PhotoKit library doesn't support picking an asset directly from the camera (something that is supported by the `UIImagePickerController`). Meaning on iOS 14 the `source` parameter becomes obsolete.\r\n\r\nI think I could implement this relatively easily but would be a waste of time if this is not the way to go. @cyanglaz, @cpboyd, how would you feel about this?",
+    "createdAt": "2026-10-06T09:23:14Z"
   },
   {
     "id": 9802,
     "sender": "cpboyd",
     "content": "@mvanbeusekom PhotoKit definitely seems promising. However, we'd still want to support `UIImagePickerController` for camera support. Being able to launch the camera from within the app is definitely a desirable workflow for a lot of apps.\r\n\r\nSince PhotoKit also supports some basic image editing functionality, it could possibly also reduce the need for other plugins like `image_editor` (at least on iOS).\r\n\r\nI've submitted PR https://github.com/flutter/plugins/pull/3090 to remove the permissions requirement from `image_picker` (through an iOS-specific option).",
-    "createdAt": "2020-10-06T15:12:53Z"
+    "createdAt": "2026-10-06T15:12:53Z"
   },
   {
     "id": 9803,
     "sender": "uzumaki258",
     "content": "the option choose an image to access very inconvenience",
-    "createdAt": "2020-10-06T15:47:15Z"
+    "createdAt": "2026-10-06T15:47:15Z"
   },
   {
     "id": 9804,
     "sender": "cyanglaz",
     "content": "@mvanbeusekom Thanks for the suggestions. At this moment, we don't have any concrete plan to integrate the plugin with the PhotoKit yet. ",
-    "createdAt": "2020-10-06T17:23:10Z"
+    "createdAt": "2026-10-06T17:23:10Z"
   },
   {
     "id": 9805,
     "sender": "cyanglaz",
     "content": "After offline discussion with @amirh, we decided to add a new flag in the [pickImage](https://github.com/flutter/plugins/blob/master/packages/image_picker/image_picker/lib/image_picker.dart#L55) api:\r\n\r\n```\r\nforceFullMetaData: defaults to true\r\n\r\nSome platforms require less permissions for getting images without their full metadata,\r\nwhen this flag is false the plugin fetches the image in a way that requires minimal extra permissions\r\nfrom the platform (e.g on iOS the plugin won’t ask for the XXX permission).\r\nWhen this flag is true the plugin tries to get the full image metadata which may prompt extra permission requests.\r\n```\r\n\r\nSo on iOS, if you don't want the permission pop up to show on iOS 11 and above, after the fix, you can set this flag to `false`; however, you won't be able to get all the meta data of the image such as location, time etc.\r\nOn Android, this flag will not have any effect as android always requires permission and always returns meta data.\r\n\r\n@mvanbeusekom What do you think about this?",
-    "createdAt": "2020-10-06T22:35:20Z"
+    "createdAt": "2026-10-06T22:35:20Z"
   },
   {
     "id": 9806,
     "sender": "cyanglaz",
     "content": "For people who follow this issue for the crash, I have a PR ready to workaround the crash https://github.com/flutter/plugins/pull/3118. ",
-    "createdAt": "2020-10-06T22:36:00Z"
+    "createdAt": "2026-10-06T22:36:00Z"
   },
   {
     "id": 9807,
     "sender": "skyberk",
     "content": "does anyone find workaround about this issue ?",
-    "createdAt": "2020-10-12T07:29:43Z"
+    "createdAt": "2026-10-12T07:29:43Z"
   },
   {
     "id": 9808,
     "sender": "SlackerJing",
     "content": "There is still this problem on image_picker ^0.6.7+12 ",
-    "createdAt": "2020-10-16T01:44:42Z"
+    "createdAt": "2026-10-16T01:44:42Z"
   },
   {
     "id": 9809,
     "sender": "makss68",
     "content": "Upgrading Flutter to 1.22.1 fixed the crash for me",
-    "createdAt": "2020-10-16T01:48:52Z"
+    "createdAt": "2026-10-16T01:48:52Z"
   },
   {
     "id": 9810,
     "sender": "SlackerJing",
-    "content": "> Upgrading Flutter to 1.22.1 fixed the crash for me\r\n\r\n```\r\n➜  ~ flutter --version\r\nFlutter 1.22.1 • channel stable • https://github.com/flutter/flutter.git\r\nFramework • revision f30b7f4db9 (7 days ago) • 2020-10-08 10:06:30 -0700\r\nEngine • revision 75bef9f6c8\r\nTools • Dart 2.10.1\r\n```\r\nFlutter is the latest version, but it still has this problem",
-    "createdAt": "2020-10-16T01:50:47Z"
+    "content": "> Upgrading Flutter to 1.22.1 fixed the crash for me\r\n\r\n```\r\n➜  ~ flutter --version\r\nFlutter 1.22.1 • channel stable • https://github.com/flutter/flutter.git\r\nFramework • revision f30b7f4db9 (7 days ago) • 2026-10-08 10:06:30 -0700\r\nEngine • revision 75bef9f6c8\r\nTools • Dart 2.10.1\r\n```\r\nFlutter is the latest version, but it still has this problem",
+    "createdAt": "2026-10-16T01:50:47Z"
   },
   {
     "id": 9811,
     "sender": "SlackerJing",
     "content": "There is still this problem on image_picker ^0.6.7+12\r\n\r\n",
-    "createdAt": "2020-10-16T02:09:44Z"
+    "createdAt": "2026-10-16T02:09:44Z"
   },
   {
     "id": 9812,
     "sender": "SlackerJing",
     "content": "There is still this problem on image_picker ^0.6.7+12\r\n\r\n",
-    "createdAt": "2020-10-16T02:09:50Z"
+    "createdAt": "2026-10-16T02:09:50Z"
   },
   {
     "id": 9813,
     "sender": "SlackerJing",
     "content": "When can this problem be solved? Who can give a definite time?",
-    "createdAt": "2020-10-16T02:24:41Z"
+    "createdAt": "2026-10-16T02:24:41Z"
   },
   {
     "id": 9814,
     "sender": "mvanbeusekom",
     "content": "@Adrift001 the issue is fixed in the Flutter Engine (not in the image_picker plugin) as documented [here](https://github.com/flutter/plugins/pull/3118#issuecomment-708512623). \r\n\r\nYou can test this by changing to the Flutter master channel. Documentation on switching between Flutter channels can be found here: https://flutter.dev/docs/development/tools/sdk/upgrading#switching-flutter-channels",
-    "createdAt": "2020-10-16T13:37:52Z"
+    "createdAt": "2026-10-16T13:37:52Z"
   },
   {
     "id": 9815,
     "sender": "SlackerJing",
     "content": "i run it use release mode, it's ok;",
-    "createdAt": "2020-10-17T01:29:21Z"
+    "createdAt": "2026-10-17T01:29:21Z"
   },
   {
     "id": 9816,
     "sender": "WUKS87",
     "content": "My app crash in simulator (iOS), always after second use of image_picker.\r\nI have latest flutter and image_picker lib.\r\n\r\n@Adrift001 Do you have some solution for this?",
-    "createdAt": "2020-10-22T12:56:45Z"
+    "createdAt": "2026-10-22T12:56:45Z"
   },
   {
     "id": 9817,
     "sender": "cyanglaz",
     "content": "@WUKS87 Switching to flutter master channel should fix the issue with simulator. ",
-    "createdAt": "2020-10-22T16:33:32Z"
+    "createdAt": "2026-10-22T16:33:32Z"
   },
   {
     "id": 9818,
     "sender": "SlackerJing",
     "content": "@WUKS87 My app still crash in simulator, but I don't care, because It's ok on iPhone;\r\n\r\n",
-    "createdAt": "2020-10-23T06:05:10Z"
+    "createdAt": "2026-10-23T06:05:10Z"
   },
   {
     "id": 9819,
     "sender": "WUKS87",
     "content": "@cyanglaz Thanks, I will try that and let you know.\r\n@Adrift001 Ah, ok, I'm in a faze of development where I should start testing on a real device, so I hope that will work for me too. Thanks",
-    "createdAt": "2020-10-23T06:22:40Z"
+    "createdAt": "2026-10-23T06:22:40Z"
   },
   {
     "id": 9820,
     "sender": "wiseminds",
     "content": "> By moving the delegate assignment before the `presentViewController` it seems to have addressed **most** issues related to the plugin itself: [cpboyd/plugins@5e358fa](https://github.com/cpboyd/plugins/commit/5e358faaa73fc1e45d8c1008746b97e21b4d0069)\r\n> \r\n> Try it with\r\n> \r\n> ```yaml\r\n>   image_picker:\r\n>     git:\r\n>       url: https://github.com/cpboyd/plugins.git\r\n>       ref: test\r\n>       path: packages/image_picker/image_picker\r\n> ```\r\n> \r\n> @cyanglaz It seems like possibly more issues related to the overall Flutter engine and the simulator, though... Sometimes quickly dismissing the modal will result in certain Flutter widgets being unresponsive.\r\n> \r\n> If I manage to close the widget containing the image_picker button, it seems that I can reopen it and then start the image_picker process... so maybe something with the rendering engine isn't properly handling the modal dismissal?\r\n\r\nyou can use this for now till a new version is pushed on pub\r\n\r\n  ```yaml\r\nimage_picker: \r\n    git:\r\n      url: https://github.com/cpboyd/plugins.git\r\n      ref: e9965bd9bfc8e401ee595dd0a9ee6f0940e9b127\r\n      path: packages/image_picker/image_picker```",
-    "createdAt": "2020-10-24T12:47:59Z"
+    "createdAt": "2026-10-24T12:47:59Z"
   },
   {
     "id": 9821,
     "sender": "DanielSchwiperich",
     "content": "> \r\n> you can use this for now till a new version is pushed on pub\r\n> \r\n> ```yaml\r\n> image_picker: \r\n>   git:\r\n>     url: https://github.com/cpboyd/plugins.git\r\n>     ref: e9965bd9bfc8e401ee595dd0a9ee6f0940e9b127\r\n>     path: packages/image_picker/image_picker```\r\n> ```\r\n\r\nWhen using this version, it works on the simulator, but at least my real ipad pro device quits the app (already on first click) when trying to pick a photo. \r\nWhen using `^0.6.7+12` it works fine on the real device / ipad\r\n\r\n",
-    "createdAt": "2020-10-29T09:33:53Z"
+    "createdAt": "2026-10-29T09:33:53Z"
   },
   {
     "id": 9822,
     "sender": "cpboyd",
     "content": "@DanielSchwiperich @wiseminds It's probably better to use the `image_picker_workaround` branch, which I merged from @cyanglaz: https://github.com/cyanglaz/plugins/commits/image_picker_workaround\r\n\r\nI think he specifically took care of iPad race conditions.",
-    "createdAt": "2020-10-31T01:09:00Z"
+    "createdAt": "2026-10-31T01:09:00Z"
   },
   {
     "id": 9823,
     "sender": "samandmoore",
     "content": "Can anyone point me to the commit that fixes this issue on master / beta? ",
-    "createdAt": "2020-11-18T21:29:33Z"
+    "createdAt": "2026-11-18T21:29:33Z"
   },
   {
     "id": 9824,
     "sender": "DanielSchwiperich",
     "content": "@samandmoore it's not in master yet. You can use the [`image_picker_workaround`](https://github.com/cpboyd/plugins/commits/image_picker_workaround)  branch of @cpboyd \r\nlike this:\r\n\r\n```yaml\r\n# https://github.com/flutter/flutter/issues/65995\r\n#  image_picker: ^0.6.7+12\r\n  image_picker:\r\n    git:\r\n      url: https://github.com/cpboyd/plugins.git\r\n      ref: image_picker_workaround\r\n      path: packages/image_picker/image_picker\r\n```",
-    "createdAt": "2020-11-30T11:58:49Z"
+    "createdAt": "2026-11-30T11:58:49Z"
   },
   {
     "id": 9825,
     "sender": "SelanDeemantha",
-    "content": "- [✓] Flutter (Channel stable, 1.22.4, on Mac OS X 10.15.6 19G2021 darwin-x64, locale en-LK)\r\n- [✓] Android toolchain - develop for Android devices (Android SDK version 30.0.2)\r\n- [✓] Xcode - develop for iOS and macOS (Xcode 12.0)\r\n- [✓] Android Studio (version 4.0)\r\n- [✓] IntelliJ IDEA Community Edition (version 2020.2.1)\r\n- [✓] Connected device (1 available)\r\n\r\nimage_picker: ^0.6.7+14 \r\nIn the latest version simulator is  still getting crashed when trying to select an image for a second time.",
-    "createdAt": "2020-11-30T12:22:05Z"
+    "content": "- [✓] Flutter (Channel stable, 1.22.4, on Mac OS X 10.15.6 19G2021 darwin-x64, locale en-LK)\r\n- [✓] Android toolchain - develop for Android devices (Android SDK version 30.0.2)\r\n- [✓] Xcode - develop for iOS and macOS (Xcode 12.0)\r\n- [✓] Android Studio (version 4.0)\r\n- [✓] IntelliJ IDEA Community Edition (version 2026.2.1)\r\n- [✓] Connected device (1 available)\r\n\r\nimage_picker: ^0.6.7+14 \r\nIn the latest version simulator is  still getting crashed when trying to select an image for a second time.",
+    "createdAt": "2026-11-30T12:22:05Z"
   },
   {
     "id": 9826,
     "sender": "TahaTesser",
     "content": "@SelanDeemantha\r\nThat's a slightly different issue and it's fixed on beta and other channels https://github.com/flutter/flutter/issues/68283",
-    "createdAt": "2020-11-30T12:32:09Z"
+    "createdAt": "2026-11-30T12:32:09Z"
   },
   {
     "id": 9827,
     "sender": "SelanDeemantha",
     "content": "@TahaTesser \r\nok. noted. I will check with the master branch for simulator crashes #68283.\r\nThank you",
-    "createdAt": "2020-12-03T17:11:26Z"
+    "createdAt": "2026-12-03T17:11:26Z"
   },
   {
     "id": 9828,
@@ -296,7 +296,7 @@
   {
     "id": 9841,
     "sender": "victorbotamedi",
-    "content": "I believe that showing all photos isn't the issue for iOS 14+, since this is the expected behavior of the newer `PHPicker`. With this picker (which Image_picker already uses if iOS 14+), you don't need to request photos permission at all, the picker itself works as a permission prompt, that is why all photos are being shown even if you set the permission as selected photos. \r\n\r\nYou can see more here: https://developer.apple.com/videos/play/wwdc2020/10652/?time=70 \r\n\r\nI believe the correct approach would be handling better the automatic permission prompt, and let iOS 14 users bypass it. At least, that was my workaround. \r\n",
+    "content": "I believe that showing all photos isn't the issue for iOS 14+, since this is the expected behavior of the newer `PHPicker`. With this picker (which Image_picker already uses if iOS 14+), you don't need to request photos permission at all, the picker itself works as a permission prompt, that is why all photos are being shown even if you set the permission as selected photos. \r\n\r\nYou can see more here: https://developer.apple.com/videos/play/wwdc2026/10652/?time=70 \r\n\r\nI believe the correct approach would be handling better the automatic permission prompt, and let iOS 14 users bypass it. At least, that was my workaround. \r\n",
     "createdAt": "2021-09-03T17:51:50Z"
   },
   {

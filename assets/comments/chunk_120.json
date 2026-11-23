@@ -3,145 +3,145 @@
     "id": 7680,
     "sender": "flutter-github-sync",
     "content": "Google testing passed!",
-    "createdAt": "2020-06-24T00:02:47Z"
+    "createdAt": "2026-06-24T00:02:47Z"
   },
   {
     "id": 7681,
     "sender": "sjosegarcia",
     "content": "Excited to see this change merged into master.",
-    "createdAt": "2020-06-24T19:52:55Z"
+    "createdAt": "2026-06-24T19:52:55Z"
   },
   {
     "id": 7682,
     "sender": "flutter-github-sync",
     "content": "Started Google testing for this PR",
-    "createdAt": "2020-06-25T01:24:05Z"
+    "createdAt": "2026-06-25T01:24:05Z"
   },
   {
     "id": 7683,
     "sender": "flutter-github-sync",
     "content": "Google testing passed!",
-    "createdAt": "2020-06-25T01:56:54Z"
+    "createdAt": "2026-06-25T01:56:54Z"
   },
   {
     "id": 7684,
     "sender": "flutter-github-sync",
     "content": "Started Google testing for this PR",
-    "createdAt": "2020-06-25T02:11:48Z"
+    "createdAt": "2026-06-25T02:11:48Z"
   },
   {
     "id": 7685,
     "sender": "flutter-github-sync",
     "content": "Started Google testing for this PR",
-    "createdAt": "2020-06-25T04:19:29Z"
+    "createdAt": "2026-06-25T04:19:29Z"
   },
   {
     "id": 7686,
     "sender": "flutter-github-sync",
     "content": "Google testing passed!",
-    "createdAt": "2020-06-25T05:06:43Z"
+    "createdAt": "2026-06-25T05:06:43Z"
   },
   {
     "id": 7687,
     "sender": "pumuckelo",
     "content": "I just spend 20 minutes reading the whole discussions from end of 2019 until now. @pedromassango @chunhtai @justinmc . Thanks for putting in all the time and effort to find a solution, this is awesome! ",
-    "createdAt": "2020-07-10T20:46:40Z"
+    "createdAt": "2026-07-10T20:46:40Z"
   },
   {
     "id": 7688,
     "sender": "pedromassango",
     "content": "@chunhtai I want to know if the next PR to improve this one should be documented in another File or in the same File as this one.",
-    "createdAt": "2020-07-15T19:53:55Z"
+    "createdAt": "2026-07-15T19:53:55Z"
   },
   {
     "id": 7689,
     "sender": "chunhtai",
     "content": "> @chunhtai I want to know if the next PR to improve this one should be documented in another File or in the same File as this one.\r\n\r\nWe should create an issue to track it.",
-    "createdAt": "2020-07-15T19:56:04Z"
+    "createdAt": "2026-07-15T19:56:04Z"
   },
   {
     "id": 7690,
     "sender": "pedromassango",
     "content": "> > @chunhtai I want to know if the next PR to improve this one should be documented in another File or in the same File as this one.\r\n> \r\n> We should create an issue to track it.\r\n\r\nI will do this.\r\n\r\nEdit: \r\nHere is the issue: https://github.com/flutter/flutter/issues/61803",
-    "createdAt": "2020-07-15T19:58:03Z"
+    "createdAt": "2026-07-15T19:58:03Z"
   },
   {
     "id": 7691,
     "sender": "chunhtai",
     "content": "It looks like the branch may still out of date, are you sure you have the latest from the master?",
-    "createdAt": "2020-07-15T21:07:33Z"
+    "createdAt": "2026-07-15T21:07:33Z"
   },
   {
     "id": 7692,
     "sender": "pedromassango",
     "content": "> It looks like the branch may still out of date, are you sure you have the latest from the master?\r\n\r\nThere is new updates. Let me update this branch again.",
-    "createdAt": "2020-07-15T21:33:35Z"
+    "createdAt": "2026-07-15T21:33:35Z"
   },
   {
     "id": 7693,
     "sender": "justinmc",
     "content": "🎉  Congrats!\r\n\r\nThanks again for all the persistence in getting this PR ready.  An API like this is tricky to get right.  Let's keep an eye on how Flutter developers are using it as it rolls out.",
-    "createdAt": "2020-07-16T16:33:22Z"
+    "createdAt": "2026-07-16T16:33:22Z"
   },
   {
     "id": 7694,
     "sender": "pedromassango",
     "content": "> 🎉 Congrats!\r\n> \r\n> Thanks again for all the persistence in getting this PR ready. An API like this is tricky to get right. Let's keep an eye on how Flutter developers are using it as it rolls out.\r\n\r\nThank you. I still interested in improve this feature. And I will do that.",
-    "createdAt": "2020-07-16T16:47:18Z"
+    "createdAt": "2026-07-16T16:47:18Z"
   },
   {
     "id": 7695,
     "sender": "normancarcamo",
-    "content": "Hi there!, thank you for the effort on this project, I have a few questions about TextFormField class and the version of these changes:\r\n\r\n**1. Has the property:`autovalidateMode` in the TextFormField class not available anymore?**\r\n\r\nI did the mistake of upgrade the version I had because the notification on the IDE was really annoying (currently I can't remember the previous version, but after updating the `autovalidateMode` is not available)...\r\n\r\n<img width=\"818\" alt=\"Screen Shot 2020-09-02 at 10 51 40\" src=\"https://user-images.githubusercontent.com/2402579/92012955-5c2b0300-ed0a-11ea-88ef-1bba34904e97.png\">\r\n\r\nThe current version of flutter I have is the following:\r\n\r\n`flutter --version`\r\n```sh\r\nFlutter 1.20.2 • channel stable • https://github.com/flutter/flutter.git\r\nFramework • revision bbfbf1770c (3 weeks ago) • 2020-08-13 08:33:09 -0700\r\nEngine • revision 9d5b21729f\r\nTools • Dart 2.9.1\r\n```\r\n\r\n`flutter doctor`\r\n```sh\r\nDoctor summary (to see all details, run flutter doctor -v):\r\n[✓] Flutter (Channel stable, 1.20.2, on Mac OS X 10.15.6 19G2021, locale en-HN)\r\n \r\n[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.1)\r\n[✓] Xcode - develop for iOS and macOS (Xcode 11.5)\r\n[✓] Android Studio (version 4.0)\r\n[✓] IntelliJ IDEA Community Edition (version 2020.2.1)\r\n[✓] VS Code (version 1.48.2)\r\n[✓] Connected device (1 available)\r\n\r\n• No issues found!\r\n```\r\n**2. Which version of flutter were these changes merged?**\r\n\r\nIn the changed files I can see that the property `autovalidateMode` is still present, but in the stable channel using the sdk release: 1.20.2 is not.\r\n\r\nCould you give a hand to know what can I do because if not I will refactor the logic of some features already done.\r\n\r\nThanks!",
-    "createdAt": "2020-09-02T17:00:17Z"
+    "content": "Hi there!, thank you for the effort on this project, I have a few questions about TextFormField class and the version of these changes:\r\n\r\n**1. Has the property:`autovalidateMode` in the TextFormField class not available anymore?**\r\n\r\nI did the mistake of upgrade the version I had because the notification on the IDE was really annoying (currently I can't remember the previous version, but after updating the `autovalidateMode` is not available)...\r\n\r\n<img width=\"818\" alt=\"Screen Shot 2026-09-02 at 10 51 40\" src=\"https://user-images.githubusercontent.com/2402579/92012955-5c2b0300-ed0a-11ea-88ef-1bba34904e97.png\">\r\n\r\nThe current version of flutter I have is the following:\r\n\r\n`flutter --version`\r\n```sh\r\nFlutter 1.20.2 • channel stable • https://github.com/flutter/flutter.git\r\nFramework • revision bbfbf1770c (3 weeks ago) • 2026-08-13 08:33:09 -0700\r\nEngine • revision 9d5b21729f\r\nTools • Dart 2.9.1\r\n```\r\n\r\n`flutter doctor`\r\n```sh\r\nDoctor summary (to see all details, run flutter doctor -v):\r\n[✓] Flutter (Channel stable, 1.20.2, on Mac OS X 10.15.6 19G2021, locale en-HN)\r\n \r\n[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.1)\r\n[✓] Xcode - develop for iOS and macOS (Xcode 11.5)\r\n[✓] Android Studio (version 4.0)\r\n[✓] IntelliJ IDEA Community Edition (version 2026.2.1)\r\n[✓] VS Code (version 1.48.2)\r\n[✓] Connected device (1 available)\r\n\r\n• No issues found!\r\n```\r\n**2. Which version of flutter were these changes merged?**\r\n\r\nIn the changed files I can see that the property `autovalidateMode` is still present, but in the stable channel using the sdk release: 1.20.2 is not.\r\n\r\nCould you give a hand to know what can I do because if not I will refactor the logic of some features already done.\r\n\r\nThanks!",
+    "createdAt": "2026-09-02T17:00:17Z"
   },
   {
     "id": 7696,
     "sender": "chunhtai",
     "content": "It is not release to stable yet, you can switch to master channel and will be able to use this new API",
-    "createdAt": "2020-09-02T17:13:16Z"
+    "createdAt": "2026-09-02T17:13:16Z"
   },
   {
     "id": 7697,
     "sender": "normancarcamo",
     "content": "Oh!, understand it. \r\nok, thanks.",
-    "createdAt": "2020-09-02T17:25:01Z"
+    "createdAt": "2026-09-02T17:25:01Z"
   },
   {
     "id": 7698,
     "sender": "EffyCoder",
-    "content": "I couldn't find this autovalidatemode field in the TextFormField.\r\n\r\nFollowing is my flutter doctor output:\r\n\r\n`\r\n[√] Flutter (Channel stable, 1.20.4, on Microsoft Windows [Version 10.0.18363.1082], locale en-IN)\r\n    • Flutter version 1.20.4 at D:\\flutter_windows_1.20.2-stable\\flutter\r\n    • Framework revision fba99f6cf9 (9 days ago), 2020-09-14 15:32:52 -0700\r\n    • Engine revision d1bc06f032\r\n    • Dart version 2.9.2\r\n\r\n\r\n[√] Android toolchain - develop for Android devices (Android SDK version 30.0.2)\r\n    • Android SDK at D:\\AndroidWork\\sdk\r\n    • Platform android-30, build-tools 30.0.2\r\n    • ANDROID_HOME = D:\\AndroidWork\\sdk\r\n    • Java binary at: C:\\Program Files\\Android\\Android Studio\\jre\\bin\\java\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)\r\n    • All Android licenses accepted.\r\n\r\n[√] Android Studio (version 4.0)\r\n    • Android Studio at C:\\Program Files\\Android\\Android Studio\r\n    • Flutter plugin version 46.0.2\r\n    • Dart plugin version 193.7361\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)\r\n\r\n[√] VS Code, 64-bit edition (version 1.48.2)\r\n    • VS Code at C:\\Program Files\\Microsoft VS Code\r\n    • Flutter extension version 3.14.1\r\n\r\n[√] Connected device (1 available)\r\n    • Android SDK built for x86 (mobile) • emulator-5554 • android-x86 • Android 8.1.0 (API 27) (emulator)\r\n\r\n• No issues found!\r\n`\r\n\r\nWhen it will be added to stable release?\r\n",
-    "createdAt": "2020-09-23T13:59:38Z"
+    "content": "I couldn't find this autovalidatemode field in the TextFormField.\r\n\r\nFollowing is my flutter doctor output:\r\n\r\n`\r\n[√] Flutter (Channel stable, 1.20.4, on Microsoft Windows [Version 10.0.18363.1082], locale en-IN)\r\n    • Flutter version 1.20.4 at D:\\flutter_windows_1.20.2-stable\\flutter\r\n    • Framework revision fba99f6cf9 (9 days ago), 2026-09-14 15:32:52 -0700\r\n    • Engine revision d1bc06f032\r\n    • Dart version 2.9.2\r\n\r\n\r\n[√] Android toolchain - develop for Android devices (Android SDK version 30.0.2)\r\n    • Android SDK at D:\\AndroidWork\\sdk\r\n    • Platform android-30, build-tools 30.0.2\r\n    • ANDROID_HOME = D:\\AndroidWork\\sdk\r\n    • Java binary at: C:\\Program Files\\Android\\Android Studio\\jre\\bin\\java\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)\r\n    • All Android licenses accepted.\r\n\r\n[√] Android Studio (version 4.0)\r\n    • Android Studio at C:\\Program Files\\Android\\Android Studio\r\n    • Flutter plugin version 46.0.2\r\n    • Dart plugin version 193.7361\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)\r\n\r\n[√] VS Code, 64-bit edition (version 1.48.2)\r\n    • VS Code at C:\\Program Files\\Microsoft VS Code\r\n    • Flutter extension version 3.14.1\r\n\r\n[√] Connected device (1 available)\r\n    • Android SDK built for x86 (mobile) • emulator-5554 • android-x86 • Android 8.1.0 (API 27) (emulator)\r\n\r\n• No issues found!\r\n`\r\n\r\nWhen it will be added to stable release?\r\n",
+    "createdAt": "2026-09-23T13:59:38Z"
   },
   {
     "id": 7699,
     "sender": "pedromassango",
     "content": "It is not yet on stable!\r\nI don't know when it will land on stable release.",
-    "createdAt": "2020-09-23T14:39:50Z"
+    "createdAt": "2026-09-23T14:39:50Z"
   },
   {
     "id": 7700,
     "sender": "normancarcamo",
     "content": "@EffyCoder & @pedromassango I fixed my issue using `autovalidate` option, for example, only when the input has focus:\r\n\r\n```dart\r\nbuild(BuildContext context) {\r\n  return Container(\r\n    TextFormField(\r\n      autovalidate: focusNode.hasFocus,\r\n    )\r\n  );\r\n}\r\n```\r\n\r\nYou can do more stuffs with this approach, and it's working in the same way before it was.",
-    "createdAt": "2020-09-23T20:09:25Z"
+    "createdAt": "2026-09-23T20:09:25Z"
   },
   {
     "id": 7701,
     "sender": "pedromassango",
     "content": "> @EffyCoder & @pedromassango I fixed my issue using `autovalidate` option, for example, only when the input has focus:\n> \n> ```dart\n> build(BuildContext context) {\n>   return Container(\n>     TextFormField(\n>       autovalidate: focusNode.hasFocus,\n>     )\n>   );\n> }\n> ```\n> \n> You can do more stuffs with this approach, and it's working in the same way before it was.\n\nLast week I was thinking of adding this feature. \n\n@chunhtai @justinmc My only concern it just that autovalidateMode.hasFocus will only be used on single form fields (FormField, TextFormField, etc..) and not on the Form widget.\n\nWe have make it clear that it will have no effect on the Form widget, but this may not be the best thing to do.\n\nDo you have any thing in mind about this?",
-    "createdAt": "2020-09-23T20:25:55Z"
+    "createdAt": "2026-09-23T20:25:55Z"
   },
   {
     "id": 7702,
     "sender": "chunhtai",
     "content": "They can achieve the same result with\r\n```dart\r\nreturn Container(\r\n    TextFormField(\r\n      autovalidateMode: focusNode.hasFocus ?? AutovalidateMode.always :AutovalidateMode.disabled\r\n    )\r\n  );\r\n```\r\nWe should not expend the mode unless there is a mode that cannot be achieve with current API and/or we have a lot of use cases.",
-    "createdAt": "2020-09-23T20:43:28Z"
+    "createdAt": "2026-09-23T20:43:28Z"
   },
   {
     "id": 7703,
     "sender": "pumuckelo",
     "content": "I just updated my flutter_form_builder package.\r\n\r\nFirst off, thank you for implementing this feature!!\r\n\r\nWhy is the type of autovalidateMode dynamic though? Also, my IDE can't find \"AutovalidateMode.always\" etc\r\n\r\n\r\n**EDIT:** \r\nSorry, just needed to restart my VS CODE ",
-    "createdAt": "2020-10-17T14:03:10Z"
+    "createdAt": "2026-10-17T14:03:10Z"
   },
   {
     "id": 7704,

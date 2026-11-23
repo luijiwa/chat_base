@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chatscrollview/src/chat_message.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_data_source.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_scroll_common.dart';
@@ -5,6 +7,7 @@ import 'package:chatscrollview/src/chat_scroll/chat_scroll_controller.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_selection_controller.dart';
 import 'package:chatscrollview/src/chat_widgets/chat_keyboard_shortcuts.dart';
 import 'package:chatscrollview/src/chat_widgets/chat_scroll_view.dart';
+import 'package:chatscrollview/src/bloc/chat_message_bloc.dart';
 import 'package:chatscrollview/src/chat_widgets/demo/chat_composer.dart';
 import 'package:chatscrollview/src/chat_widgets/demo/date_separator.dart';
 import 'package:chatscrollview/src/chat_widgets/demo/demo_message.dart';
@@ -12,6 +15,12 @@ import 'package:chatscrollview/src/chat_widgets/demo/measure_size.dart';
 import 'package:chatscrollview/src/chat_widgets/demo/new_messages_pill.dart';
 import 'package:chatscrollview/src/chat_widgets/demo/selection_app_bar.dart';
 import 'package:chatscrollview/src/comments_data_source.dart';
+import 'package:chatscrollview/src/data/local_message_data_source.dart';
+import 'package:chatscrollview/src/data/message_repository_impl.dart';
+import 'package:chatscrollview/src/domain/message_repository.dart';
+import 'package:chatscrollview/src/domain/message_send_status.dart';
+import 'package:chatscrollview/src/domain/send_message_use_case.dart';
+import 'package:chatscrollview/src/domain/sent_message.dart';
 import 'package:material_ui/material_ui.dart';
 
 /// Demo screen for the widget-based [ChatScrollView] — the chat viewport,
@@ -33,16 +42,33 @@ class _WidgetChatScreenState extends State<WidgetChatScreen> {
   final ValueNotifier<double> _bottomInset = ValueNotifier<double>(96);
   bool _loading = true;
 
+  /// Доменный/дата стек отправки сообщений.
+  LocalMessageDataSource? _localDataSource;
+  MessageRepository? _messageRepository;
+  SendMessageUseCase? _sendMessageUseCase;
+
+  /// BLoC, владеющий состоянием отправки сообщений.
+  ChatMessageBloc? _chatBloc;
+  StreamSubscription<ChatMessageState>? _blocSubscription;
+
   @override
   void initState() {
     super.initState();
     _controller = ChatScrollController();
     _selection = ChatSelectionController();
+
+    // Доменный/дата стек отправки сообщений.
+    _localDataSource = LocalMessageDataSource();
+    _messageRepository = MessageRepositoryImpl(_localDataSource!);
+    _sendMessageUseCase = SendMessageUseCase(_messageRepository!);
+
     _init();
   }
 
   @override
   void dispose() {
+    _blocSubscription?.cancel();
+    _chatBloc?.close();
     _bottomInset.dispose();
     _controller.dispose();
     _selection.dispose();
@@ -81,6 +107,15 @@ class _WidgetChatScreenState extends State<WidgetChatScreen> {
       reachedNewest: true,
     );
     _controller.jumpTo(count - 1);
+
+    // Создаём BLoC отправки, как только известно начальное значение id.
+    _chatBloc = ChatMessageBloc(
+      sendMessageUseCase: _sendMessageUseCase!,
+      initialNextOutgoingId: count,
+    );
+    _blocSubscription = _chatBloc!.stream.listen((_) {
+      if (mounted) setState(() {});
+    });
   }
 
   /// Stable per-state tear-off — same reference for the widget's lifetime,
@@ -96,7 +131,66 @@ class _WidgetChatScreenState extends State<WidgetChatScreen> {
     if (message == null) return const DemoShimmerBubble();
     final prev = _dataSource?.getMessage(id - 1);
     final isFirstInRun = prev?.sender != message.sender;
-    return DemoMessageBubble(message: message, isFirstInRun: isFirstInRun);
+    final sendStatus = _chatBloc!.state.statusOf(id);
+    return DemoMessageBubble(
+      message: message,
+      isFirstInRun: isFirstInRun,
+      sendStatus: sendStatus,
+      onRetry: sendStatus == MessageSendStatus.failed
+          ? () => _retrySend(id)
+          : null,
+    );
+  }
+
+  /// Обработка нажатия «Отправить» в композиторе.
+  ///
+  /// Вставляет pending-сообщение в дата-источник и пролистывает к нему,
+  /// затем delegates управление статусом в BLoC.
+  void _onSend(String text) {
+    final trimmed = text.trim();
+    if (trimmed.isEmpty) return;
+
+    final id = _chatBloc!.state.nextOutgoingId;
+    final now = DateTime.now();
+    final pending = SentMessage(
+      id: id,
+      sender: 'Me',
+      createdAt: now,
+      updatedAt: now,
+      content: trimmed,
+      status: MessageSendStatus.pending,
+    );
+
+    // Вставляем в дата-источник, чтобы сообщение отобразилось в списке.
+    _dataSource?.upsertMessage(pending);
+    // Расширяем границу до нового id — иначе viewport не рендерит сообщение
+    // за старым newestKnownId. Диалог не закончился, пользователь может
+    // отправить ещё.
+    _dataSource?.seedBoundaries(newestKnownId: id);
+    _controller.jumpTo(id);
+
+    // Delegates status management (pending → sent / failed) to BLoC.
+    _chatBloc!.add(ChatMessageSendRequested(text: text));
+  }
+
+  /// Повторная отправка сообщения с [id] (кнопка «Повтор» на failed).
+  ///
+  /// Вставляет retrying-сообщение в дата-источник и пролистывает к нему,
+  /// затем delegates управление статусом в BLoC.
+  void _retrySend(int id) {
+    final existing = _chatBloc!.state.messageOf(id);
+    if (existing == null) return;
+
+    final retrying = existing.copyWith(
+      status: MessageSendStatus.pending,
+      error: null,
+    );
+
+    _dataSource?.upsertMessage(retrying);
+    _dataSource?.seedBoundaries(newestKnownId: id);
+    _controller.jumpTo(id);
+
+    _chatBloc!.add(ChatMessageRetryRequested(id: id));
   }
 
   Widget _buildChunkError(
@@ -156,6 +250,7 @@ class _WidgetChatScreenState extends State<WidgetChatScreen> {
               child: ChatComposer(
                 selection: _selection,
                 dataSource: _dataSource!,
+                onSend: _onSend,
               ),
             ),
           ),

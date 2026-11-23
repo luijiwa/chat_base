@@ -128,7 +128,7 @@
   {
     "id": 5973,
     "sender": "irdevp",
-    "content": "Same issue\r\n\r\nflutter run --debug\r\nhttps://user-images.githubusercontent.com/47428695/125677525-aa55b9ce-36d7-45c9-b6cb-ddc209daacbe.mp4\r\n\r\nW/ActivityThread(18074): SCHED: br.com.example.app/.MainActivity [66, r=94ms, a=48ms, w=1917ms]\r\nLost connection to device.\r\n\r\nimage_picker: ^0.6.7+22\r\nFlutter 1.22.2 • channel unknown • unknown source\r\nFramework • revision 84f3d28555 (9 months ago) • 2020-10-15 16:26:19 -0700\r\nEngine • revision b8752bbfff\r\nTools • Dart 2.10.2\r\n\r\nLost connection to device.\r\n\r\nDevices:\r\nLG K22 (more often)\r\nRedmi Note 7\r\nSamsung A30",
+    "content": "Same issue\r\n\r\nflutter run --debug\r\nhttps://user-images.githubusercontent.com/47428695/125677525-aa55b9ce-36d7-45c9-b6cb-ddc209daacbe.mp4\r\n\r\nW/ActivityThread(18074): SCHED: br.com.example.app/.MainActivity [66, r=94ms, a=48ms, w=1917ms]\r\nLost connection to device.\r\n\r\nimage_picker: ^0.6.7+22\r\nFlutter 1.22.2 • channel unknown • unknown source\r\nFramework • revision 84f3d28555 (9 months ago) • 2026-10-15 16:26:19 -0700\r\nEngine • revision b8752bbfff\r\nTools • Dart 2.10.2\r\n\r\nLost connection to device.\r\n\r\nDevices:\r\nLG K22 (more often)\r\nRedmi Note 7\r\nSamsung A30",
     "createdAt": "2021-07-14T19:09:54Z"
   },
   {

@@ -219,7 +219,7 @@
     "id": 3620,
     "sender": "danialdezfouli",
     "content": "I have made a simple one here:\r\nhttps://github.com/danialdezfouli/flutterjsx\r\nhttps://www.npmjs.com/package/flutterjsx\r\nhttps://www.youtube.com/watch?v=Oj1JMSurphA",
-    "createdAt": "2020-04-11T18:06:52Z"
+    "createdAt": "2026-04-11T18:06:52Z"
   },
   {
     "id": 3621,
@@ -297,90 +297,90 @@
     "id": 3633,
     "sender": "acoutts",
     "content": "Will this help iOS metal?",
-    "createdAt": "2020-07-14T00:05:22Z"
+    "createdAt": "2026-07-14T00:05:22Z"
   },
   {
     "id": 3634,
     "sender": "liyuqian",
     "content": "@acoutts : Test-based shader warmup #53609 would help. SkSL-based shader warmup #53607 currently doesn't help iOS metal without further work from Skia.",
-    "createdAt": "2020-07-16T18:47:00Z"
+    "createdAt": "2026-07-16T18:47:00Z"
   },
   {
     "id": 3635,
     "sender": "acoutts",
     "content": "> @acoutts : Test-based shader warmup #53609 would help. SkSL-based shader warmup #53607 currently doesn't help iOS metal without further work from Skia.\r\n\r\nThanks. I have been having a big issue with the warmup jank on ios, and as you can see in my gifs here it is very noticeable:\r\nhttps://github.com/flutter/flutter/issues/61450\r\n\r\n* Would reverting to not using metal help this?\r\n* Is it feasible / worth it to not use metal if it could help this?",
-    "createdAt": "2020-07-16T18:55:10Z"
+    "createdAt": "2026-07-16T18:55:10Z"
   },
   {
     "id": 3636,
     "sender": "liyuqian",
     "content": "> * Would reverting to not using metal help this?\r\n> * Is it feasible / worth it to not use metal if it could help this?\r\n\r\nYes to the first question. I guess the second question is already answered by https://github.com/flutter/flutter/issues/61045#issuecomment-668609516\r\n\r\n",
-    "createdAt": "2020-08-05T20:00:59Z"
+    "createdAt": "2026-08-05T20:00:59Z"
   },
   {
     "id": 3637,
     "sender": "kf6gpe",
     "content": "@liyuqian Have we spoken to the Skia team about what APIs we'd need to do this for Metal? Maybe we should consider estimating this as part of our Q4 planning work?",
-    "createdAt": "2020-08-31T21:47:45Z"
+    "createdAt": "2026-08-31T21:47:45Z"
   },
   {
     "id": 3638,
     "sender": "ghenry",
     "content": "Hi,\r\n\r\nIs it possible to do this and put the resulting skia file in an appbundle? The flutter docs show an apk. \r\n\r\nThanks. ",
-    "createdAt": "2020-10-04T21:47:39Z"
+    "createdAt": "2026-10-04T21:47:39Z"
   },
   {
     "id": 3639,
     "sender": "liyuqian",
     "content": "Yes, the ` --bundle-sksl-path` is supported by `flutter build appbundle`. I'll update the doc to reflect that.",
-    "createdAt": "2020-10-06T23:55:57Z"
+    "createdAt": "2026-10-06T23:55:57Z"
   },
   {
     "id": 3640,
     "sender": "ghenry",
     "content": "Excellent! ",
-    "createdAt": "2020-10-07T07:55:58Z"
+    "createdAt": "2026-10-07T07:55:58Z"
   },
   {
     "id": 3641,
     "sender": "kf6gpe",
     "content": "See also https://github.com/flutter/flutter/issues/61450.",
-    "createdAt": "2020-10-19T21:47:11Z"
+    "createdAt": "2026-10-19T21:47:11Z"
   },
   {
     "id": 3642,
     "sender": "ghenry",
     "content": "Hi all,\r\n\r\nDoes this need to be done on a physical device for Android and iOS? I've only done it on Android and use that for my iOS build, but notice jank still on iOS.\r\n\r\nThanks.",
-    "createdAt": "2020-10-21T09:42:57Z"
+    "createdAt": "2026-10-21T09:42:57Z"
   },
   {
     "id": 3643,
     "sender": "liyuqian",
     "content": "@ghenry : our ultimate goal of fixing this issue is having a device independent solution. So far, however, the intermediate solution we provided through https://github.com/flutter/flutter/issues/53607 is device dependent so generating SkSL shaders on actual iOS devices is recommended. Using SkSLs from emulators or across iOS and Android is feasible and may work in some cases (see, e.g., https://github.com/flutter/flutter/issues/53607#issuecomment-608587484), but it's not guaranteed to provide good results.",
-    "createdAt": "2020-10-21T18:06:23Z"
+    "createdAt": "2026-10-21T18:06:23Z"
   },
   {
     "id": 3644,
     "sender": "ghenry",
     "content": "Thanks. That makes sense. Time for a new App Store release then :-)\n\nI use the OpenContainer animation to go from a FAB to the Keypad screen in\nour app:\n\nhttps://apps.apple.com/us/app/surevoip/id1518887036\nhttps://pub.dev/packages/animations#container-transform (item 3)\n\nI just noticed the iOS version jank as I generated the SkSL on a Samsung\nS10e.\n",
-    "createdAt": "2020-10-21T18:59:50Z"
+    "createdAt": "2026-10-21T18:59:50Z"
   },
   {
     "id": 3645,
     "sender": "MiguelSOliveira",
     "content": "What is the best way to track this specific shader problem for iOS? Is it this issue here?\r\n\r\nMy app on android runs perfect and on iOS, it is just really bad and I don't really understand what you mean by intermediate solution here: https://github.com/flutter/flutter/issues/53607, @liyuqian .. \r\nCan you point to the specific comment that posts the solution you mean? \r\n\r\nI've also tried disabling metal but I hear from others that that causes other issues that metal fixes?\r\n\r\nThis is also a P3 ? Should it not be higher up in the priorities? isn't it affecting every single iOS app ?",
-    "createdAt": "2020-11-03T23:57:57Z"
+    "createdAt": "2026-11-03T23:57:57Z"
   },
   {
     "id": 3646,
     "sender": "liyuqian",
     "content": "Please check https://flutter.dev/docs/perf/rendering/shader on how to use the solution provided by #53607. For iOS, you may need to disable Metal. The easiest way to disable it might be to follow https://github.com/flutter/flutter/issues/61045#issuecomment-699044134.\r\n\r\nP3 is our highest priority that's not breaking our build or 1st party customers. So this issue is definitely our top priority after breakages.",
-    "createdAt": "2020-11-04T00:51:58Z"
+    "createdAt": "2026-11-04T00:51:58Z"
   },
   {
     "id": 3647,
     "sender": "ghenry",
     "content": "I know you advised (https://github.com/flutter/flutter/issues/32170#issuecomment-713764870) me to do the warm up on an iOS device, but it doesn't seem to make a difference. Android is fine warm up is fine. I think https://flutter.dev/docs/perf/rendering/shader#how-to-use-sksl-warmup should say this needs to be done on both an Android physical device and iOS physical device.\r\n\r\nYou can try the animations if you like:\r\nhttps://play.google.com/store/apps/details?id=com.surevoip.talk\r\nvs\r\nhttps://apps.apple.com/us/app/surevoip/id1518887036 which is still janky in the latest build I released.\r\n\r\nThanks.",
-    "createdAt": "2020-11-04T09:18:44Z"
+    "createdAt": "2026-11-04T09:18:44Z"
   }
 ]

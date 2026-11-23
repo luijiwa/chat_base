@@ -201,186 +201,186 @@
     "id": 7265,
     "sender": "Loopex2019",
     "content": "Hi there is a package called native_ads which support native ads from google admob . I didn't tried it yet but it's just a Suggetstion .",
-    "createdAt": "2020-01-17T07:37:52Z"
+    "createdAt": "2026-01-17T07:37:52Z"
   },
   {
     "id": 7266,
     "sender": "PlymouthRock",
     "content": "We've went live with https://pub.dev/packages/native_ads.  You can install our Tide App to check it out:\r\n\r\nhttps://play.google.com/store/apps/details?id=com.us.techone.tidewatch\r\n\r\nhttps://apps.apple.com/us/app/tidewatch-by-techone/id1477715216\r\n",
-    "createdAt": "2020-01-17T14:00:02Z"
+    "createdAt": "2026-01-17T14:00:02Z"
   },
   {
     "id": 7267,
     "sender": "redbrogdon",
     "content": "A quick caveat about `native_ads` and any other plugins that attempt to use Flutter's `PlatformView` widgets to display ads:\r\n\r\nWhile it's great to see folks in the community working on these types of things, everyone should be aware that just getting an ad onscreen is only part of the job for any mobile ads plugin. In addition to display, ads need to track impressions, handle clicks, deal with things like MRAID, AdChoices placement, anti-spam features, and accurate measurement of a whole bunch of signals. \r\n\r\nThe reason there isn't already a plugin from Google for native ads is that it's very hard to get all of that right, and the consequences of not getting it right could be lost revenue, inaccurate stats, and even account suspension by AdMob or any mediated ad network.\r\n\r\nFor that reason, I highly recommend sticking with the `firebase_admob` plugin for now. While that plugin doesn't include native ads, the formats it *does* support are known to be implemented correctly.\r\n\r\nThere are engineers at Google working to build a better ads integration, but it's still an ongoing project right now.",
-    "createdAt": "2020-01-17T18:25:17Z"
+    "createdAt": "2026-01-17T18:25:17Z"
   },
   {
     "id": 7268,
     "sender": "Loopex2019",
     "content": "> A quick caveat about `native_ads` and any other plugins that attempt to use Flutter's `PlatformView` widgets to display ads:\r\n> \r\n> While it's great to see folks in the community working on these types of things, everyone should be aware that just getting an ad onscreen is only part of the job for any mobile ads plugin. In addition to display, ads need to track impressions, handle clicks, deal with things like MRAID, AdChoices placement, anti-spam features, and accurate measurement of a whole bunch of signals.\r\n> \r\n> The reason there isn't already a plugin from Google for native ads is that it's very hard to get all of that right, and the consequences of not getting it right could be lost revenue, inaccurate stats, and even account suspension by AdMob or any mediated ad network.\r\n> \r\n> For that reason, I highly recommend sticking with the `firebase_admob` plugin for now. While that plugin doesn't include native ads, the formats it _does_ support are known to be implemented correctly.\r\n> \r\n> There are engineers at Google working to build a better ads integration, but it's still an ongoing project right now.\r\n\r\nOkay thanks for explaining !",
-    "createdAt": "2020-01-18T07:13:07Z"
+    "createdAt": "2026-01-18T07:13:07Z"
   },
   {
     "id": 7269,
     "sender": "PlymouthRock",
     "content": "> A quick caveat about `native_ads` and any other plugins that attempt to use Flutter's `PlatformView` widgets to display ads:\r\n> \r\n> While it's great to see folks in the community working on these types of things, everyone should be aware that just getting an ad onscreen is only part of the job for any mobile ads plugin. In addition to display, ads need to track impressions, handle clicks, deal with things like MRAID, AdChoices placement, anti-spam features, and accurate measurement of a whole bunch of signals.\r\n> \r\n> The reason there isn't already a plugin from Google for native ads is that it's very hard to get all of that right, and the consequences of not getting it right could be lost revenue, inaccurate stats, and even account suspension by AdMob or any mediated ad network.\r\n> \r\n> For that reason, I highly recommend sticking with the `firebase_admob` plugin for now. While that plugin doesn't include native ads, the formats it _does_ support are known to be implemented correctly.\r\n> \r\n> There are engineers at Google working to build a better ads integration, but it's still an ongoing project right now.\r\n\r\nIsn't the Mobile Ads SDK responsible for tracking impressions, handling clicks, anti-spam features, and accurate measurement of a whole bunch of signals.  How is this different that if we were building a native android app and following the instructions here: https://developers.google.com/admob/android/native/start\r\n\r\n\r\n",
-    "createdAt": "2020-01-18T13:28:28Z"
+    "createdAt": "2026-01-18T13:28:28Z"
   },
   {
     "id": 7270,
     "sender": "jaggernod",
     "content": "> > A quick caveat about `native_ads` and any other plugins that attempt to use Flutter's `PlatformView` widgets to display ads:\r\n> > While it's great to see folks in the community working on these types of things, everyone should be aware that just getting an ad onscreen is only part of the job for any mobile ads plugin. In addition to display, ads need to track impressions, handle clicks, deal with things like MRAID, AdChoices placement, anti-spam features, and accurate measurement of a whole bunch of signals.\r\n> > The reason there isn't already a plugin from Google for native ads is that it's very hard to get all of that right, and the consequences of not getting it right could be lost revenue, inaccurate stats, and even account suspension by AdMob or any mediated ad network.\r\n> > For that reason, I highly recommend sticking with the `firebase_admob` plugin for now. While that plugin doesn't include native ads, the formats it _does_ support are known to be implemented correctly.\r\n> > There are engineers at Google working to build a better ads integration, but it's still an ongoing project right now.\r\n> \r\n> Isn't the Mobile Ads SDK responsible for tracking impressions, handling clicks, anti-spam features, and accurate measurement of a whole bunch of signals. How is this different that if we were building a native android app and following the instructions here: https://developers.google.com/admob/android/native/start\r\n\r\nThe thing is that platform view *might* have side-effects and behave differently than the same ads viewed directly on the native platforms. \r\nFor example, if the ad visibility is counted when the percentage of view is shown for a specific period of time. \r\nAre not 100% sure that the 1st pixel of the ad appears and is counted in the same way in native and futter? \r\n\r\nUsing ads in a not intended environment might cause google to have objections. Especially that it directly impacts their business model. \r\n\r\nIt's at least a grey zone.",
-    "createdAt": "2020-01-19T00:07:33Z"
+    "createdAt": "2026-01-19T00:07:33Z"
   },
   {
     "id": 7271,
     "sender": "redbrogdon",
     "content": "Another way to say it is that any plugin made for Flutter to display mobile ads must be able guarantee that it doesn't interfere with the ad SDK's ability to do its job, which is a tricky thing to do.  Add to that the pressure that comes with working on a plugin that could literally be responsible for someone's livelihood, and youcan see how important it is to get the plugin rock solid before releasing it.",
-    "createdAt": "2020-01-19T02:52:05Z"
+    "createdAt": "2026-01-19T02:52:05Z"
   },
   {
     "id": 7272,
     "sender": "PlymouthRock",
     "content": "These are all fair points about a third party native ads plugin.  As soon as we have a better solution from Google we'll update our app.  ",
-    "createdAt": "2020-01-19T15:14:22Z"
+    "createdAt": "2026-01-19T15:14:22Z"
   },
   {
     "id": 7273,
     "sender": "psfutada",
     "content": "I've been working on a news feed app and I really need to place native ads blended into posts. So, most probably I should go with add-to-app rather than plugin approach, so the listing screen is implemented in Swift/Kotlin to deal with ads, the rest of screens that do not have ads can be implemented in Flutter. ",
-    "createdAt": "2020-01-22T09:52:40Z"
+    "createdAt": "2026-01-22T09:52:40Z"
   },
   {
     "id": 7274,
     "sender": "comlaterra",
     "content": "I would like to point out that the `flutter_admob` plugin is currently implementing at least one discouraged banner implementation by the Admob Policies.\r\n\r\nI believe it's implementing \"Ad overlapping with app content\" and, in most of the Android cases the \"Ad sandwiched between app items\". You can find the related information [here](https://support.google.com/admob/answer/6275345?hl=en).\r\n\r\nThat being said, I'm not sure what is worst, if to be in a \"grey zone\" as mentioned above or directly implementing something that is stated as \"against policy\" in the Admob policies page itself 🤔",
-    "createdAt": "2020-01-25T04:19:27Z"
+    "createdAt": "2026-01-25T04:19:27Z"
   },
   {
     "id": 7275,
     "sender": "khainhero",
     "content": "I believe we should have at the very least get a progress report of the current progress. In this day of competitive applications, it would be great to **at least** keep up with the competition.\r\n\r\nA banner overlay on screen looks _very disgusting_ especially when paired with the beautiful flutter UI/UX.",
-    "createdAt": "2020-02-19T14:56:27Z"
+    "createdAt": "2026-02-19T14:56:27Z"
   },
   {
     "id": 7276,
     "sender": "sjghose",
     "content": "Till we have a robust solution for monetizing apps with ads, I'm afraid it will be a big reason for smaller app developers to shun Flutter. It's one thing to make a lightweight app as a proof of concept but without the hooks to bring in consistent ad revenue, it's just a nice shiny tool with limited use cases in the real world. Waiting for nearly two years for this to get prioritized.",
-    "createdAt": "2020-03-19T00:08:01Z"
+    "createdAt": "2026-03-19T00:08:01Z"
   },
   {
     "id": 7277,
     "sender": "charleshan",
     "content": "It looks like native ads have been added a few days ago: https://github.com/FirebaseExtended/flutterfire/pull/169",
-    "createdAt": "2020-03-22T19:56:25Z"
+    "createdAt": "2026-03-22T19:56:25Z"
   },
   {
     "id": 7278,
     "sender": "jaggernod",
     "content": "> It looks like native ads have been added a few days ago: [FirebaseExtended/flutterfire#169](https://github.com/FirebaseExtended/flutterfire/pull/169)\r\n\r\nIt's really nice that they did add this. Great job guys!\r\nHowever, still, you cannot position it inside your view hierarchy.\r\nTo my understanding, there is only `show` method that pops up the view from the bottom as an overlay. ",
-    "createdAt": "2020-03-26T22:49:47Z"
+    "createdAt": "2026-03-26T22:49:47Z"
   },
   {
     "id": 7279,
     "sender": "nathanael540",
     "content": "I have MainActivity.kt and not MainActivity.java;\r\n\r\nCan I use Native Ads? How to?",
-    "createdAt": "2020-03-27T19:12:26Z"
+    "createdAt": "2026-03-27T19:12:26Z"
   },
   {
     "id": 7280,
     "sender": "ItsCalebJones",
     "content": "It looks like it's just Android?",
-    "createdAt": "2020-03-28T20:41:33Z"
+    "createdAt": "2026-03-28T20:41:33Z"
   },
   {
     "id": 7281,
     "sender": "thibaultzanini",
     "content": "> It looks like it's just Android?\r\n\r\nIt looks like native ads on IOS have been added as well https://github.com/FirebaseExtended/flutterfire/pull/2106",
-    "createdAt": "2020-03-28T22:28:58Z"
+    "createdAt": "2026-03-28T22:28:58Z"
   },
   {
     "id": 7282,
     "sender": "itielMaimon",
     "content": "But can you place it inside your view hierarchy?\n\nIt seems there is only show method that pops up the view from the bottom as an overlay, which makes it pretty useless as a native ad.",
-    "createdAt": "2020-03-28T23:11:52Z"
+    "createdAt": "2026-03-28T23:11:52Z"
   },
   {
     "id": 7283,
     "sender": "ItsCalebJones",
     "content": "I figured that was the whole point of this, otherwise it's just as useless.",
-    "createdAt": "2020-03-28T23:15:44Z"
+    "createdAt": "2026-03-28T23:15:44Z"
   },
   {
     "id": 7284,
     "sender": "itielMaimon",
     "content": "Any progress on this?",
-    "createdAt": "2020-04-02T13:55:21Z"
+    "createdAt": "2026-04-02T13:55:21Z"
   },
   {
     "id": 7285,
     "sender": "SaadArdati",
     "content": "Can confirm, it's literally just a banner ad right now with customizability from android layouts only.",
-    "createdAt": "2020-04-11T15:35:33Z"
+    "createdAt": "2026-04-11T15:35:33Z"
   },
   {
     "id": 7286,
     "sender": "dasebasto",
     "content": "I don't really get how the current implementation handles the display of ad views, if it's not using platform views.\r\n\r\nDoes it display native a Android View / iOS UIView on top of the flutter view?\r\nCreate a new Activity for interstitials? \r\n\r\nCould someone please point me to where this is done in the code? ",
-    "createdAt": "2020-04-30T17:01:34Z"
+    "createdAt": "2026-04-30T17:01:34Z"
   },
   {
     "id": 7287,
     "sender": "FarmaanElahi",
-    "content": "It overlays the ads on top of flutter widget. Ads aren't part of flutter\nwidget hierarchy So you will not be able to embed that in a widget. Example\na list view\n\nOn Thu, Apr 30, 2020, 10:32 PM dasebasto <notifications@github.com> wrote:\n\n> I don't really get how the current implementation handles the display of\n> ad views, if it's not using platform views.\n>\n> Does it display native Android Views / iOS UIView above the flutter view?\n>\n> Could someone please point me to where this is done in the code?\n>\n> —\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/flutter/flutter/issues/12114#issuecomment-621980272>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/AESIMECDHHOREM7OCD6UC63RPGVIVANCNFSM4D3FBARA>\n> .\n>\n",
-    "createdAt": "2020-04-30T17:31:25Z"
+    "content": "It overlays the ads on top of flutter widget. Ads aren't part of flutter\nwidget hierarchy So you will not be able to embed that in a widget. Example\na list view\n\nOn Thu, Apr 30, 2026, 10:32 PM dasebasto <notifications@github.com> wrote:\n\n> I don't really get how the current implementation handles the display of\n> ad views, if it's not using platform views.\n>\n> Does it display native Android Views / iOS UIView above the flutter view?\n>\n> Could someone please point me to where this is done in the code?\n>\n> —\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/flutter/flutter/issues/12114#issuecomment-621980272>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/AESIMECDHHOREM7OCD6UC63RPGVIVANCNFSM4D3FBARA>\n> .\n>\n",
+    "createdAt": "2026-04-30T17:31:25Z"
   },
   {
     "id": 7288,
     "sender": "itielMaimon",
     "content": "If that’s really the case then what’s the point of all this? \n\nThe most common and natural place for a Native Ad to be is inside a list view, if that’s not possible what value does it add?",
-    "createdAt": "2020-04-30T17:46:26Z"
+    "createdAt": "2026-04-30T17:46:26Z"
   },
   {
     "id": 7289,
     "sender": "SaadArdati",
     "content": "Exactly, the whole point is embedding them and customizing them in the widget tree. So they can fit in with the app's style. That is literally the whole point of a native ad. ",
-    "createdAt": "2020-05-01T17:31:42Z"
+    "createdAt": "2026-05-01T17:31:42Z"
   },
   {
     "id": 7290,
     "sender": "LucaIaconelli",
     "content": "Any progress on this? ",
-    "createdAt": "2020-05-19T22:27:24Z"
+    "createdAt": "2026-05-19T22:27:24Z"
   },
   {
     "id": 7291,
     "sender": "mileusna",
     "content": "Not just native ads, also banner ads should be integrated into widget tree. After a short usage of this widget I realised how difficult it is to work with floating banners in app. They interfere with lots of visual elements in the app, menus, list views, bottom dialogs and surfaces on iOS etc. etc. They are just not suitable for some kind of applications. Normal widget banners is what we need.",
-    "createdAt": "2020-05-20T09:49:39Z"
+    "createdAt": "2026-05-20T09:49:39Z"
   },
   {
     "id": 7292,
     "sender": "KaungZawHtet",
     "content": "consider adsense for flutter web too",
-    "createdAt": "2020-05-20T21:32:06Z"
+    "createdAt": "2026-05-20T21:32:06Z"
   },
   {
     "id": 7293,
     "sender": "talent-apps",
     "content": "On one hand the Flutter team says that they prioritize issues according to the number of thumbs up they receive (this issue is currently ranked 4th on the entire repo) and on the other hand this issue is labeled as P6, meaning \"A feature or bug we're unlikely to address\".\r\nProviding an easy and seamless way to monetize mobile apps via ads is a basic feature for any framework, yet it doesn't seem like this is the case with Flutter.\r\n\r\n@kf6gpe can you please shed some light on this?",
-    "createdAt": "2020-05-29T20:15:15Z"
+    "createdAt": "2026-05-29T20:15:15Z"
   },
   {
     "id": 7294,
     "sender": "jaggernod",
     "content": "I would observe the project attached to this ticket. \r\nThe \"Ecosystem - Bitcoin\" does contain plenty of \"stuff\" for PlatformViews which might explain why we are not getting dart implementation of the ads.\r\n\r\nDoes the Flutter team want to first improve (functionality and performance) of PlatformViews to then just use the native ad SDKs without rewriting them?\r\n\r\nNevertheless, more transparency would be greatly appreciated. \r\n",
-    "createdAt": "2020-06-07T17:17:10Z"
+    "createdAt": "2026-06-07T17:17:10Z"
   },
   {
     "id": 7295,
     "sender": "jebwatson",
     "content": "Guys, what are we doing? This is basically a cat 1 bug as far as most people are concerned. It is looking like a complete showstopper for my application and I am considering other cross-platform frameworks after reading all day about how this feature has been in the works for 3+ years without any significant progress. I don't consider the ability to display native ads as glorified banners as progress. We must have embedded native ads or at the very least the ability to overlay native ads on flutter widgets, otherwise there is simply no incentive to continue with what is otherwise a fantastic platform.",
-    "createdAt": "2020-06-30T22:58:27Z"
+    "createdAt": "2026-06-30T22:58:27Z"
   }
 ]

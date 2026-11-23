@@ -255,43 +255,43 @@
     "id": 7850,
     "sender": "duzenko",
     "content": "Why is it closed with an external link to a no-doc repo? Are you not going to fix this with standard ListView at all?",
-    "createdAt": "2020-03-05T16:26:11Z"
+    "createdAt": "2026-03-05T16:26:11Z"
   },
   {
     "id": 7851,
     "sender": "tarobins",
     "content": "I don't see a solution that can be used on ListView itself without making a mess of the API because there's a conflict between pixel-based and item-based scrolling.  When we jump or scroll to a item that's far down a list, if we want to keep the pixel-based and item-based indices consistent, we'd need to layout every item before the desired item, which can be prohibitively expensive.  ",
-    "createdAt": "2020-03-05T20:38:52Z"
+    "createdAt": "2026-03-05T20:38:52Z"
   },
   {
     "id": 7852,
     "sender": "duzenko",
     "content": "Please let us decide if we can live with the 'expenses'.\r\nOtherwise consider backporting the widget you linked to above in flutter core.\r\nPlease do not close critical functionality holes with a no-fix.",
-    "createdAt": "2020-03-05T20:48:58Z"
+    "createdAt": "2026-03-05T20:48:58Z"
   },
   {
     "id": 7853,
     "sender": "tarobins",
     "content": "I can understand that one would want a solution integrated with the existing ListView; however, I wasn't able to think of one that I thought would be workable and at the same time that I thought would be an acceptable change to the core ListView. I did create a solution that I thought got to the core of what was originally asked for in this issue. \r\n\r\nI know there are still some desired features.  For example, I have seen the requests to have the ScrollablePositionedList work with a collapsible appbar, unfortunately I haven't had time to explore a solution to that use case.  (More requests can be seen or added at https://github.com/google/flutter.widgets/issues, and people are encouraged to fork my solution and submit PRs, or just create new solutions based on mine or from scratch).  If you have use cases not covered, please open a new issue (perhaps with a linking comment from here so people interested see the new issue), with an exact explanation of not-yet-covered needs and use cases.  Doing so will help someone provide solutions that meet the use cases you have.  Also, if more documentation is needed for the solution I provided, please let me know, and I’ll work on providing updates, as I do want people to be able to use it. \r\n\r\nAs for this issue, given that I am the current assignee of the issue, I didn’t want to leave the issue open, and give the impression that I was still working on the issue past the solution I was able to come up with. However, if someone does want to continue to work on integrating a solution with ListView, I'm happy to hand over this issue and they can reopen it. However, if no one has a feasible change to ListView in mind, I'm not sure leaving this issue open is useful, as doing so might give people an incorrect impression that a change to ListView is being worked on, or eventually will be worked on at some point in the reasonable future.  If such a change is not foreseeable, it might be best to direct energies to coming up with new widgets that meet peoples’ use cases, which, personally, I think is the more obtainable path.\r\n",
-    "createdAt": "2020-03-06T15:50:59Z"
+    "createdAt": "2026-03-06T15:50:59Z"
   },
   {
     "id": 7854,
     "sender": "marcglasberg",
     "content": "@tarobins However, it would be great if this widget could have its own package in pub/dev, instead of being bundled with other widgets. That's totally non-standard. I am guilty of doing that myself (https://pub.dev/packages/assorted_layout_widgets) but I think ScrollablePositionedList is just too important to be buried into a package called flutter.widgets. ",
-    "createdAt": "2020-03-06T18:15:44Z"
+    "createdAt": "2026-03-06T18:15:44Z"
   },
   {
     "id": 7855,
     "sender": "tarobins",
     "content": "exciting news!  ScrollablePositionedList is now available in its own package on pub:  https://pub.dev/packages/scrollable_positioned_list\r\n\r\nPlease start pointing to that package.",
-    "createdAt": "2020-04-01T04:08:32Z"
+    "createdAt": "2026-04-01T04:08:32Z"
   },
   {
     "id": 7856,
     "sender": "tarobins",
     "content": "Thanks particularly to @mehmetf ",
-    "createdAt": "2020-04-01T04:10:00Z"
+    "createdAt": "2026-04-01T04:10:00Z"
   },
   {
     "id": 7857,
@@ -369,18 +369,18 @@
     "id": 7869,
     "sender": "Peng-Qian",
     "content": "> I did a little bit of digging. It looks like Android is generating these warnings because we are holding the InputConnection incorrectly in the Engine's TextInputPlugin. I haven't really figured out what we're doing wrong, though.\r\n\r\nHi goderbauer,\r\n\r\nDo you still following this problem, it really generates many warnings to seriously affect the functionality of logs when debugging.\r\n\r\nMany thanks @goderbauer ",
-    "createdAt": "2020-01-08T11:15:59Z"
+    "createdAt": "2026-01-08T11:15:59Z"
   },
   {
     "id": 7870,
     "sender": "cbracken",
     "content": "/cc @GaryQian who has been looking into loads of keyboard-related issues on Android and may have ideas.",
-    "createdAt": "2020-02-10T19:22:46Z"
+    "createdAt": "2026-02-10T19:22:46Z"
   },
   {
     "id": 7871,
     "sender": "zigang93",
     "content": "hotfix version 7 never show this warning..\r\nbut after upgrade to hotfix version 8..\r\nI keep getting 'getTextAfterCursor on inactive InputConnection' warning messages",
-    "createdAt": "2020-02-13T07:20:22Z"
+    "createdAt": "2026-02-13T07:20:22Z"
   }
 ]

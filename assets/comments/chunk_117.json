@@ -111,13 +111,13 @@
     "id": 7506,
     "sender": "tomoerlemans010",
     "content": "This really ought to be a much higher priority issue for whoever is managing the Flutter team. Implementing background functionality is a huge pain for the average Flutter developer and it breaks down often an in non-trivial ways. And I am sure that a lot of app developers are currently struggling with this.",
-    "createdAt": "2020-05-26T16:45:41Z"
+    "createdAt": "2026-05-26T16:45:41Z"
   },
   {
     "id": 7507,
     "sender": "a-siva",
     "content": "@tomoerlemans010 please see the comment in https://github.com/flutter/flutter/issues/3671#issuecomment-438113161.\r\n\r\nThis particular issue is closed, please add comments to other open issues related to background execution or create a new one with the issues that you are facing.",
-    "createdAt": "2020-05-26T17:02:28Z"
+    "createdAt": "2026-05-26T17:02:28Z"
   },
   {
     "id": 7508,
@@ -219,37 +219,37 @@
     "id": 7524,
     "sender": "rodydavis",
     "content": "Here is a simple example for MacOS I created that modifies the AppDelegate and allows you to create and communicate between windows: https://github.com/rodydavis/multi_window",
-    "createdAt": "2020-01-07T06:13:55Z"
+    "createdAt": "2026-01-07T06:13:55Z"
   },
   {
     "id": 7525,
     "sender": "cyrilOrderoo",
     "content": "Does anyone have a workaround for Windows apps ?\r\nThank you.",
-    "createdAt": "2020-01-28T14:34:19Z"
+    "createdAt": "2026-01-28T14:34:19Z"
   },
   {
     "id": 7526,
     "sender": "stuartmorgan-g",
     "content": "Running a separate engine instance for every window and manually wiring up all communication between those engines using custom method channels (which is what the macOS example above does) should work on Windows as well. If you encounter problems doing that on Windows, please file a new issue with details.\r\n\r\nThis issue is tracking having a much less manual approach that doesn't require designing each window as if it were essentially a separate Flutter application.",
-    "createdAt": "2020-01-28T17:21:34Z"
+    "createdAt": "2026-01-28T17:21:34Z"
   },
   {
     "id": 7527,
     "sender": "WalterPurvis",
     "content": "Is there any work (or even thought) ongoing or scheduled for this?  I'm trying to think of a desktop application I've developed in the last twenty years that didn't require multiple windows, and I don't believe there have been any. It seems pretty important.",
-    "createdAt": "2020-03-04T06:11:58Z"
+    "createdAt": "2026-03-04T06:11:58Z"
   },
   {
     "id": 7528,
     "sender": "bdhb",
     "content": "From what I understand by reading the docs, every FlutterEngine may have zero or one FlutterViewController at a time.\r\n\r\nWhat if the FlutterEngine would support multiple FlutterViewControllers using the same OpenGL context and each FlutterViewController would be used with glViewport/glScissor to separate between multiple windows?\r\n\r\nEssentially every window would clip a part of the Flutter canvas and draw it.\r\nMouse events would also be redirected to the engine based on the position of that specific window in the Flutter canvas.\r\n\r\nThis way, there would be a single FlutterEngine and communicating between multiple windows would be as easy as communicating between multiple widgets.\r\n\r\nHere is an image that should better explain what I am thinking of.\r\n\r\n<img width=\"683\" alt=\"image\" src=\"https://user-images.githubusercontent.com/6471545/81569855-7da55f00-93a8-11ea-9ba1-626febdb1969.png\">\r\n\r\nHow does this sound?",
-    "createdAt": "2020-05-11T13:59:25Z"
+    "createdAt": "2026-05-11T13:59:25Z"
   },
   {
     "id": 7529,
     "sender": "suwermave",
     "content": "> How does this sound?\r\n\r\nNon-performant?",
-    "createdAt": "2020-05-22T15:42:10Z"
+    "createdAt": "2026-05-22T15:42:10Z"
   },
   {
     "id": 7530,

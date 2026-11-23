@@ -3,151 +3,151 @@
     "id": 3648,
     "sender": "liyuqian",
     "content": "@ghenry : I'm sorry to hear that. Are you using the default Flutter iOS engine with Metal, or are you using a custom OpenGL Flutter iOS engine? The SkSL warm up doesn't help Metal right now so you may need something like https://github.com/flutter/flutter/issues/61045#issuecomment-699044134. And thank you for the suggestion on https://flutter.dev/docs/perf/rendering/shader#how-to-use-sksl-warmup! I'll revise that soon.",
-    "createdAt": "2020-11-05T01:07:11Z"
+    "createdAt": "2026-11-05T01:07:11Z"
   },
   {
     "id": 3649,
     "sender": "ghenry",
     "content": "Just the default. I'll look at the way you suggest. Thanks. ",
-    "createdAt": "2020-11-05T07:24:20Z"
+    "createdAt": "2026-11-05T07:24:20Z"
   },
   {
     "id": 3650,
     "sender": "acoutts",
     "content": "@liyuqian sadly after quite a bit of testing I’ve experienced a few OOM crashes when using OpenGL on iOS so I need to go back to  using metal for now. I hope we have metal SkSL warmup soon!\r\n\r\nI know there’s a number of issues on it but is this the best issue to follow the progress on?",
-    "createdAt": "2020-11-06T09:06:09Z"
+    "createdAt": "2026-11-06T09:06:09Z"
   },
   {
     "id": 3651,
     "sender": "theniceboy",
     "content": "Hi, Flutter Team! Thank you for the incredible work! Regarding this issue, I'm considering which route to take, Metal or OpenGL. My concern is that Flutter compiled without Metal may have unexpected issues in production. So is there a rough ETA on SKSL warm-up for Metal? Thanks!",
-    "createdAt": "2020-11-06T09:16:49Z"
+    "createdAt": "2026-11-06T09:16:49Z"
   },
   {
     "id": 3652,
     "sender": "primaryperson",
     "content": "I have problem with my animation something like that: https://github.com/flutter/flutter/issues/61450\r\nAnd I am still waiting for a solution to this problem",
-    "createdAt": "2020-11-08T18:59:49Z"
+    "createdAt": "2026-11-08T18:59:49Z"
   },
   {
     "id": 3653,
     "sender": "meowofficial",
     "content": "> @liyuqian sadly after quite a bit of testing I’ve experienced a few OOM crashes when using OpenGL on iOS so I need to go back to using metal for now.\r\n\r\nCould you please say a couple of words about how did you find out your app has a problem with OOM crashes using OpenGL? I don't have experience in testing and TDD, so it would be very helpful.",
-    "createdAt": "2020-11-08T19:18:41Z"
+    "createdAt": "2026-11-08T19:18:41Z"
   },
   {
     "id": 3654,
     "sender": "acoutts",
     "content": "> > @liyuqian sadly after quite a bit of testing I’ve experienced a few OOM crashes when using OpenGL on iOS so I need to go back to using metal for now.\r\n> \r\n> Could you please say a couple of words about how did you find out your app has a problem with OOM crashes using OpenGL? I don't have experience in testing and TDD, so it would be very helpful.\r\n\r\nIt's just a hunch as I don't have a hard proof test that crashes it, but anecdotally I and some of our users have experienced random crashes while using my app and it's only on the builds I compiled with a Flutter engine with Metal disabled. It's usually random, but happening during an animation like a screen transition.",
-    "createdAt": "2020-11-08T22:15:39Z"
+    "createdAt": "2026-11-08T22:15:39Z"
   },
   {
     "id": 3655,
     "sender": "meowofficial",
     "content": "Could anyone from Flutter team say something about probable terms of solution for ios? As far as I know the issue became critical on ios after release of flutter 1.17.0 on stable channel 6 months ago. I think almost all of flutter developers who know about the cause of their app's lags need this information to choose 1 of 4 available options:\r\n1) Downgrade to flutter 1.12\r\nI don't know much about consequences of this option because I didn't try it yet. I can't remember critical issues for me from that time, probably `firebase_crashlytics` won't work, may be obfuscation. If there wasn't a problem with OOM crashes it's the best of the worst I think.\r\n2) Release with no-metal flutter engine \r\nI don't know about others, but I don't have testing team or variety of iPhones. I would test on couple iPhones I have and it seems to me I can possibly face OOM crashes on production and won't do anything about it.\r\n3) Release with metal flutter engine\r\nAs for me the janks are so terrible and app is so unusable that the only result I would achieve is 1-star rating, angry users and ruined launch.\r\n4) Wait for fix and add new features while issue is resolving. The question is how long?",
-    "createdAt": "2020-11-10T00:56:56Z"
+    "createdAt": "2026-11-10T00:56:56Z"
   },
   {
     "id": 3656,
     "sender": "zanderso",
     "content": "Hi all,\r\n\r\nThanks for the useful perspective and discussion on this thread. This issue is *very* important to us. Given the flexibility of the Flutter framework, it is also a very difficult issue to solve. Designing a user-friendly, long-term solution is among the highest priority work the engine team is doing in Q4 and going into next year. We hope to be able to share more about this design before the end of next month.\r\n\r\nIn the meantime, the situation on iOS should be improved thanks to help from the Skia team on https://github.com/flutter/flutter/issues/60267.\r\n\r\nThanks again for your feedback, and thanks for your patience as we make these improvements.\r\n\r\n/cc @chinmaygarde @liyuqian",
-    "createdAt": "2020-11-10T16:50:37Z"
+    "createdAt": "2026-11-10T16:50:37Z"
   },
   {
     "id": 3657,
     "sender": "ghenry",
     "content": "Thanks. Will take a look at #60267\n<https://github.com/flutter/flutter/issues/60267>\n",
-    "createdAt": "2020-11-10T17:26:30Z"
+    "createdAt": "2026-11-10T17:26:30Z"
   },
   {
     "id": 3658,
     "sender": "sinshev",
     "content": "A possible workaround for a simple application is to actually run the animation on the app launch but hide it under the \"loading\" dialog. A 1-second loading dialog is a much more user friendly than junky animation while interacting with the app.",
-    "createdAt": "2020-11-21T07:20:49Z"
+    "createdAt": "2026-11-21T07:20:49Z"
   },
   {
     "id": 3659,
     "sender": "acoutts",
     "content": "> A possible workaround for a simple application is to actually run the animation on the app launch but hide it under the \"loading\" dialog. A 1-second loading dialog is a much more user friendly than junky animation while interacting with the app.\r\n\r\nI tried this but to simulate even just a few screen transitions you’re looking at 300ms * each transition. The loading time quickly adds up. I also found just simulating a transition type with a blank screen isn’t enough, you would need to actually walk through your app’s screens. Doing it with empty dummy screens doesn’t help anything.\r\n\r\nAnother issue is the animation of opening the keyboard can’t be done this way because the keyboard can’t hide behind the loading screen. So if your screen uses the keyboard it will be janky.\r\n\r\nThe absolute only thing I’ve found to fix it is to compile the flutter engine without metal and use SkSL warmup like android, but there are OOM crashes and instability.",
-    "createdAt": "2020-11-21T08:46:51Z"
+    "createdAt": "2026-11-21T08:46:51Z"
   },
   {
     "id": 3660,
     "sender": "jacksteves",
     "content": "Wondering if there is an update here? \n\nIn my opinion this is by far and away the most important issue facing Flutter and, until fixed, Flutter is hardly suitable for distribution on iOS (at least not for large-scale, company-owned apps). \n\nI know the Flutter team is doing what they can to fix the issue and I recognize the complexity of the issue. However, the issue has now existed for 6+ months. And as a developer and CTO who has invested thousands of hours and tens of thousands of dollars into this framework (and continues to do so), I would very much appreciate seeing regular status updates and ETAs. ",
-    "createdAt": "2020-11-27T18:12:59Z"
+    "createdAt": "2026-11-27T18:12:59Z"
   },
   {
     "id": 3661,
     "sender": "ghenry",
-    "content": "+1 here as a CEO too. I need this to look better on iOS. What can we do to\nhelp? Not money as Google has lots. Time? Resources?\n\nhttp://blog.tadsummit.com/2020/11/17/building-the-surevoip-app-gavin-henry/\n",
-    "createdAt": "2020-11-27T18:24:38Z"
+    "content": "+1 here as a CEO too. I need this to look better on iOS. What can we do to\nhelp? Not money as Google has lots. Time? Resources?\n\nhttp://blog.tadsummit.com/2026/11/17/building-the-surevoip-app-gavin-henry/\n",
+    "createdAt": "2026-11-27T18:24:38Z"
   },
   {
     "id": 3662,
     "sender": "nt4f04uNd",
     "content": "That's hilarious how this issue has P2 tag on it, I just can't get it.",
-    "createdAt": "2020-11-27T18:52:57Z"
+    "createdAt": "2026-11-27T18:52:57Z"
   },
   {
     "id": 3663,
     "sender": "FelixMittermeier",
     "content": "@nt4f04uNd Of course, this is a big problem for many people (including me) at the moment, which should not be underestimated. However, the developers themselves know this and so we simply need patience. Constantly complaining about it doesn't help anybody and only stresses the team unnecessarily more. Sometimes a little bit more gratitude is appropriate for what we are allowed to use completely free of charge. Have a nice weekend :-)",
-    "createdAt": "2020-11-27T19:43:29Z"
+    "createdAt": "2026-11-27T19:43:29Z"
   },
   {
     "id": 3664,
     "sender": "ghenry",
     "content": "Out of interest, how is React Native handling this?\n",
-    "createdAt": "2020-11-27T20:48:44Z"
+    "createdAt": "2026-11-27T20:48:44Z"
   },
   {
     "id": 3665,
     "sender": "FelixMittermeier",
     "content": "@ghenry React Native is using a completely different approach: it uses actual native (therefore the name) components from the underlying operating system just like native written apps do. In contrast Flutter can be imagined like a game engine where all the user interface rendering and drawing is done by the framework itself. So in the end React Native doesn't have this problem at all because it doesn't handle the rendering and that is the critical part here. ",
-    "createdAt": "2020-11-27T20:55:50Z"
+    "createdAt": "2026-11-27T20:55:50Z"
   },
   {
     "id": 3666,
     "sender": "ghenry",
     "content": "That's what I thought. I did a podcast show with Tom Sneath and he explained it well. I just wondered if anything could be referenced from any other framework but Flutter Architecture is unique.\n\nOur show will be here next month https://www.se-radio.net/team/gavin-henry/ if interested. ",
-    "createdAt": "2020-11-27T20:59:17Z"
+    "createdAt": "2026-11-27T20:59:17Z"
   },
   {
     "id": 3667,
     "sender": "alectogeek",
     "content": "@ghenry Doesn't Unity do the same?",
-    "createdAt": "2020-11-27T21:50:35Z"
+    "createdAt": "2026-11-27T21:50:35Z"
   },
   {
     "id": 3668,
     "sender": "nt4f04uNd",
     "content": "@alectogeek unity doesn't use skia",
-    "createdAt": "2020-11-27T21:55:02Z"
+    "createdAt": "2026-11-27T21:55:02Z"
   },
   {
     "id": 3669,
     "sender": "alectogeek",
     "content": "@nt4f04uNd  But it also uses own rendering engine.",
-    "createdAt": "2020-11-27T21:55:55Z"
+    "createdAt": "2026-11-27T21:55:55Z"
   },
   {
     "id": 3670,
     "sender": "huvi8161",
     "content": "@liyuqian i understand that automatic handling of this issue on iOS with Metal is complex but if Skia resolves cache for compiled shaders(https://github.com/flutter/flutter/issues/60267, jvanverth) on iOS, would it be possible to provide us a manual solution that would allow us to manually go through the app and after that include all the shaders in final ipa file that Skia could recompile on app start the way it is doing now on Android and iOS(where Open GL is used). I know that this is not an optimal solution and it does take some work from developer side but it would allow us to give our customers app without jank issues?",
-    "createdAt": "2020-11-28T10:11:54Z"
+    "createdAt": "2026-11-28T10:11:54Z"
   },
   {
     "id": 3671,
     "sender": "nt4f04uNd",
     "content": "@alectogeek that's an interesting point tho, how do unity, unreal, etc. handle these things?",
-    "createdAt": "2020-11-28T12:28:57Z"
+    "createdAt": "2026-11-28T12:28:57Z"
   },
   {
     "id": 3672,
     "sender": "theniceboy",
     "content": "https://github.com/flutter/flutter/issues/60267#issuecomment-739223129",
-    "createdAt": "2020-12-05T11:06:17Z"
+    "createdAt": "2026-12-05T11:06:17Z"
   },
   {
     "id": 3673,

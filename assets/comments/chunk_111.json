@@ -345,42 +345,42 @@
     "id": 7161,
     "sender": "dkwingsmt",
     "content": "## System mouse cursors\n\n## Description\r\n\r\nThis PR adds the basic framework for the mouse cursor system. While only system cursors are supported for now, the APIs are designed with the consideration of asynchronously loaded cursors (image cursors).\r\n\r\nWith this PR:\r\n- Cursors are assigned to regions in a declarative way using data classes.\r\n- `MouseRegion`, `RenderMouseRegion` and `MouseTrackerAnnotation` have a new property `MouseCursor cursor` that can be used to customize mouse cursors of pointers that are hovering over the region.\r\n- `Inkwell` and a few other widgets also have a new parameter `MouseCursor mouseCursor`\r\n- Hidden cursor, uncontrolled cursor, and several system cursors are supported.\r\n\r\nThis PR is only the framework part of the system. Without the upcoming engine change, these changes won't take effect, but will not break existing apps either.\r\n\r\n~~For more information about the design, see https://flutter.dev/go/system-mouse-cursor~~ Edit: this design doc is out of date\r\n\r\n## Related Issues\r\n\r\n- Part of https://github.com/flutter/flutter/issues/31952\r\n\r\n## Tests\r\n\r\nI added the following tests:\r\n\r\n- Many tests to the cursor aspect of `MouseTracker`\r\n- Test the cursor aspect of `MouseRegion`\r\n- Test `MouseCursorController`\r\n\r\n## Checklist\r\n\r\nBefore you create this PR confirm that it meets all requirements listed below by checking the relevant checkboxes (`[x]`). This will ensure a smooth and quick review process.\r\n\r\n- [x] I read the [Contributor Guide] and followed the process outlined there for submitting PRs.\r\n- [x] I signed the [CLA].\r\n- [x] I read and followed the [Flutter Style Guide], including [Features we expect every widget to implement].\r\n- [x] I read the [Tree Hygiene] wiki page, which explains my responsibilities.\r\n- [x] I updated/added relevant documentation (doc comments with `///`).\r\n- [x] All existing and new tests are passing.\r\n- [x] The analyzer (`flutter analyze --flutter-repo`) does not report any problems on my PR.\r\n- [x] I am willing to follow-up on review comments in a timely manner.\r\n\r\n## Breaking Change\r\n\r\nDid any tests fail when you ran them? Please read [Handling breaking changes].\r\n\r\n- [x] No, no existing tests failed, so this is *not* a breaking change.\r\n- [ ] Yes, this is a breaking change. *If not, delete the remainder of this section.*\r\n   - [ ] I wrote a design doc: https://flutter.dev/go/template *Replace this with a link to your design doc's short link*\r\n   - [ ] I got input from the developer relations team, specifically from: *Replace with the names of who gave advice*\r\n   - [ ] I wrote a migration guide: *Replace with a link to your migration guide*\r\n\r\n<!-- Links -->\r\n[issue database]: https://github.com/flutter/flutter/issues\r\n[Contributor Guide]: https://github.com/flutter/flutter/wiki/Tree-hygiene#overview\r\n[Test Coverage]: https://github.com/flutter/flutter/wiki/Test-coverage-for-package%3Aflutter\r\n[Flutter Style Guide]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo\r\n[Features we expect every widget to implement]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#features-we-expect-every-widget-to-implement\r\n[CLA]: https://cla.developers.google.com/\r\n[Tree Hygiene]: https://github.com/flutter/flutter/wiki/Tree-hygiene\r\n[Handling breaking changes]: https://github.com/flutter/flutter/wiki/Tree-hygiene#handling-breaking-changes\r",
-    "createdAt": "2020-04-07T05:56:57Z"
+    "createdAt": "2026-04-07T05:56:57Z"
   },
   {
     "id": 7162,
     "sender": "goderbauer",
     "content": "The analyzer is unhappy.",
-    "createdAt": "2020-04-15T23:21:09Z"
+    "createdAt": "2026-04-15T23:21:09Z"
   },
   {
     "id": 7163,
     "sender": "dkwingsmt",
     "content": "@Hixie @goderbauer I made some major changes:\r\n\r\n- `PreparedMouseCursor` now has a protected method `performActivate`, which is overridden by subclasses. It replaces the `is` type-checks in `MouseTracker`.\r\n- The method channel calls are split into a `MouseCursorController` class, which only has static methods, such as `activateSystemCursor`, and is to be used by `PreparedMouseCursor.performActivate`.\r\n- The cursor part of `MouseTracker` is split into a mixin `MouseTrackerCursorMixin`. The original `MouseTracker` is renamed to `BaseMouseTracker`, whereas the one with all mixins is the new `MouseTracker`. \r\n\r\nCan you take a look?",
-    "createdAt": "2020-04-22T04:00:01Z"
+    "createdAt": "2026-04-22T04:00:01Z"
   },
   {
     "id": 7164,
     "sender": "goderbauer",
     "content": "Avoiding the repaint for when cursors change adds a lot of complexibility. I am not sure if that's worth it, TBH. The repaint shouldn't be that expensive and I would image that when you need to change the cursor, you'd also be changing other aspects of the UI to \"justify\" the new cursor. For that, you'd have to do a repaint anyways...",
-    "createdAt": "2020-04-23T21:28:33Z"
+    "createdAt": "2026-04-23T21:28:33Z"
   },
   {
     "id": 7165,
     "sender": "dkwingsmt",
     "content": "@goderbauer Can you take a look at the new design, which I call \"session-based\":\r\n\r\nOverview of design:\r\n- `MouseCursor` is an immutable class and stores data. Subclasses overrides the method `createSession` to create a `MouseCursorSession` object.\r\n- Every `MouseCursor` has a corresponding `MouseCursorSession` class, which represents the duration when a device displays a cursor, i.e. the tuple `(device, cursor)`.\r\n- `MouseCursorSession` is a mutable class that stores states and provides methods `activate` and `dispose` to override. The `activate` will handle the method calls as well as resource fetching, caching, fallback cursors, etc.\r\n- `MouseTrackerAnnotation` stays const, and doesn't have listeners at all.\r\n- No more `MouseTrackerRenderObjectMixin`.\r\n  - `RenderMouseRegion` implements variable cursor by _implementing_ `MouseTrackerAnnotation`, and pushing itself as the annotation.\r\n\r\nA demo of implementing image cursor can be found at https://github.com/dkwingsmt/flutter/pull/1.",
-    "createdAt": "2020-05-04T08:08:25Z"
+    "createdAt": "2026-05-04T08:08:25Z"
   },
   {
     "id": 7166,
     "sender": "winwisely99",
     "content": "Just adding myself to this so I can see when it's ready as we need it for our flutter project.\r\n\r\nhttps://github.com/getcouragenow",
-    "createdAt": "2020-05-07T09:29:12Z"
+    "createdAt": "2026-05-07T09:29:12Z"
   },
   {
     "id": 7167,
     "sender": "ja2375",
     "content": "I think the default behavior for this on web should be the cursor autochanges when it detects you are hovering a button, text, etc. Will this be the behavior for web or will it be necessary to add an extra widget on every clickable, text widget we want to show a different cursor on?\r\n\r\nMany thanks for implementing this!",
-    "createdAt": "2020-05-07T18:57:10Z"
+    "createdAt": "2026-05-07T18:57:10Z"
   }
 ]

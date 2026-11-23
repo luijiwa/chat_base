@@ -3,127 +3,127 @@
     "id": 2112,
     "sender": "lukepighetti",
     "content": "Maybe the guys over at Rive can put together some SVG converting library. They already have a proprietary (and open source) vector engine for Flutter. @luigi-rosso",
-    "createdAt": "2020-04-20T16:03:27Z"
+    "createdAt": "2026-04-20T16:03:27Z"
   },
   {
     "id": 2113,
     "sender": "giaur500",
     "content": "Why not to add support importing svg into Flutter project. And convert to dart code/new vector drawable etc. Note that the same situation is on native Android, that's why we don't use svg directly (which I agree does not make much sense) and import to project instead, svg is stripped from not supported and not needed functionalitites and converted into android path definition.\r\n\r\nIsn't that good idea for Flutter?",
-    "createdAt": "2020-04-20T18:10:04Z"
+    "createdAt": "2026-04-20T18:10:04Z"
   },
   {
     "id": 2114,
     "sender": "Hixie",
     "content": "@giaur500 This issue isn't about that. If you have a suggestion specifically about SVG, please file a separate issue.",
-    "createdAt": "2020-04-20T18:21:23Z"
+    "createdAt": "2026-04-20T18:21:23Z"
   },
   {
     "id": 2115,
     "sender": "lukepighetti",
     "content": "To be fair, many of the comments in this issue are discussing SVG and Flutter.",
-    "createdAt": "2020-04-20T23:17:15Z"
+    "createdAt": "2026-04-20T23:17:15Z"
   },
   {
     "id": 2116,
     "sender": "duzy",
     "content": "#follow \r\n\r\nSVG is perfect for great pixel-level user interface. Properly the best so far for great pixels.",
-    "createdAt": "2020-04-21T03:54:35Z"
+    "createdAt": "2026-04-21T03:54:35Z"
   },
   {
     "id": 2117,
     "sender": "Hixie",
     "content": "@lukepighetti Yes. They are unfortunately all off-topic and having them here will not result in any improvements to Flutter.",
-    "createdAt": "2020-04-21T17:48:19Z"
+    "createdAt": "2026-04-21T17:48:19Z"
   },
   {
     "id": 2118,
     "sender": "LeeMatthewHiggins",
     "content": "> From earlier discussion, some important considerations are:\r\n> \r\n> * We don't want full SVG support.  There is too much in the spec that is expensive, heavyweight, and/or duplicates what we already have in Flutter.\r\n> * We should emphasize in our supported format those operations are effective/efficient/optimized in our graphics engine (Skia).\r\n> * We may want to process the format at build time rather than support a full run-time interpreter.\r\n\r\nA build time tool would be great, take the vector and render all the screen densities, and add the assets as images. Apples iOS does this with PDF icons.",
-    "createdAt": "2020-05-05T08:16:56Z"
+    "createdAt": "2026-05-05T08:16:56Z"
   },
   {
     "id": 2119,
     "sender": "Josecodesalot",
     "content": "> Better to be able to import svg and process them internally, either at build time or auto generate code during import. Similar as native Android - you can import svg and Android path definition xml will be generated from source svg. Import into Flutter project could generate dart code to be reused to draw vector asset.\r\n\r\ni like it",
-    "createdAt": "2020-08-14T05:29:15Z"
+    "createdAt": "2026-08-14T05:29:15Z"
   },
   {
     "id": 2120,
     "sender": "giaur500",
     "content": "> @giaur500 This issue isn't about that. If you have a suggestion specifically about SVG, please file a separate issue.\r\n\r\nNew issue has been created: https://github.com/flutter/flutter/issues/63752",
-    "createdAt": "2020-08-14T08:28:03Z"
+    "createdAt": "2026-08-14T08:28:03Z"
   },
   {
     "id": 2121,
     "sender": "n00bmind",
     "content": "So what's the state of this?\r\nIs there any intention at all of supporting something similar to VectorDrawable, or even VectorDrawable itself for those on Android?\r\n\r\nAs a developer considering adopting the ecosystem, I'd say this is a strong point that'd convince me to stay native..",
-    "createdAt": "2020-08-15T09:46:00Z"
+    "createdAt": "2026-08-15T09:46:00Z"
   },
   {
     "id": 2122,
     "sender": "fmatosqg",
-    "content": "I never tried it myself, but flutter svg lib used to have support for at\nleast key features of vector drawable like paths.\n\nOn Sat, 15 Aug 2020, 19:46 n00bmind, <notifications@github.com> wrote:\n\n> So what's the state of this?\n> Is there any intention at all of supporting something similar to\n> VectorDrawable, or even VectorDrawable itself for those on Android?\n>\n> As a developer considering adopting the ecosystem, I'd say this is a\n> strong point that'd convince me to stay native..\n>\n> —\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/flutter/flutter/issues/1831#issuecomment-674375846>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/ABI4Y4LWYSYEIWI3RRSSCK3SAZKO5ANCNFSM4B3FXMMQ>\n> .\n>\n",
-    "createdAt": "2020-08-15T09:53:02Z"
+    "content": "I never tried it myself, but flutter svg lib used to have support for at\nleast key features of vector drawable like paths.\n\nOn Sat, 15 Aug 2026, 19:46 n00bmind, <notifications@github.com> wrote:\n\n> So what's the state of this?\n> Is there any intention at all of supporting something similar to\n> VectorDrawable, or even VectorDrawable itself for those on Android?\n>\n> As a developer considering adopting the ecosystem, I'd say this is a\n> strong point that'd convince me to stay native..\n>\n> —\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/flutter/flutter/issues/1831#issuecomment-674375846>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/ABI4Y4LWYSYEIWI3RRSSCK3SAZKO5ANCNFSM4B3FXMMQ>\n> .\n>\n",
+    "createdAt": "2026-08-15T09:53:02Z"
   },
   {
     "id": 2123,
     "sender": "giaur500",
     "content": "I guess state is nothing. No conclusion exists here from this thread and also  my idea to develop something similar to native vector drawable closed immediately.",
-    "createdAt": "2020-08-15T11:38:59Z"
+    "createdAt": "2026-08-15T11:38:59Z"
   },
   {
     "id": 2124,
     "sender": "lukepighetti",
     "content": "Is there any reason why the flutter svg package won't work for you? We are using it with great success in one of our apps. I have never used Vector Drawable so I'm not sure how it compares to SVG. ",
-    "createdAt": "2020-08-15T12:20:48Z"
+    "createdAt": "2026-08-15T12:20:48Z"
   },
   {
     "id": 2125,
     "sender": "n00bmind",
     "content": "It seems the flutter_svg package is worth a look for this kind of use case..\r\n@lukepighetti how would you rate its performance? My usage would be just a splash image and a few icon-sized graphics here and there in the app, so nothing fancy.",
-    "createdAt": "2020-08-15T16:53:53Z"
+    "createdAt": "2026-08-15T16:53:53Z"
   },
   {
     "id": 2126,
     "sender": "lukepighetti",
     "content": "> It seems the flutter_svg package is worth a look for this kind of use case..\n> \n> @lukepighetti how would you rate its performance? My usage would be just a splash image and a few icon-sized graphics here and there in the app, so nothing fancy.\n\nI would rate it very high for your use case. I think people should really give it a try before they put pressure on the flutter team to do something internally. ",
-    "createdAt": "2020-08-16T00:35:41Z"
+    "createdAt": "2026-08-16T00:35:41Z"
   },
   {
     "id": 2127,
     "sender": "ohir",
-    "content": "@lukepighetti \r\n> before they put pressure on the flutter team to do something internally.\r\n\r\nReal problem with this particular issue is that Skia the flutter graphics engine has [everything needed](https://skia.org/user/api/SkPath_Overview) to make \"drawable-like\" vector format running at the highest speed without importing quite heavy dart package that calls engine to draw primitives step by step.\r\n\r\n> I think people should really give it _(svg package)_ a try\r\n\r\nI think that people should loudly and in every possible place call Googlers to this gh-issue, because now — after four years — only negative PR may kick someone's at Google to think about whether mobile framework in year 2020 should really be forcing us to carry all that megabytes of raster graphics within our apps.\r\n\r\n[@Hixie]",
-    "createdAt": "2020-08-21T17:55:46Z"
+    "content": "@lukepighetti \r\n> before they put pressure on the flutter team to do something internally.\r\n\r\nReal problem with this particular issue is that Skia the flutter graphics engine has [everything needed](https://skia.org/user/api/SkPath_Overview) to make \"drawable-like\" vector format running at the highest speed without importing quite heavy dart package that calls engine to draw primitives step by step.\r\n\r\n> I think people should really give it _(svg package)_ a try\r\n\r\nI think that people should loudly and in every possible place call Googlers to this gh-issue, because now — after four years — only negative PR may kick someone's at Google to think about whether mobile framework in year 2026 should really be forcing us to carry all that megabytes of raster graphics within our apps.\r\n\r\n[@Hixie]",
+    "createdAt": "2026-08-21T17:55:46Z"
   },
   {
     "id": 2128,
     "sender": "lukepighetti",
     "content": "Unless I'm missing something, the implementation for such a flutter feature would look a lot like @dnfield 's [flutter_svg](https://github.com/dnfield/flutter_svg) package which appears to solve the use case you are describing. On top of that, the maintainer is on the core Flutter team so we can be sure of its quality. Would you feel better if this package was in https://github.com/flutter/plugins ?\r\n\r\nIf there is something I'm missing please feel free to educate me so I can learn more about this topic.",
-    "createdAt": "2020-08-24T12:46:30Z"
+    "createdAt": "2026-08-24T12:46:30Z"
   },
   {
     "id": 2129,
     "sender": "ohir",
     "content": "@lukepighetti \r\n\r\nI think that \"not SVG\" in the issue's title should be made red, bold and flashing.\r\n\r\nThis issue is specifically *not* about svg format.\r\n\r\nOP (and me) had hopes for exposing Skia's path api so the assets graphics could be represented in a compact form - ie binary of fixed endianess. Dan even did a [patch to Skia](https://github.com/flutter/engine/pull/4957) that works for the flutter_svg, which in turn now allows us to use svg assets. Though still we parse xml at app run time and draw by calling the engine — also for the static assets bundled in the apk.\r\n\r\n> With proper support for the *custom vector drawable format* (lets name it **fvd**), parsing of designer work would happen once — at app build time, then object in *fvd* format would be thrown directly at Skia. In graphics-heavy app such approach would have enormous effect on the app size and noticeable savings on rendering time. [*citing self*]\r\n\r\nI hope that above shows how I see this issue and justifies my call to have it at last done.\r\nEven as a part of the flutter_svg library.\r\n\r\nFlutter deserves to have yet another advantage over competing technologies.\r\n\r\n\r\n",
-    "createdAt": "2020-08-26T07:44:23Z"
+    "createdAt": "2026-08-26T07:44:23Z"
   },
   {
     "id": 2130,
     "sender": "denizdogan",
     "content": "For what it's worth, there's nothing inherently wrong with using flutter_svg, it's just that it's lacking even some very simple things, e.g. [it doesn't support percentages](https://github.com/dnfield/flutter_svg/issues/103) and straight up crashes when trying to render them. This comment is not a knock on the flutter_svg library, it's just to explain to people who are saying we can just use flutter_svg.",
-    "createdAt": "2020-09-06T10:47:17Z"
+    "createdAt": "2026-09-06T10:47:17Z"
   },
   {
     "id": 2131,
     "sender": "cassioseffrin",
     "content": "flutter_svg seems work very well despite of not support scripting, HTML, SMIL etc.\r\n\r\n it's looks good and we can build SVG from files assets, network or ordinary strings.",
-    "createdAt": "2020-09-22T12:18:12Z"
+    "createdAt": "2026-09-22T12:18:12Z"
   },
   {
     "id": 2132,
     "sender": "javdev",
     "content": "my problem with flutter_svg is, that it only supports android and ios. I think it is crucial to have svg in web and native as well.",
-    "createdAt": "2020-12-27T19:54:35Z"
+    "createdAt": "2026-12-27T19:54:35Z"
   },
   {
     "id": 2133,

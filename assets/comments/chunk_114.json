@@ -3,67 +3,67 @@
     "id": 7296,
     "sender": "itielMaimon",
     "content": "I know this isn’t exactly what we want, it’s not Admob native ads, but it works, so you might find it useful.\n\nThere’s a package for Facebook Audience Network native ads and it’s working great, tested both on Android and iOS.\n\n[https://pub.dev/packages/facebook_audience_network](https://pub.dev/packages/facebook_audience_network)",
-    "createdAt": "2020-07-01T04:46:34Z"
+    "createdAt": "2026-07-01T04:46:34Z"
   },
   {
     "id": 7297,
     "sender": "angel1st",
     "content": "@jebwatson - have a look at this one https://pub.dev/packages/admob_flutter. I cannot find a better option so far with regards to AdMob & Flutter implementation.",
-    "createdAt": "2020-07-01T06:48:46Z"
+    "createdAt": "2026-07-01T06:48:46Z"
   },
   {
     "id": 7298,
     "sender": "PlymouthRock",
     "content": "We've been using https://pub.dev/packages/native_ads\r\n\r\n![tidewatch](https://user-images.githubusercontent.com/2496106/86238031-d7393700-bb6a-11ea-8856-bfb79946eb41.jpg)\r\n",
-    "createdAt": "2020-07-01T11:03:45Z"
+    "createdAt": "2026-07-01T11:03:45Z"
   },
   {
     "id": 7299,
     "sender": "zerox1212",
     "content": "I'm still waiting for this as well. I just want to display AdMob banner inline with my flutter views. Floating the banner over the top of the flutter app is just ugly and undermines the entire purpose of this platform. ",
-    "createdAt": "2020-07-01T19:43:59Z"
+    "createdAt": "2026-07-01T19:43:59Z"
   },
   {
     "id": 7300,
     "sender": "jaggernod",
     "content": "> We've been using https://pub.dev/packages/native_ads\r\n> \r\n> ![tidewatch](https://user-images.githubusercontent.com/2496106/86238031-d7393700-bb6a-11ea-8856-bfb79946eb41.jpg)\r\n\r\nMy concern would be that this is a grey-zone. \r\nThere is a possibility google might block applications that use Ad solutions which are not designed for them.",
-    "createdAt": "2020-07-02T10:39:42Z"
+    "createdAt": "2026-07-02T10:39:42Z"
   },
   {
     "id": 7301,
     "sender": "sabinbajracharya",
     "content": "Right now the only solution available that the Third party libraries use to display native ads as part of flutter widget tree (eg: ListView) is to embed native Android and iOS view using `AndroidView` and `UiKitView` respectively **which according to the Flutter Docs is an expensive operation and should be avoided** and as a result there is a significant lag while scrolling.\r\n\r\nIs this the reason the flutter team are delaying native ads implementation as part of the flutter widget tree because they are waiting for a better and faster way to embed native views in flutter or some other improvements?\r\n\r\nBut, wouldn't it be possible to implement admob (native ads) completely in flutter/dart without depending on Android and iOS?\r\n",
-    "createdAt": "2020-07-25T18:28:37Z"
+    "createdAt": "2026-07-25T18:28:37Z"
   },
   {
     "id": 7302,
     "sender": "harshapulikollu",
     "content": "Desperate to have native ads support in flutter listviews. Any sort of timeline about when we are able to use native ads in flutter by the team will be helpful.",
-    "createdAt": "2020-08-03T17:37:17Z"
+    "createdAt": "2026-08-03T17:37:17Z"
   },
   {
     "id": 7303,
     "sender": "AdiLaxman",
     "content": "There are so many third-party plugins that implement native ads by AdMob. Knowing the notoriety of Google for banning the developers for trivial issues, I am afraid to use those solutions. I am looking forward to the first-party implementation of this. Could you please give a timeline?",
-    "createdAt": "2020-10-27T17:50:35Z"
+    "createdAt": "2026-10-27T17:50:35Z"
   },
   {
     "id": 7304,
     "sender": "timsneath",
     "content": "We have good news for you all, with today's announcement of beta support for this feature:\r\n [Support for inline banner and native ads formats in Flutter](https://medium.com/flutter/new-ads-beta-inline-banner-and-native-support-for-the-flutter-mobile-ads-plugin-e48a7e9a0e64)\r\n\r\nRight now this is in a closed beta, but we [strongly encourage you to apply to join](https://forms.gle/5d1MfrbaCLX9PS2Z9) if you're ready to use this feature in a production app. Assuming all goes well, we plan to open this up more broadly in early 2021.",
-    "createdAt": "2020-11-12T00:00:31Z"
+    "createdAt": "2026-11-12T00:00:31Z"
   },
   {
     "id": 7305,
     "sender": "nateshmbhat",
     "content": "> We have good news for you all, with today's announcement of beta support for this feature:\n>  [Support for inline banner and native ads formats in Flutter](https://medium.com/flutter/new-ads-beta-inline-banner-and-native-support-for-the-flutter-mobile-ads-plugin-e48a7e9a0e64)\n> \n> Right now this is in a closed beta, but we [strongly encourage you to apply to join](https://forms.gle/5d1MfrbaCLX9PS2Z9) if you're ready to use this feature in a production app. Assuming all goes well, we plan to open this up more broadly in early 2021.\n\nThis is awesome ❤️. Been a few days since I applied for the beta program. Waiting eagerly for a reply ✨",
-    "createdAt": "2020-11-25T12:55:37Z"
+    "createdAt": "2026-11-25T12:55:37Z"
   },
   {
     "id": 7306,
     "sender": "zerox1212",
     "content": "I also applied for the beta program. Has anyone received a response?",
-    "createdAt": "2020-11-25T14:33:55Z"
+    "createdAt": "2026-11-25T14:33:55Z"
   },
   {
     "id": 7307,

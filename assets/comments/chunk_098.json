@@ -176,7 +176,7 @@
   {
     "id": 6301,
     "sender": "flukejones",
-    "content": "@jonahwilliams I mention it here because these changes touch much of what is required for 32bit support and it would be good to have these changes allow for adding 32bit instead of assuming it will never be used. There are a number of issues that I've tracked down:\r\n- https://github.com/flutter/flutter/issues/74322\r\n- [maintainer of meta-flutter for yocto, used with stm32mp1](https://github.com/flutter/flutter/issues/56213)\r\n- [flutter-rs engine builds needed to be disabled](https://github.com/flutter-rs/engine-builds)\r\n- [article where ARM was used, no-longer working](https://blog.basyskom.com/2020/how-to-run-flutter-on-an-embedded-device/)\r\n\r\nI will create an issue to track this.",
+    "content": "@jonahwilliams I mention it here because these changes touch much of what is required for 32bit support and it would be good to have these changes allow for adding 32bit instead of assuming it will never be used. There are a number of issues that I've tracked down:\r\n- https://github.com/flutter/flutter/issues/74322\r\n- [maintainer of meta-flutter for yocto, used with stm32mp1](https://github.com/flutter/flutter/issues/56213)\r\n- [flutter-rs engine builds needed to be disabled](https://github.com/flutter-rs/engine-builds)\r\n- [article where ARM was used, no-longer working](https://blog.basyskom.com/2026/how-to-run-flutter-on-an-embedded-device/)\r\n\r\nI will create an issue to track this.",
     "createdAt": "2021-02-11T02:23:43Z"
   },
   {
@@ -345,42 +345,42 @@
     "id": 6329,
     "sender": "jakobwgnr",
     "content": "## Enable \"hot reload\" (not just \"hot restart\") for Flutter Web\n\nLatest update: https://github.com/flutter/flutter/issues/53041#issuecomment-1367615679\r\n\r\n----\r\n\r\nHello! \r\nTrying the web development currently in beta version. actually quite satisfied as the browser reloads very quick. Only annoying thing is that the hot restart doesn't work properly, imho.\r\nPlease check on this.\r\nBest Regards,\r\nJakob\r\nP.S.: Hope this is enough information - First time opening an issue here :)\r\n\r\n# Steps to Reproduce\r\n\r\n1. Setup flutter project for web development\r\n2. Run `flutter run -d Chrome`\r\n3. Navigate to a view != main view\r\n4. hot restart (small 'r') without browser refresh (like it should do with capital 'R')\r\n\r\n**Expected results:** \r\nBrowser should reload, but stay on the same view\r\n\r\n**Actual results:** \r\nBrowser fully restarts the app --> Again at the main view",
-    "createdAt": "2020-03-22T09:27:31Z"
+    "createdAt": "2026-03-22T09:27:31Z"
   },
   {
     "id": 6330,
     "sender": "jakobwgnr",
     "content": "not 100% sure if this is a similar issue like #50517, though...",
-    "createdAt": "2020-03-22T09:28:03Z"
+    "createdAt": "2026-03-22T09:28:03Z"
   },
   {
     "id": 6331,
     "sender": "jonahwilliams",
     "content": "Do you mean the entire browser is doing a hard refresh? or that it is doing a hot restart?\r\n\r\nSee https://flutter.dev/docs/development/platform-integration/web#does-hot-reload-work-with-a-web-app ",
-    "createdAt": "2020-03-22T16:56:49Z"
+    "createdAt": "2026-03-22T16:56:49Z"
   },
   {
     "id": 6332,
     "sender": "jakobwgnr",
     "content": "Hi @jonahwilliams \r\nit does a hot restart, what I wanted to have is hot reload... I was quite confused on how this is explained in the CLI.\r\n![image](https://user-images.githubusercontent.com/18501893/77300488-64f4c300-6cee-11ea-9bc1-f8be1a0c7043.png)\r\nSo the simple \"No.\" in the FAQ is actually the answer for my problem.\r\n\r\nMay I turn this into a feature-request either to:\r\nsupport hot reload for web (preferred) \r\nOR \r\nto add an info in the CLI for web that 'r' and 'R' are actually doing the same, as this is not the case right now.\r\n\r\n",
-    "createdAt": "2020-03-23T09:16:47Z"
+    "createdAt": "2026-03-23T09:16:47Z"
   },
   {
     "id": 6333,
     "sender": "iapicca",
     "content": "https://github.com/flutter/flutter/issues/50517",
-    "createdAt": "2020-03-23T11:52:06Z"
+    "createdAt": "2026-03-23T11:52:06Z"
   },
   {
     "id": 6334,
     "sender": "yjbanov",
     "content": "The full stateful hot-reload is not yet supported on the web. The app's state is lost between hot restarts. The reason you end up on another route could be a navigator bug. /cc @mdebbar ",
-    "createdAt": "2020-03-26T22:00:06Z"
+    "createdAt": "2026-03-26T22:00:06Z"
   },
   {
     "id": 6335,
     "sender": "mdebbar",
     "content": "I see no mention of routes or urls in the issue.\r\n\r\nLike @yjbanov said, we don't yet support stateful hot reload on the web. We only do hot restart (which loses state as you described), but we do keep url. Try using a `Navigator` with named routes. Once you navigate to a named route, you can do a hot restart and you'll stay on the same page.",
-    "createdAt": "2020-03-26T23:04:58Z"
+    "createdAt": "2026-03-26T23:04:58Z"
   }
 ]

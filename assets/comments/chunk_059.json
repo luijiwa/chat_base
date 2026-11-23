@@ -285,102 +285,102 @@
     "id": 3823,
     "sender": "goderbauer",
     "content": "## Restoration Framework\n\nMarked as WIP because I am still working on the tests (I decided to refactor the original testing framework for state restoration a little more to make it easier to use).\r\n\r\n## Description\r\n\r\nImplements https://flutter.dev/go/state-restoration-design.\r\n\r\nThis PR introduces the basic framework for state restoration in Flutter as outlined in the document above.\r\n\r\nIn the service layer, the following concepts are introduced:\r\n\r\n* `RestorationManager`, which synchronizes the restoration data between engine and framework.\r\n* `RestorationBucket`, which stores the restoration data in a tree.\r\n* `RestorationId`, which identifies a piece of restoration data uniquely within a `RestorationBucket`.\r\n\r\nIn the widget layer, the following concepts are introduced. This is what most developers will presumably work with to make their apps restorable.\r\n\r\n* `RestorationMixin`, which is mixed into a `State` object to make certain values in the state restorable.\r\n* `RestorableProperty`, which holds the data within a `State` object that need to be restorable.\r\n* Many subclasses of `RestorableProperty` for storing specific data types, e.g. `RestorableInt`, `RestorableString`, etc.\r\n* Various `RestorationScope` widgets to create new name spaces for `RestorationId`s in the widget tree.\r\n\r\n## Related Issues\r\n\r\nhttps://github.com/flutter/flutter/issues/6827\r\n\r\n## Tests\r\n\r\nI added the following tests:\r\n\r\n* Tests for newly introduced concepts in the service layer: `RestorationManager`, `RestorationBucket`, `RestorationId` and friends.\r\n* WIP: tests for the widget layer.\r\n\r\n## Checklist\r\n\r\nBefore you create this PR confirm that it meets all requirements listed below by checking the relevant checkboxes (`[x]`). This will ensure a smooth and quick review process.\r\n\r\n- [x] I read the [Contributor Guide] and followed the process outlined there for submitting PRs.\r\n- [x] I signed the [CLA].\r\n- [x] I read and followed the [Flutter Style Guide], including [Features we expect every widget to implement].\r\n- [x] I read the [Tree Hygiene] wiki page, which explains my responsibilities.\r\n- [x] I updated/added relevant documentation (doc comments with `///`).\r\n- [x] All existing and new tests are passing.\r\n- [x] The analyzer (`flutter analyze --flutter-repo`) does not report any problems on my PR.\r\n- [x] I am willing to follow-up on review comments in a timely manner.\r\n\r\n## Breaking Change\r\n\r\nDid any tests fail when you ran them? Please read [Handling breaking changes].\r\n\r\n- [x] No, no existing tests failed, so this is *not* a breaking change.\r\n- [ ] Yes, this is a breaking change. *If not, delete the remainder of this section.*\r\n   - [ ] I wrote a design doc: https://flutter.dev/go/template *Replace this with a link to your design doc's short link*\r\n   - [ ] I got input from the developer relations team, specifically from: *Replace with the names of who gave advice*\r\n   - [ ] I wrote a migration guide: https://flutter.dev/go/breaking-changes-template *Replace this with a link to a pull request that adds the migration guide to https://flutter.dev/docs/release/breaking-changes*\r\n\r\n<!-- Links -->\r\n[issue database]: https://github.com/flutter/flutter/issues\r\n[Contributor Guide]: https://github.com/flutter/flutter/wiki/Tree-hygiene#overview\r\n[Test Coverage]: https://github.com/flutter/flutter/wiki/Test-coverage-for-package%3Aflutter\r\n[Flutter Style Guide]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo\r\n[Features we expect every widget to implement]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#features-we-expect-every-widget-to-implement\r\n[CLA]: https://cla.developers.google.com/\r\n[Tree Hygiene]: https://github.com/flutter/flutter/wiki/Tree-hygiene\r\n[Handling breaking changes]: https://github.com/flutter/flutter/wiki/Tree-hygiene#handling-breaking-changes\r",
-    "createdAt": "2020-06-26T17:55:48Z"
+    "createdAt": "2026-06-26T17:55:48Z"
   },
   {
     "id": 3824,
     "sender": "goderbauer",
     "content": "Tests for newly introduced concepts in the service layer (`RestorationManager`, `RestorationBucket`, `RestorationId` and friends) have been added. Coming up next: tests for the widget layer.",
-    "createdAt": "2020-06-30T23:50:42Z"
+    "createdAt": "2026-06-30T23:50:42Z"
   },
   {
     "id": 3825,
     "sender": "goderbauer",
     "content": "This PR is now complete and ready for review, PTAL @gspencergoog and @Hixie.",
-    "createdAt": "2020-07-09T20:40:59Z"
+    "createdAt": "2026-07-09T20:40:59Z"
   },
   {
     "id": 3826,
     "sender": "goderbauer",
     "content": "I am going to refactor the finalized stuff a little bit more. Probably best to wait with another round of reviews until that’s done...",
-    "createdAt": "2020-07-13T06:36:44Z"
+    "createdAt": "2026-07-13T06:36:44Z"
   },
   {
     "id": 3827,
     "sender": "goderbauer",
     "content": "Alright, that refactoring is done. Finalizers are no more. All comments should be addressed. PTAL @dnfield ",
-    "createdAt": "2020-07-13T19:34:36Z"
+    "createdAt": "2026-07-13T19:34:36Z"
   },
   {
     "id": 3828,
     "sender": "goderbauer",
     "content": "Thanks for the reviews! All comments are addressed.",
-    "createdAt": "2020-07-15T20:25:53Z"
+    "createdAt": "2026-07-15T20:25:53Z"
   },
   {
     "id": 3829,
     "sender": "goderbauer",
     "content": "All comments addressed. PTAL",
-    "createdAt": "2020-07-20T17:48:28Z"
+    "createdAt": "2026-07-20T17:48:28Z"
   },
   {
     "id": 3830,
     "sender": "Hixie",
     "content": "This looks great. My only feedback would be that we should add more sample code, especially to the major classes.",
-    "createdAt": "2020-07-22T23:24:37Z"
+    "createdAt": "2026-07-22T23:24:37Z"
   },
   {
     "id": 3831,
     "sender": "goderbauer",
     "content": "Test breakages are due to https://github.com/flutter/flutter/issues/62146.",
-    "createdAt": "2020-07-27T19:30:49Z"
+    "createdAt": "2026-07-27T19:30:49Z"
   },
   {
     "id": 3832,
     "sender": "gspencergoog",
     "content": "Whoohoo! 🥳🥳🥳",
-    "createdAt": "2020-07-28T17:21:04Z"
+    "createdAt": "2026-07-28T17:21:04Z"
   },
   {
     "id": 3833,
     "sender": "chunhtai",
     "content": "## Implements the navigator page api\n\n## Description\r\n\r\nThis is part 2 of https://github.com/flutter/flutter/issues/45938\r\nDesign doc: https://flutter.dev/go/navigator-with-router\r\n\r\nThis pr adds the page api, transition delegate and modifies route entry lifecycle\r\n\r\n\r\n## Related Issues\r\n\r\nhttps://github.com/flutter/flutter/issues/45938\r\n\r\n## Tests\r\n\r\nI added the following tests:\r\n\r\nA lot tests is navigator_test.dart\r\n\r\n## Checklist\r\n\r\nBefore you create this PR confirm that it meets all requirements listed below by checking the relevant checkboxes (`[x]`). This will ensure a smooth and quick review process.\r\n\r\n- [ ] I read the [Contributor Guide] and followed the process outlined there for submitting PRs.\r\n- [ ] I signed the [CLA].\r\n- [ ] I read and followed the [Flutter Style Guide], including [Features we expect every widget to implement].\r\n- [ ] I read the [Tree Hygiene] wiki page, which explains my responsibilities.\r\n- [ ] I updated/added relevant documentation (doc comments with `///`).\r\n- [ ] All existing and new tests are passing.\r\n- [ ] The analyzer (`flutter analyze --flutter-repo`) does not report any problems on my PR.\r\n- [ ] I am willing to follow-up on review comments in a timely manner.\r\n\r\n## Breaking Change\r\n\r\nDid any tests fail when you ran them? Please read [Handling breaking changes].\r\n\r\n- [ ] No, no existing tests failed, so this is *not* a breaking change.\r\n- [ ] Yes, this is a breaking change. *If not, delete the remainder of this section.*\r\n   - [ ] I wrote a design doc: https://flutter.dev/go/template *Replace this with a link to your design doc's short link*\r\n   - [ ] I got input from the developer relations team, specifically from: *Replace with the names of who gave advice*\r\n   - [ ] I wrote a migration guide: *Replace with a link to your migration guide*\r\n\r\n<!-- Links -->\r\n[issue database]: https://github.com/flutter/flutter/issues\r\n[Contributor Guide]: https://github.com/flutter/flutter/wiki/Tree-hygiene#overview\r\n[Test Coverage]: https://github.com/flutter/flutter/wiki/Test-coverage-for-package%3Aflutter\r\n[Flutter Style Guide]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo\r\n[Features we expect every widget to implement]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#features-we-expect-every-widget-to-implement\r\n[CLA]: https://cla.developers.google.com/\r\n[Tree Hygiene]: https://github.com/flutter/flutter/wiki/Tree-hygiene\r\n[Handling breaking changes]: https://github.com/flutter/flutter/wiki/Tree-hygiene#handling-breaking-changes\r",
-    "createdAt": "2020-02-07T21:24:31Z"
+    "createdAt": "2026-02-07T21:24:31Z"
   },
   {
     "id": 3834,
     "sender": "chunhtai",
     "content": "bump for review",
-    "createdAt": "2020-02-25T19:16:00Z"
+    "createdAt": "2026-02-25T19:16:00Z"
   },
   {
     "id": 3835,
     "sender": "goderbauer",
     "content": "Cirrus seems pretty unhappy. ",
-    "createdAt": "2020-03-04T18:49:32Z"
+    "createdAt": "2026-03-04T18:49:32Z"
   },
   {
     "id": 3836,
     "sender": "chunhtai",
     "content": "ready for another review @goderbauer ",
-    "createdAt": "2020-03-09T21:56:50Z"
+    "createdAt": "2026-03-09T21:56:50Z"
   },
   {
     "id": 3837,
     "sender": "chunhtai",
     "content": "@goderbauer I addressed all the comments. I also rename `PageBuilder` to `CustomBuilderPage` because `PageBuilder` implies a builder that returns a page which is a bit weird.",
-    "createdAt": "2020-03-14T00:42:30Z"
+    "createdAt": "2026-03-14T00:42:30Z"
   },
   {
     "id": 3838,
     "sender": "chunhtai",
     "content": "bump for attention",
-    "createdAt": "2020-03-16T17:35:28Z"
+    "createdAt": "2026-03-16T17:35:28Z"
   },
   {
     "id": 3839,
     "sender": "chunhtai",
     "content": "I addressed all comments except for this one https://github.com/flutter/flutter/pull/50362#discussion_r398223925. @goderbauer @Hixie ",
-    "createdAt": "2020-03-26T19:57:01Z"
+    "createdAt": "2026-03-26T19:57:01Z"
   }
 ]

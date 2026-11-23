@@ -3,19 +3,19 @@
     "id": 6080,
     "sender": "brnyza",
     "content": "> > > > > @libo1223 Thank you! I also found some code [#3225](https://github.com/flutter/plugins/pull/3225/files)\r\n> > > > \r\n> > > > \r\n> > > > After changing all the code of webview_flutter like this code [#3225](https://github.com/flutter/plugins/pull/3225/files)\r\n> > > > The app crash when I click on `<input tipe=\"file\">`\r\n> > > > ```\r\n> > > > W/System.err(12698): java.lang.NullPointerException: Attempt to invoke virtual method 'int android.content.Context.checkPermission(java.lang.String, int, int)' on a null object reference\r\n> > > > W/System.err(12698): \tat androidx.core.content.ContextCompat.checkSelfPermission(ContextCompat.java:535)\r\n> > > > W/System.err(12698): \tat io.flutter.plugins.webviewflutter.FileChooserLauncher.hasCameraPermission(FileChooserLauncher.java:60)\r\n> > > > W/System.err(12698): \tat io.flutter.plugins.webviewflutter.FileChooserLauncher.start(FileChooserLauncher.java:65)\r\n> > > > W/System.err(12698): \tat io.flutter.plugins.webviewflutter.FlutterWebView$FlutterWebChromeClient.onShowFileChooser(FlutterWebView.java:86)\r\n> > > > ```\r\n> > > \r\n> > > \r\n> > > I had same problem with NullPointerException on checkPermission method and I resolved it by replacing `Actvity` with `Context`.\r\n> > > Check this commit [michaltrmac/plugins@9376b1e](https://github.com/michaltrmac/plugins/commit/9376b1e15998c2d46ac14ae3d41d913a3bcf0f93) for more info.\r\n> > > This work for my app.\r\n> > \r\n> > \r\n> > Thank you @michaltrmac it worked well now. (I don't have idea how do you find these solutions)\r\n> > There is only one problem for me. My html code is:\r\n> > `<input type=\"file\" accept=\"image/*\" capture>`\r\n> > Now it's possible to select a file. But I need the both option 1-Select a file, or 2-Take a picture.\r\n> > The same as Chrome do.\r\n> > Does anyone know how to do it?\r\n> \r\n> @brnyza You have to request `CAMERA` permission.\r\n> Add\r\n> \r\n> ```\r\n> <uses-permission android:name=\"android.permission.CAMERA\" />\r\n> ```\r\n> \r\n> to `android/app/src/main/AndroidManifest.xml` and use some plugin to request permissions in app.\r\n> \r\n> I use this plugin https://pub.dev/packages/permission_handler and then in app request permission with code like this:\r\n> \r\n> ```dart\r\n> PermissionStatus status = await Permission.camera.status;\r\n> if (status.isUndetermined) {\r\n>     await Permission.camera.request();\r\n> }\r\n> ```\r\n> \r\n> I also fully uninstalled the app from phone and install it again.\r\n\r\n@michaltrmac Thank you more one time, worked perfectly!",
-    "createdAt": "2020-11-28T13:18:35Z"
+    "createdAt": "2026-11-28T13:18:35Z"
   },
   {
     "id": 6081,
     "sender": "Burak45",
     "content": "@libo1223  and @michaltrmac thank you so much, I have a problem. I applied the codes, but when I upload a picture from the camera, it does not load the page. When I choose it from the gallery, it loads without any problem. Do you have an opinion on this?",
-    "createdAt": "2020-11-28T18:53:34Z"
+    "createdAt": "2026-11-28T18:53:34Z"
   },
   {
     "id": 6082,
     "sender": "Burak45",
     "content": "> @libo1223 and @michaltrmac thank you so much, I have a problem. I applied the codes, but when I upload a picture from the camera, it does not load the page. When I choose it from the gallery, it loads without any problem. Do you have an opinion on this?\r\n\r\nimg upload but image type goes blank ",
-    "createdAt": "2020-11-29T12:08:34Z"
+    "createdAt": "2026-11-29T12:08:34Z"
   },
   {
     "id": 6083,

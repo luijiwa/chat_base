@@ -18,6 +18,7 @@ class ChatComposer extends StatefulWidget {
   const ChatComposer({
     required this.selection,
     required this.dataSource,
+    required this.onSend,
     super.key,
   });
 
@@ -26,6 +27,9 @@ class ChatComposer extends StatefulWidget {
 
   /// Source for message text when copying a selection to the clipboard.
   final ChatDataSource dataSource;
+
+  /// Вызывается с текстом сообщения, когда пользователь нажимает «Отправить».
+  final ValueChanged<String> onSend;
 
   @override
   State<ChatComposer> createState() => _ChatComposerState();
@@ -126,6 +130,7 @@ class _ChatComposerState extends State<ChatComposer>
 
   void _handleSend() {
     if (_text.text.trim().isEmpty) return;
+    widget.onSend(_text.text);
     _text.clear();
     _focus.unfocus();
   }

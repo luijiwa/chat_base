@@ -357,30 +357,30 @@
     "id": 8123,
     "sender": "amreniouinnovent",
     "content": "One more case on old devices with 2 sim cards when you toggle airplane mode on and off the native youtube and flutter apps will restart #49057 \r\nVideo is attached in my issue",
-    "createdAt": "2020-01-19T10:52:47Z"
+    "createdAt": "2026-01-19T10:52:47Z"
   },
   {
     "id": 8124,
     "sender": "laksithakumara",
     "content": "Try to disable flutter debug mode. if debug mode is enabled app always restart. \r\n\r\ndebugShowCheckedModeBanner: false,",
-    "createdAt": "2020-01-30T17:08:30Z"
+    "createdAt": "2026-01-30T17:08:30Z"
   },
   {
     "id": 8125,
     "sender": "Aman-Malhotra",
     "content": "I have been working in flutter since 2018, June/July maybe and came to know this was an issue after 2-3 months. I didn't know it became such a big issue. I was making a music player app and if I pressed back button, flutter used to destroy every state while the music kept playing in the background. To resolve this back then I made this **[system_shortcuts](https://pub.dev/packages/system_shortcuts/)** library .\r\nAdd the plugin to your project in **pubspec.yaml**  _[ For those who are beginners :) ]_ \r\n```\r\ndependencies:\r\n  flutter:\r\n    sdk: flutter\r\n\r\n  # The following adds the Cupertino Icons font to your application.\r\n  # Use with the CupertinoIcons class for iOS style icons.\r\n  cupertino_icons: ^0.1.2\r\n  system_shortcuts:\r\n\r\n```\r\nI have always been using a **workaround that works just fine for me** but there are a few issues in it, mentioned below in this comment but they don't affect me that much. \r\n\r\n### Usage - \r\nWhatever widget you are on and on back button press you know that the app will close(i.e user leaves the app) add **WidgetsBindingObserver** Mixin in the state class like this \r\n```\r\nclass _MusicPlayerState extends State<MusicPlayer>\r\n    with WidgetsBindingObserver{\r\n...\r\n}\r\n```\r\nAfter doing that **override the didPopRoute method** and add the following code in the method\r\n\r\n```\r\n@override\r\n  Future<bool> didPopRoute() async {\r\n    await SystemShortcuts.home();\r\n  return true;\r\n  }\r\n```\r\n\r\n_Lets Understand how this works_ :\r\n**App is running**  >>  **User presses back button**   >>  **Home button is pressed and the back button is not**>>The app goes to the background and the **state is not destroyed ANY OF IT**\r\n\r\n### Working Sample -\r\n\r\n_**EDIT**_\r\n_This app is written using **provider state management** but there is no code used to manage any of the state after closing the app and reopening from the recent. Its just the code that we added working here._ \r\n\r\n![ezgif com-video-to-gif](https://user-images.githubusercontent.com/30658517/73565220-19106500-4487-11ea-8f10-989abc04cb58.gif)\r\n\r\n![ezgif com-video-to-gif (1)](https://user-images.githubusercontent.com/30658517/73565751-3db90c80-4488-11ea-9ccb-76b0d32ba803.gif)\r\n\r\n\r\n### Issues - \r\nIf you have come to your app from another app, whenever you go back from your home widget you'll always go to the home screen and not to that previous app from where you came.\r\nExample :- \r\n**User is in WhatsApp (or any other app)**   >>   **They get a notification from your app**  >>  **They open your app from the notification**  >>  **Now they press back button**  >> **They'll go back to home screen of the phone and not WhatsApp(which should be the default scenario)**\r\n_This issue has not given me any big problem so far and I think all the normal users and developers will be ok with it as it is in rare cases that you come to your app from another app. I am not neglecting that it can happen quiet a few times but it works for me and its just a workaround till it gets any actual help from flutter core team._\r\n",
-    "createdAt": "2020-01-31T18:50:12Z"
+    "createdAt": "2026-01-31T18:50:12Z"
   },
   {
     "id": 8126,
     "sender": "roysprojects",
     "content": "The fact that this problem is almost 3 and half years old and still nothing is so upsetting. ",
-    "createdAt": "2020-02-04T08:02:30Z"
+    "createdAt": "2026-02-04T08:02:30Z"
   },
   {
     "id": 8127,
     "sender": "LouisCAD",
-    "content": "Apparently, this is set to be worked on by May 2020 judging from the currently set milestone… in time for Google I/O?",
-    "createdAt": "2020-02-04T09:36:23Z"
+    "content": "Apparently, this is set to be worked on by May 2026 judging from the currently set milestone… in time for Google I/O?",
+    "createdAt": "2026-02-04T09:36:23Z"
   }
 ]

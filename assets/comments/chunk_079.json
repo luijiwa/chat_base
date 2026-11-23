@@ -195,49 +195,49 @@
     "id": 5088,
     "sender": "ChrisRollz",
     "content": "Same issues today with keyboard. Can focus the input field within the WebViews but the keyboard does not populate the field. We tried on both a nexus and a Huawei mate 9 pro. ",
-    "createdAt": "2020-02-02T03:22:47Z"
+    "createdAt": "2026-02-02T03:22:47Z"
   },
   {
     "id": 5089,
     "sender": "mklim",
     "content": "@ChrisFetterly thanks for the report. Could you file a new issue for the problem you're seeing with the output of `flutter doctor` and a small reproducible sample case?",
-    "createdAt": "2020-02-03T17:55:06Z"
+    "createdAt": "2026-02-03T17:55:06Z"
   },
   {
     "id": 5090,
     "sender": "hnvn",
     "content": "Hi guys, I am facing a problem with keyboard in Android that it overlaps input fields when it shows up. Is there anyone know this issue?",
-    "createdAt": "2020-05-06T09:07:08Z"
+    "createdAt": "2026-05-06T09:07:08Z"
   },
   {
     "id": 5091,
     "sender": "jtibbles",
     "content": "On Android it doesn't seem to work if you click inside the textfield, it only works if you click on the top border of the textfield. Then the keyboard pops up.\r\nAnd if you click anywhere else the keyboard remains on-screen.",
-    "createdAt": "2020-05-12T08:58:40Z"
+    "createdAt": "2026-05-12T08:58:40Z"
   },
   {
     "id": 5092,
     "sender": "veselinnguyen",
-    "content": "Hi guys,\r\nThe issue still occurs and it has been here for ages. Noone has found already a solution?\r\n\r\nI am opening a WEBPAGE in a FLUTTER WEBVIEW. The Keyboard works only for ANDROID.\r\n\r\n![Screenshot 2020-06-23 at 11 13 10 PM](https://user-images.githubusercontent.com/2046167/85669991-b97a5680-b6c0-11ea-9a9d-88e18904f440.png)\r\n\r\n",
-    "createdAt": "2020-06-25T06:49:48Z"
+    "content": "Hi guys,\r\nThe issue still occurs and it has been here for ages. Noone has found already a solution?\r\n\r\nI am opening a WEBPAGE in a FLUTTER WEBVIEW. The Keyboard works only for ANDROID.\r\n\r\n![Screenshot 2026-06-23 at 11 13 10 PM](https://user-images.githubusercontent.com/2046167/85669991-b97a5680-b6c0-11ea-9a9d-88e18904f440.png)\r\n\r\n",
+    "createdAt": "2026-06-25T06:49:48Z"
   },
   {
     "id": 5093,
     "sender": "crypto-maria",
-    "content": "> Hi guys,\r\n> The issue still occurs and it has been here for ages. Noone has found already a solution?\r\n> \r\n> I am opening a WEBPAGE in a FLUTTER WEBVIEW. The Keyboard works only for ANDROID.\r\n> \r\n> ![Screenshot 2020-06-23 at 11 13 10 PM](https://user-images.githubusercontent.com/2046167/85669991-b97a5680-b6c0-11ea-9a9d-88e18904f440.png)\r\n\r\nHave you got any solution for this?",
-    "createdAt": "2020-09-05T12:44:04Z"
+    "content": "> Hi guys,\r\n> The issue still occurs and it has been here for ages. Noone has found already a solution?\r\n> \r\n> I am opening a WEBPAGE in a FLUTTER WEBVIEW. The Keyboard works only for ANDROID.\r\n> \r\n> ![Screenshot 2026-06-23 at 11 13 10 PM](https://user-images.githubusercontent.com/2046167/85669991-b97a5680-b6c0-11ea-9a9d-88e18904f440.png)\r\n\r\nHave you got any solution for this?",
+    "createdAt": "2026-09-05T12:44:04Z"
   },
   {
     "id": 5094,
     "sender": "matuella",
-    "content": "> Hi guys,\r\n> The issue still occurs and it has been here for ages. Noone has found already a solution?\r\n> \r\n> I am opening a WEBPAGE in a FLUTTER WEBVIEW. The Keyboard works only for ANDROID.\r\n> \r\n> ![Screenshot 2020-06-23 at 11 13 10 PM](https://user-images.githubusercontent.com/2046167/85669991-b97a5680-b6c0-11ea-9a9d-88e18904f440.png)\r\n\r\nare you sure you haven't disabled the simulator visual keyboard (CMD + K / SHIFT + CMD + K)?",
-    "createdAt": "2020-10-07T10:54:51Z"
+    "content": "> Hi guys,\r\n> The issue still occurs and it has been here for ages. Noone has found already a solution?\r\n> \r\n> I am opening a WEBPAGE in a FLUTTER WEBVIEW. The Keyboard works only for ANDROID.\r\n> \r\n> ![Screenshot 2026-06-23 at 11 13 10 PM](https://user-images.githubusercontent.com/2046167/85669991-b97a5680-b6c0-11ea-9a9d-88e18904f440.png)\r\n\r\nare you sure you haven't disabled the simulator visual keyboard (CMD + K / SHIFT + CMD + K)?",
+    "createdAt": "2026-10-07T10:54:51Z"
   },
   {
     "id": 5095,
     "sender": "crypto-maria",
-    "content": "Thats probably because, in emulator setting the virtual keyboard is turned\noff. However the problem could be have also been caused if you are using\nthe older version of the library if not then see if the keyboard is not\nenabled in the setting as by default it is disabled in the emulator.\n\nOn Wed, 7 Oct 2020, 15:55 Guilherme Carlos Matuella, <\nnotifications@github.com> wrote:\n\n> Hi guys,\n> The issue still occurs and it has been here for ages. Noone has found\n> already a solution?\n>\n> I am opening a WEBPAGE in a FLUTTER WEBVIEW. The Keyboard works only for\n> ANDROID.\n>\n> [image: Screenshot 2020-06-23 at 11 13 10 PM]\n> <https://user-images.githubusercontent.com/2046167/85669991-b97a5680-b6c0-11ea-9a9d-88e18904f440.png>\n>\n> are you sure you haven't disabled the simulator visual keyboard (CMD + K /\n> SHIFT + CMD + K)?\n>\n> —\n> You are receiving this because you commented.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/flutter/flutter/issues/19718#issuecomment-704857369>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/AOW4IEFOYBISDCRWRSIDSULSJRCJJANCNFSM4FLUCUTA>\n> .\n>\n",
-    "createdAt": "2020-10-07T11:00:08Z"
+    "content": "Thats probably because, in emulator setting the virtual keyboard is turned\noff. However the problem could be have also been caused if you are using\nthe older version of the library if not then see if the keyboard is not\nenabled in the setting as by default it is disabled in the emulator.\n\nOn Wed, 7 Oct 2026, 15:55 Guilherme Carlos Matuella, <\nnotifications@github.com> wrote:\n\n> Hi guys,\n> The issue still occurs and it has been here for ages. Noone has found\n> already a solution?\n>\n> I am opening a WEBPAGE in a FLUTTER WEBVIEW. The Keyboard works only for\n> ANDROID.\n>\n> [image: Screenshot 2026-06-23 at 11 13 10 PM]\n> <https://user-images.githubusercontent.com/2046167/85669991-b97a5680-b6c0-11ea-9a9d-88e18904f440.png>\n>\n> are you sure you haven't disabled the simulator visual keyboard (CMD + K /\n> SHIFT + CMD + K)?\n>\n> —\n> You are receiving this because you commented.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/flutter/flutter/issues/19718#issuecomment-704857369>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/AOW4IEFOYBISDCRWRSIDSULSJRCJJANCNFSM4FLUCUTA>\n> .\n>\n",
+    "createdAt": "2026-10-07T11:00:08Z"
   },
   {
     "id": 5096,

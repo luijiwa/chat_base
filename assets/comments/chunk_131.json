@@ -3,253 +3,253 @@
     "id": 8384,
     "sender": "GaryQian",
     "content": "Not yet, have been continuing with experimentation, but not much success yet. Will update when I have more information. The remaining portion of this bug is caused by a similar issue with finishing composing region and how Samsung caches that internally. When the keyboard is hidden, the composing region finishes, however, Samsung does not clear their cache, and incorrectly reinstates it when the keyboard is shown again, causing the duplication. The hard part is finding a reliable way to notify/force the keyboard to clear out its cache in a general way that doesn't break other keyboards.",
-    "createdAt": "2020-01-30T19:52:59Z"
+    "createdAt": "2026-01-30T19:52:59Z"
   },
   {
     "id": 8385,
     "sender": "petermichaux",
     "content": "Go, @GaryQian. Go! You can do it!!",
-    "createdAt": "2020-02-08T02:48:42Z"
+    "createdAt": "2026-02-08T02:48:42Z"
   },
   {
     "id": 8386,
     "sender": "GaryQian",
     "content": "Update: The hack I was able to use to fix the \"dupe on punctuation\" part of the bug does not work with the \"keyboard hide-show dupe\" part of this bug. I have confirmed I am successfully resetting composing regions on keyboard hide/show with no positive results. It seems this cached value is stored somewhere else, or Samsung has not full implemented receiving composing region data in the IME. Continuing the search...",
-    "createdAt": "2020-02-11T01:32:03Z"
+    "createdAt": "2026-02-11T01:32:03Z"
   },
   {
     "id": 8387,
     "sender": "GaryQian",
     "content": "I believe I have another partial fix that resolves this bug in the vast majority of cases. It seems there is yet a third way the duplication happens, but I was able to use the updateSelection IMM call to trick the keyboard into resetting its cached composing region in https://github.com/flutter/engine/pull/16547.\r\n\r\nThis fixes the duplication (on my test devices) for almost all cases, but in a few rare instances (exact repro steps yet to be determined), I am still able to duplicate. I will try to land the current state of the hack/fix because this is an important bugfix and most cases are covered by it.",
-    "createdAt": "2020-02-11T21:54:47Z"
+    "createdAt": "2026-02-11T21:54:47Z"
   },
   {
     "id": 8388,
     "sender": "GaryQian",
     "content": "The partial workaround has been landed. https://github.com/flutter/engine/commit/c4c6ef67195bd7b592ede2769702ecb7253e525c Still needs to roll into the framework, but it should hugely improve the duplication behavior. Please try it out (after it rolls into framework).\r\n\r\nIf anyone can come up with reliable steps to reproduce the remaining duplication edge case, please share! I am able to repro it every once in a while, but am unable to achieve it consistently.",
-    "createdAt": "2020-02-13T00:54:03Z"
+    "createdAt": "2026-02-13T00:54:03Z"
   },
   {
     "id": 8389,
     "sender": "ccarbajo",
-    "content": "I used S10 plus with android 10\r\nEspañol (US) idiom\r\n\r\nScenario\r\n\r\nTap textformfield\r\nEnter a letter\r\nDone\r\nTap textformfield\r\nEnter a dot (.)\r\nEnter any letter\r\n\r\nreproduce today 13/2/2020",
-    "createdAt": "2020-02-14T02:22:47Z"
+    "content": "I used S10 plus with android 10\r\nEspañol (US) idiom\r\n\r\nScenario\r\n\r\nTap textformfield\r\nEnter a letter\r\nDone\r\nTap textformfield\r\nEnter a dot (.)\r\nEnter any letter\r\n\r\nreproduce today 13/2/2026",
+    "createdAt": "2026-02-14T02:22:47Z"
   },
   {
     "id": 8390,
     "sender": "GaryQian",
     "content": "The fix above has rolled into master channel as of https://github.com/flutter/flutter/commit/6ecb0521399c3148aaac513921cd51a3e17e56a9 today. Please try it now.\r\n\r\n@ccarbajo You probably tried on a version that did not include the fix as it only just rolled into the frtamework, please try it on master channel now :)",
-    "createdAt": "2020-02-14T21:01:10Z"
+    "createdAt": "2026-02-14T21:01:10Z"
   },
   {
     "id": 8391,
     "sender": "Endebert",
-    "content": "Thank you @GaryQian for your efforts. Unfortunately, our issues are not resolved based on our observations.\r\n\r\nWe created a simple example application with this TextField:\r\n```dart\r\nTextField(\r\n  autocorrect: false,\r\n  enableSuggestions: false,\r\n)\r\n```\r\nInput is still duplicated when typing a letter after `@` or `.`.\r\n\r\n**In fact, the issue seems to have worsened for us, as now the very first character that is typed is sometimes duplicated as well, which was not the case before.**\r\n\r\nDuplication of first character seems to be related to hiding + unhiding the keyboard, or changing focus back & forth.\r\n\r\nHere is a short video showing both issues.\r\n \r\n![ezgif-6-abaec488e429](https://user-images.githubusercontent.com/9431420/74650017-113c0a80-5181-11ea-90e8-cc4e49e42756.gif)\r\n\r\n\r\nDevice is a Galaxy Tab A (2019, 10.1). Tried both with english & german locale.\r\n\r\nflutter doctor:\r\n```\r\n[✓] Flutter (Channel master, v1.15.4-pre.83, on Linux, locale en_US.UTF-8)\r\n    • Flutter version 1.15.4-pre.83 at /opt/flutter\r\n    • Framework revision ec9813a500 (8 hours ago), 2020-02-16 19:15:52 -0800\r\n    • Engine revision d60f298d9e\r\n    • Dart version 2.8.0 (build 2.8.0-dev.9.0 edd64e6d5c)\r\n\r\n \r\n[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.2)\r\n    • Android SDK at /home/ren/Android/Sdk\r\n    • Android NDK location not configured (optional; useful for native profiling support)\r\n    • Platform android-29, build-tools 29.0.2\r\n    • Java binary at: /home/ren/.local/share/JetBrains/Toolbox/apps/AndroidStudio/ch-0/191.6010548/jre/bin/java\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)\r\n    • All Android licenses accepted.\r\n\r\n[✓] Android Studio (version 3.5)\r\n    • Android Studio at /home/ren/.local/share/JetBrains/Toolbox/apps/AndroidStudio/ch-0/191.6010548\r\n    • Flutter plugin version 40.0.2\r\n    • Dart plugin version 191.8423\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)\r\n\r\n[✓] Connected device (1 available)\r\n    • SM T510 • R52M400PMFN • android-arm • Android 9 (API 28)\r\n```",
-    "createdAt": "2020-02-17T11:41:03Z"
+    "content": "Thank you @GaryQian for your efforts. Unfortunately, our issues are not resolved based on our observations.\r\n\r\nWe created a simple example application with this TextField:\r\n```dart\r\nTextField(\r\n  autocorrect: false,\r\n  enableSuggestions: false,\r\n)\r\n```\r\nInput is still duplicated when typing a letter after `@` or `.`.\r\n\r\n**In fact, the issue seems to have worsened for us, as now the very first character that is typed is sometimes duplicated as well, which was not the case before.**\r\n\r\nDuplication of first character seems to be related to hiding + unhiding the keyboard, or changing focus back & forth.\r\n\r\nHere is a short video showing both issues.\r\n \r\n![ezgif-6-abaec488e429](https://user-images.githubusercontent.com/9431420/74650017-113c0a80-5181-11ea-90e8-cc4e49e42756.gif)\r\n\r\n\r\nDevice is a Galaxy Tab A (2019, 10.1). Tried both with english & german locale.\r\n\r\nflutter doctor:\r\n```\r\n[✓] Flutter (Channel master, v1.15.4-pre.83, on Linux, locale en_US.UTF-8)\r\n    • Flutter version 1.15.4-pre.83 at /opt/flutter\r\n    • Framework revision ec9813a500 (8 hours ago), 2026-02-16 19:15:52 -0800\r\n    • Engine revision d60f298d9e\r\n    • Dart version 2.8.0 (build 2.8.0-dev.9.0 edd64e6d5c)\r\n\r\n \r\n[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.2)\r\n    • Android SDK at /home/ren/Android/Sdk\r\n    • Android NDK location not configured (optional; useful for native profiling support)\r\n    • Platform android-29, build-tools 29.0.2\r\n    • Java binary at: /home/ren/.local/share/JetBrains/Toolbox/apps/AndroidStudio/ch-0/191.6010548/jre/bin/java\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)\r\n    • All Android licenses accepted.\r\n\r\n[✓] Android Studio (version 3.5)\r\n    • Android Studio at /home/ren/.local/share/JetBrains/Toolbox/apps/AndroidStudio/ch-0/191.6010548\r\n    • Flutter plugin version 40.0.2\r\n    • Dart plugin version 191.8423\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)\r\n\r\n[✓] Connected device (1 available)\r\n    • SM T510 • R52M400PMFN • android-arm • Android 9 (API 28)\r\n```",
+    "createdAt": "2026-02-17T11:41:03Z"
   },
   {
     "id": 8392,
     "sender": "inf0rmatix-old",
     "content": "This is a real issue. Any news from the front? Building with master of flutter and still experiencing this issue.",
-    "createdAt": "2020-02-17T17:41:58Z"
+    "createdAt": "2026-02-17T17:41:58Z"
   },
   {
     "id": 8393,
     "sender": "GaryQian",
     "content": "@Endebert Thanks for the detailed report!\r\n\r\nIf anyone else has also not seen improvement on master channel, please share your `flutter doctor` as well as the device you are seeing the bug on: Exact model, Android version, and Samsung Experience Version.\r\n\r\nThe bug has seen improvement on the array of my test devices, but I do not (yet) possess a comprehensive samsung device library. If we can narrow down the remaining behavior on a subset of devices, I can purchase the device to ensure it is fixed on them.",
-    "createdAt": "2020-02-18T20:45:59Z"
+    "createdAt": "2026-02-18T20:45:59Z"
   },
   {
     "id": 8394,
     "sender": "exptk3",
-    "content": "> @Endebert Thanks for the detailed report!\r\n> \r\n> If anyone else has also not seen improvement, please share your `flutter doctor` as well as the device you are seeing the bug on: Exact model, Android version, and Samsung Experience Version.\r\n> \r\n> The bug has seen improvement on the array of my test devices, but I do not (yet) possess a comprehensive samsung device library. If we can narrow down the remaining behavior on a subset of devices, I can purchase the device to ensure it is fixed on them.\r\n\r\n* I share the current state of bug reproduction and confirmation as below.\r\nAfter applying your update, duplicate input problems still occur, and customer dissatisfaction is escalating.\r\n\r\n* Reproduce this bug\r\n - run time : 2020-02-11 11:44:36\r\n - I have been told that duplicate input is coming from a user using the Galaxy s7 and Galaxy s8. To find out, I bought a Galaxy S8 device. After updating the flutter to the latest version and building the app to check the issue, the duplicate input problem did not improve and is still occurring. The duplicate text input problem is a very basic and critical flaw. This should be fixed as soon as possible, so please...\r\nCheering and Believing You^^\r\n - How to reproduce the sentence : After entering a word, lower and raise the soft keyboard. -> After entering a word again, press the space button or wait for a while to change the input status to dormant. -> Afterwards, when you try to enter the next word, the cursor moves to the front and the first word changes to the second word you entered before. After that, when enter any word, a lot of duplicate words start to be entered.\r\n - Perhaps the Samsung Galaxy S7, S8 and S9 still have duplicate input issues. I don't know about S10 or etc.\r\n\r\n* Development environment information\r\nFlutter 1.12.13+hotfix.8 • channel stable • https://github.com/flutter/flutter.git\r\n[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.2)\r\n    • Android SDK at /Users/xxx/Library/Android/sdk\r\n    • Android NDK location not configured (optional; useful for native profiling support)\r\n    • Platform android-29, build-tools 29.0.2\r\n    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)\r\n    • All Android licenses accepted.\r\n[✓] Xcode - develop for iOS and macOS (Xcode 11.3.1)\r\n    • Xcode at /Applications/Xcode.app/Contents/Developer\r\n    • Xcode 11.3.1, Build version 11C504\r\n    • CocoaPods version 1.8.4\r\n[✓] Android Studio (version 3.5)\r\n    • Android Studio at /Applications/Android Studio.app/Contents\r\n    • Flutter plugin version 43.0.1\r\n    • Dart plugin version 191.8593\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)\r\n[✓] Connected device (1 available)\r\n    • SM G950N • xxxxxxxxxxx • android-arm64 • Android 9 (API 28)\r\n\r\nI think you'd better buy a Galaxy S8 real device to fix this bug.\r\nHave a nice day. Thanks.",
-    "createdAt": "2020-02-19T11:31:10Z"
+    "content": "> @Endebert Thanks for the detailed report!\r\n> \r\n> If anyone else has also not seen improvement, please share your `flutter doctor` as well as the device you are seeing the bug on: Exact model, Android version, and Samsung Experience Version.\r\n> \r\n> The bug has seen improvement on the array of my test devices, but I do not (yet) possess a comprehensive samsung device library. If we can narrow down the remaining behavior on a subset of devices, I can purchase the device to ensure it is fixed on them.\r\n\r\n* I share the current state of bug reproduction and confirmation as below.\r\nAfter applying your update, duplicate input problems still occur, and customer dissatisfaction is escalating.\r\n\r\n* Reproduce this bug\r\n - run time : 2026-02-11 11:44:36\r\n - I have been told that duplicate input is coming from a user using the Galaxy s7 and Galaxy s8. To find out, I bought a Galaxy S8 device. After updating the flutter to the latest version and building the app to check the issue, the duplicate input problem did not improve and is still occurring. The duplicate text input problem is a very basic and critical flaw. This should be fixed as soon as possible, so please...\r\nCheering and Believing You^^\r\n - How to reproduce the sentence : After entering a word, lower and raise the soft keyboard. -> After entering a word again, press the space button or wait for a while to change the input status to dormant. -> Afterwards, when you try to enter the next word, the cursor moves to the front and the first word changes to the second word you entered before. After that, when enter any word, a lot of duplicate words start to be entered.\r\n - Perhaps the Samsung Galaxy S7, S8 and S9 still have duplicate input issues. I don't know about S10 or etc.\r\n\r\n* Development environment information\r\nFlutter 1.12.13+hotfix.8 • channel stable • https://github.com/flutter/flutter.git\r\n[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.2)\r\n    • Android SDK at /Users/xxx/Library/Android/sdk\r\n    • Android NDK location not configured (optional; useful for native profiling support)\r\n    • Platform android-29, build-tools 29.0.2\r\n    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)\r\n    • All Android licenses accepted.\r\n[✓] Xcode - develop for iOS and macOS (Xcode 11.3.1)\r\n    • Xcode at /Applications/Xcode.app/Contents/Developer\r\n    • Xcode 11.3.1, Build version 11C504\r\n    • CocoaPods version 1.8.4\r\n[✓] Android Studio (version 3.5)\r\n    • Android Studio at /Applications/Android Studio.app/Contents\r\n    • Flutter plugin version 43.0.1\r\n    • Dart plugin version 191.8593\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_202-release-1483-b49-5587405)\r\n[✓] Connected device (1 available)\r\n    • SM G950N • xxxxxxxxxxx • android-arm64 • Android 9 (API 28)\r\n\r\nI think you'd better buy a Galaxy S8 real device to fix this bug.\r\nHave a nice day. Thanks.",
+    "createdAt": "2026-02-19T11:31:10Z"
   },
   {
     "id": 8395,
     "sender": "cqpaulzhang",
     "content": "A few years ago when I developed an app with Firemonkey, I encountered several bugs in text input. The self-drawing control framework is very cool in interface development, but many bugs in text input will make developers and customers crazy. It is recommended that Google focus on solving several bugs in text input first. After all, this is a must-have feature for almost all apps.",
-    "createdAt": "2020-02-20T00:59:55Z"
+    "createdAt": "2026-02-20T00:59:55Z"
   },
   {
     "id": 8396,
     "sender": "GaryQian",
     "content": "@exptk3 You are testing on stable channel, which does not have the fixes. Please try again on master channel (`flutter channel master`).\r\n\r\nI have verified it is fixed on the following test devices I have: S7 S9 S10 Note9 (same generation as s8), as well as on various tablets including Galaxy Tab A 2017 and 2018. I also have access to a bunch of pre-s7 devices that I have not recently tried, but those devices are quite old now and many of them did not repro the issue originally.",
-    "createdAt": "2020-02-20T01:05:51Z"
+    "createdAt": "2026-02-20T01:05:51Z"
   },
   {
     "id": 8397,
     "sender": "GaryQian",
     "content": "I was able to reproduce the punctuation version of this bug on a J6+ that I dug up (SM J610G/DS). The hide keyboard version of this bug does not occur.",
-    "createdAt": "2020-02-20T01:20:02Z"
+    "createdAt": "2026-02-20T01:20:02Z"
   },
   {
     "id": 8398,
     "sender": "exptk3",
     "content": "> @exptk3 You are testing on stable channel, which does not have the fixes. Please try again on master channel (`flutter channel master`).\r\n> \r\n> I have verified it is fixed on the following test devices I have: S7 S9 S10 Note9 (same generation as s8), as well as on various tablets including Galaxy Tab A 2017 and 2018. I also have access to a bunch of pre-s7 devices that I have not recently tried, but those devices are quite old now and many of them did not repro the issue originally.\r\n\r\nOkay. \r\nI just tested it on the master channel. By the way, the duplicate input problem still occurred and there was another problem added that was not present.\r\nIt took about 3~15 seconds or more(The time required is different each time) for the keyboard to come up and down to work.\r\nAfter the keyboard went down and up, the duplicate input problem still occurred.\r\nEven the keyboard that came up after the exit of the app is on the phone home screen.\r\nThe current situation is worse than before, so even users of other countries who do not use the Korean keyboard can cause problems.\r\n\r\n*** Another Bug confirmed\r\nIn addition to the above, after applying the master channel's modifications, the enter to go to the next line was also disabled. This will break from the first use of the text field regardless of keyboard up & down and will not go to the next line.\r\n\r\nMy test device is the Galaxy S8 as mentioned in the article above.\r\nPlease check the above\r\n\r\n----------------------------------------------------\r\n* This is my TextField (nothing special)\r\nTextField(\r\n                        maxLengthEnforced: true,\r\n                        maxLength: 500,\r\n                        decoration: InputDecoration(\r\n                          labelStyle: TextStyle(fontSize: 15),\r\n                          labelText: 'xxxxxx',\r\n                          hintStyle: TextStyle(\r\n                              fontSize: 13, color: Colors.grey[400]),\r\n                          hintText: 'xxxxxx',\r\n                        ),\r\n                        controller: _xxxxxController,\r\n                        keyboardType: TextInputType.multiline,\r\n                        maxLines: null,\r\n                        onChanged: (val) {xxx },\r\n                      )\r\n----------------------------------------------------\r\n\r\n* Console message when keyboard up and down\r\n\r\n 1. keyboard down\r\nD/ViewRootImpl@3eb9136[MainActivity](21669): MSG_RESIZED: frame=Rect(0, 0 - 1080, 2220) ci=Rect(0, 72 - 0, 144) vi=Rect(0, 72 - 0, 144) or=1\r\nD/ViewRootImpl@3eb9136[MainActivity](21669): Relayout returned: old=[0,0][1080,2220] new=[0,0][1080,2220] result=0x1 surface={valid=true 524530458624} changed=false\r\n\r\n2. keyboard up\r\nW/IInputConnectionWrapper(21669): getExtractedText on inactive InputConnection\r\nW/IInputConnectionWrapper(21669): getExtractedText on inactive InputConnection\r\nW/IInputConnectionWrapper(21669): getExtractedText on inactive InputConnection\r\n.....\r\n< ..... same message so many times .....>\r\n.....\r\nW/IInputConnectionWrapper(21669): getExtractedText on inactive InputConnection\r\nW/IInputConnectionWrapper(21669): getExtractedText on inactive InputConnection\r\nW/IInputConnectionWrapper(21669): getExtractedText on inactive InputConnection\r\n\r\n------------------------------\r\n\r\nSee the console log above.\r\nThank you.",
-    "createdAt": "2020-02-20T02:57:37Z"
+    "createdAt": "2026-02-20T02:57:37Z"
   },
   {
     "id": 8399,
     "sender": "exptk3",
     "content": "< Clean Project Test >\r\n\r\nThe above is the result of testing with my Real World app. I wanted to see if there was any difference in the initial flutter app that I created, so I created a new project and tested it again, but the result is the same as the real app. It was reproduced as it is.\r\n\r\n* In this case, reproduce the duplicate input problem :  word input --> hide the  keyboard and show keyboard-> type another word-> **do not wait for the keyboard focus to disappear naturally, but press the space button(on device soft keyboard) immediately after the word to release the focus. If you do this, duplicate input is better reproduced.**\r\n(this is important test tip)\r\n\r\n* The above test was run on a clean project created like below.\r\n\r\nchildren: <Widget>[\r\n              Text(\r\n                'You have pushed the button this many times:',\r\n              ),\r\n              Text(\r\n                '$_counter',\r\n                style: Theme.of(context).textTheme.display1,\r\n              ),\r\n              TextField(\r\n                maxLengthEnforced: true,\r\n                maxLength: 500,\r\n                decoration: InputDecoration(\r\n                  labelStyle: TextStyle(fontSize: 15),\r\n                  labelText: 'xxxxxx',\r\n                  hintStyle: TextStyle(\r\n                      fontSize: 13, color: Colors.grey[400]),\r\n                  hintText: 'xxxxxx',\r\n                ),\r\n                keyboardType: TextInputType.multiline,\r\n                maxLines: null,\r\n                onChanged: (val) { },\r\n              )\r\n            ],\r\n\r\n--------------------------\r\n* Console Log (keyboard up and down)\r\nW/IInputConnectionWrapper(14019): getExtractedText on inactive InputConnection\r\nW/IInputConnectionWrapper(14019): getExtractedText on inactive InputConnection\r\n......\r\n..... so many times\r\n.....\r\nW/IInputConnectionWrapper(14019): getExtractedText on inactive InputConnection\r\nW/IInputConnectionWrapper(14019): getExtractedText on inactive InputConnection\r\nD/ViewRootImpl@82a4301[MainActivity](14019): MSG_RESIZED: frame=Rect(0, 0 - 1080, 2220) ci=Rect(0, 72 - 0, 1071) vi=Rect(0, 72 - 0, 1071) or=1\r\nD/ViewRootImpl@82a4301[MainActivity](14019): Relayout returned: old=[0,0][1080,2220] new=[0,0][1080,2220] result=0x1 surface={valid=true 488086081536} changed=false\r\nD/ViewRootImpl@82a4301[MainActivity](14019): ViewPostIme pointer 0\r\nD/ViewRootImpl@82a4301[MainActivity](14019): ViewPostIme pointer 1\r\nD/InputMethodManager(14019): HSIFW - flag : 0 Pid : 14019\r\nD/ViewRootImpl@82a4301[MainActivity](14019): MSG_RESIZED: frame=Rect(0, 0 - 1080, 2220) ci=Rect(0, 72 - 0, 144) vi=Rect(0, 72 - 0, 144) or=1\r\nD/ViewRootImpl@82a4301[MainActivity](14019): Relayout returned: old=[0,0][1080,2220] new=[0,0][1080,2220] result=0x1 surface={valid=true 488086081536} changed=false\r\n\r\n---------------------------\r\n*** The problem is summarized below.\r\nProblems occurring when the modified version of the master channel is applied : \r\n1. Time delay of the keyboard up and down\r\n2. abnormal display of the keyboard even after the app is closed (on device home screen)\r\n3. word duplication input\r\n4. input line can not be changed during keyboard input\r\n\r\nI hope this helps you solve various problems.",
-    "createdAt": "2020-02-20T06:11:10Z"
+    "createdAt": "2026-02-20T06:11:10Z"
   },
   {
     "id": 8400,
     "sender": "Endebert",
     "content": "@GaryQian In case it helps: the Samsung Experience Service version of the device we tested with is **10.6.00.13**.\r\n\r\nThe rest of the information you requested was already included in the flutter doctor I posted, but here it is again:\r\n\r\ndevice: [Galaxy Tab A (2019, 10.1)](https://www.samsung.com/ca/tablets/galaxy-tab-a-2019-101/SM-T510NZKAXAC/)\r\nmodel: SM-T510\r\nAndroid version: Android 9 (API 28)",
-    "createdAt": "2020-02-20T13:04:46Z"
+    "createdAt": "2026-02-20T13:04:46Z"
   },
   {
     "id": 8401,
     "sender": "bleroux",
-    "content": "Same problem here on master and a Galaxy Tab A (SM-T510) device.\r\n\r\n```\r\nflutter doctor -v\r\n[✓] Flutter (Channel master, v1.15.4-pre.140, on Linux, locale fr_FR.UTF-8)\r\n    • Flutter version 1.15.4-pre.140 at /home/bruno/flutter/flutter\r\n    • Framework revision 1d4667bb38 (il y a 5 heures), 2020-02-24 08:56:02 +0530\r\n    • Engine revision f2f8c342be\r\n    • Dart version 2.8.0 (build 2.8.0-dev.9.0 0f141be8bd)\r\n\r\n[!] Android toolchain - develop for Android devices (Android SDK version 28.0.3)\r\n    • Android SDK at /home/bruno/Android/Sdk\r\n    • Android NDK location not configured (optional; useful for native profiling support)\r\n    • Platform android-28, build-tools 28.0.3\r\n    • Java binary at: /home/bruno/flutter/android-studio/jre/bin/java\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_152-release-1248-b01)\r\n    ✗ Android license status unknown.\r\n      Try re-installing or updating your Android SDK Manager.\r\n      See https://developer.android.com/studio/#downloads or visit https://flutter.dev/setup/#android-setup for detailed\r\n      instructions.\r\n\r\n[✓] Linux toolchain - develop for Linux desktop\r\n    • clang++ 7.0.0\r\n    • GNU Make 4.2.1\r\n\r\n[✓] Android Studio (version 3.3)\r\n    • Android Studio at /home/bruno/flutter/android-studio\r\n    • Flutter plugin version 34.0.1\r\n    • Dart plugin version 182.5215\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_152-release-1248-b01)\r\n\r\n[✓] VS Code (version 1.42.1)\r\n    • VS Code at /usr/share/code\r\n    • Flutter extension version 3.8.1\r\n\r\n[✓] Connected device (2 available)\r\n    • SM T510 • R52M40T1T7H • android-arm • Android 9 (API 28)\r\n    • Linux   • Linux       • linux-x64   • Linux\r\n\r\n```\r\n",
-    "createdAt": "2020-02-24T08:37:30Z"
+    "content": "Same problem here on master and a Galaxy Tab A (SM-T510) device.\r\n\r\n```\r\nflutter doctor -v\r\n[✓] Flutter (Channel master, v1.15.4-pre.140, on Linux, locale fr_FR.UTF-8)\r\n    • Flutter version 1.15.4-pre.140 at /home/bruno/flutter/flutter\r\n    • Framework revision 1d4667bb38 (il y a 5 heures), 2026-02-24 08:56:02 +0530\r\n    • Engine revision f2f8c342be\r\n    • Dart version 2.8.0 (build 2.8.0-dev.9.0 0f141be8bd)\r\n\r\n[!] Android toolchain - develop for Android devices (Android SDK version 28.0.3)\r\n    • Android SDK at /home/bruno/Android/Sdk\r\n    • Android NDK location not configured (optional; useful for native profiling support)\r\n    • Platform android-28, build-tools 28.0.3\r\n    • Java binary at: /home/bruno/flutter/android-studio/jre/bin/java\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_152-release-1248-b01)\r\n    ✗ Android license status unknown.\r\n      Try re-installing or updating your Android SDK Manager.\r\n      See https://developer.android.com/studio/#downloads or visit https://flutter.dev/setup/#android-setup for detailed\r\n      instructions.\r\n\r\n[✓] Linux toolchain - develop for Linux desktop\r\n    • clang++ 7.0.0\r\n    • GNU Make 4.2.1\r\n\r\n[✓] Android Studio (version 3.3)\r\n    • Android Studio at /home/bruno/flutter/android-studio\r\n    • Flutter plugin version 34.0.1\r\n    • Dart plugin version 182.5215\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_152-release-1248-b01)\r\n\r\n[✓] VS Code (version 1.42.1)\r\n    • VS Code at /usr/share/code\r\n    • Flutter extension version 3.8.1\r\n\r\n[✓] Connected device (2 available)\r\n    • SM T510 • R52M40T1T7H • android-arm • Android 9 (API 28)\r\n    • Linux   • Linux       • linux-x64   • Linux\r\n\r\n```\r\n",
+    "createdAt": "2026-02-24T08:37:30Z"
   },
   {
     "id": 8402,
     "sender": "bleroux",
     "content": "For people looking for a quick workaround : replace Samsung Keyboard app by another Android Keyboard application ;-)",
-    "createdAt": "2020-02-24T08:39:02Z"
+    "createdAt": "2026-02-24T08:39:02Z"
   },
   {
     "id": 8403,
     "sender": "GaryQian",
     "content": "@Endebert @bleroux Since we have two reports of the bug still on SM-T510, I have one ordered, arriving Wednesday.",
-    "createdAt": "2020-02-24T19:21:48Z"
+    "createdAt": "2026-02-24T19:21:48Z"
   },
   {
     "id": 8404,
     "sender": "GaryQian",
     "content": "Can confirm that all versions of this bug still occur on SM-T510 (Galaxy Tab A 2019 10.1\")",
-    "createdAt": "2020-02-27T00:40:52Z"
+    "createdAt": "2026-02-27T00:40:52Z"
   },
   {
     "id": 8405,
     "sender": "GaryQian",
     "content": "Update: Interestingly, the devices that are still reproing some variant of this bug are each doing something strange differently.\r\n\r\nFor example, on SM-T510, the keyboard is sending a `finishComposingText` call immediately after the first character typed into the field. This is causing it experience the initial character duplication. None of the other samsung keyboards (or non-samsung keyboards) does this. The SMT510 keyboard also seems to completely ignore calls to `updateSelection` and `updateCursorAnchorInfo`, almost as if those methods were just not implemented in that version. It seems to totally dependent on its internal tracking of this information. I am able to send any gibberish data through those calls with zero impact on the the results. This makes my workarounds useless on this device.\r\n\r\nThe duplication is also inconsistent on the J6+.",
-    "createdAt": "2020-02-29T01:21:28Z"
+    "createdAt": "2026-02-29T01:21:28Z"
   },
   {
     "id": 8406,
     "sender": "tedhenry100",
     "content": "@GaryQian Wow this seems like a complex issue! I always imagined that someone at Google on such a high profile project such as Flutter would be able to contact the Android and Samsung teams directly to get help with something like this. Not the case?\r\n\r\n",
-    "createdAt": "2020-02-29T01:32:30Z"
+    "createdAt": "2026-02-29T01:32:30Z"
   },
   {
     "id": 8407,
     "sender": "ghost",
     "content": "Is this even allowed ? Unimplememted core functions ?? I cant think that flutter is the only one affected by this , right ??\r\n& can someone explain how the native android text field is working fine ?",
-    "createdAt": "2020-03-01T00:34:54Z"
+    "createdAt": "2026-03-01T00:34:54Z"
   },
   {
     "id": 8408,
     "sender": "tedhenry100",
     "content": "Why does flutter even use the native keyboard?! 😏",
-    "createdAt": "2020-03-01T01:16:02Z"
+    "createdAt": "2026-03-01T01:16:02Z"
   },
   {
     "id": 8409,
     "sender": "GaryQian",
     "content": "@tedhenry100 We have been in contact with Samsung, however, this is one of those things where even if they fixed it on their end, we would still have to fix it here as it is unlikely all the keyboards in the wild can be updated.",
-    "createdAt": "2020-03-02T18:50:52Z"
+    "createdAt": "2026-03-02T18:50:52Z"
   },
   {
     "id": 8410,
     "sender": "GaryQian",
     "content": "Since the original filing of this issue, the state of the bug has evolved. The severity has been greatly reduced for most devices, and new behaviors have been uncovered, evolving it towards a different set of issues. Since this can be difficult (and laggy) to follow in this thread of hundreds of comments, I will be moving further discussion to a new issue https://github.com/flutter/flutter/issues/51893 where we can focus on the current state of the issue.\r\n\r\nPlease continue to contribute/report/comment on https://github.com/flutter/flutter/issues/51893 and reference comments in this thread as appropriate. Thanks!",
-    "createdAt": "2020-03-03T22:40:54Z"
+    "createdAt": "2026-03-03T22:40:54Z"
   },
   {
     "id": 8411,
     "sender": "GaryQian",
     "content": "From the new thread:\r\n\r\nI have landed flutter/engine#17426 which seems to fix many of the bugs on my test devices. It would be great if others could confirm that this also fixes bugs for them.\r\n\r\nPlease try the change on master channel!",
-    "createdAt": "2020-04-02T19:49:47Z"
+    "createdAt": "2026-04-02T19:49:47Z"
   },
   {
     "id": 8412,
     "sender": "njovy",
     "content": "@GaryQian I've been testing this keyboard issue and I found a duplicate issue with the latest beta which https://github.com/flutter/engine/pull/17391 is applied.\r\nFor some reason the letter '@' causes this duplicates in english as well.",
-    "createdAt": "2020-04-10T23:49:33Z"
+    "createdAt": "2026-04-10T23:49:33Z"
   },
   {
     "id": 8413,
     "sender": "GaryQian",
     "content": "Please do testing on master channel, I believe that bug has already been addressed in the other continuation thread via the getExtractedText() fix.\n\nBeta channel is often times over a month old, and many flutter bugs are fixed/updated on a daily basis.\n\nIn particular, the getExtractedText() fix was only landed this week.",
-    "createdAt": "2020-04-10T23:53:22Z"
+    "createdAt": "2026-04-10T23:53:22Z"
   },
   {
     "id": 8414,
     "sender": "njovy",
     "content": "@GaryQian I'm using the latest beta 1.17.dev.3.1. Is there any other updates regarding this other than flutter/engine#17391? I will let you know with the latest master commit.",
-    "createdAt": "2020-04-10T23:54:44Z"
+    "createdAt": "2026-04-10T23:54:44Z"
   },
   {
     "id": 8415,
     "sender": "GaryQian",
     "content": "flutter/engine#17426 should resolve the duplication.",
-    "createdAt": "2020-04-10T23:56:43Z"
+    "createdAt": "2026-04-10T23:56:43Z"
   },
   {
     "id": 8416,
     "sender": "njovy",
     "content": "@GaryQian I thought #17391 was the latest commit and you are right this issue doesn't appear with the latest master. Sorry for the confusion. I really appreciate your help and thank you very much for your hard work to fix this.",
-    "createdAt": "2020-04-10T23:59:24Z"
+    "createdAt": "2026-04-10T23:59:24Z"
   },
   {
     "id": 8417,
     "sender": "rami-a",
-    "content": "## [Material] Redesign Time Picker\n\n## Description\r\n\r\nThis is a large PR that redesigns the time picker to match the upcoming Material spec. The main changes include:\r\n- Redesigned header with more obvious selection for hours/minutes/am/pm\r\n- Redesigned 24 hour layout with a single ring of numbers instead of the double ring\r\n- Text input mode\r\n- Theming capabilities\r\n- Updated screenreader experience to make the picker easier to use (require less swipes)\r\n\r\n| Before                                                                                                                                                                 |                                                                                  After                                                                                 |\r\n|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------:|\r\n| ![Simulator Screen Shot - iPhone 11 Pro - 2020-06-10 at 15 21 19](https://user-images.githubusercontent.com/2364772/84309744-89627d80-ab2e-11ea-9188-ef82a292d5d8.png) | ![Simulator Screen Shot - iPhone 11 Pro - 2020-06-10 at 15 18 34](https://user-images.githubusercontent.com/2364772/84309743-89627d80-ab2e-11ea-8b81-8798143ed0fd.png) |\r\n| No text input | ![Simulator Screen Shot - iPhone 11 Pro - 2020-06-12 at 11 52 56](https://user-images.githubusercontent.com/2364772/84521627-4d045e00-aca3-11ea-8da8-8c5f154d1137.png) |\r\n\r\n\r\n## Related Issues\r\n\r\nFixes #53905\r\nFixes #56465\r\n\r\n## Tests\r\n\r\nI added the following tests:\r\n\r\n- Updating existing tests to match new behavior\r\n- Adding tests for text input mode\r\n- Adding tests for theming\r\n\r\n## Checklist\r\n\r\nBefore you create this PR confirm that it meets all requirements listed below by checking the relevant checkboxes (`[x]`). This will ensure a smooth and quick review process.\r\n\r\n- [x] I read the [Contributor Guide] and followed the process outlined there for submitting PRs.\r\n- [x] I signed the [CLA].\r\n- [x] I read and followed the [Flutter Style Guide], including [Features we expect every widget to implement].\r\n- [x] I read the [Tree Hygiene] wiki page, which explains my responsibilities.\r\n- [x] I updated/added relevant documentation (doc comments with `///`).\r\n- [x] All existing and new tests are passing.\r\n- [x] The analyzer (`flutter analyze --flutter-repo`) does not report any problems on my PR.\r\n- [x] I am willing to follow-up on review comments in a timely manner.\r\n\r\n## Breaking Change\r\n\r\nDid any tests fail when you ran them? Please read [Handling breaking changes].\r\n\r\n- [x] No, no existing tests failed, so this is *not* a breaking change.\r\n- [ ] Yes, this is a breaking change. *If not, delete the remainder of this section.*\r\n   - [ ] I wrote a design doc: https://flutter.dev/go/template *Replace this with a link to your design doc's short link*\r\n   - [ ] I got input from the developer relations team, specifically from: *Replace with the names of who gave advice*\r\n   - [ ] I wrote a migration guide: https://flutter.dev/go/breaking-changes-template *Replace this with a link to a pull request that adds the migration guide to https://flutter.dev/docs/release/breaking-changes*\r\n\r\n<!-- Links -->\r\n[issue database]: https://github.com/flutter/flutter/issues\r\n[Contributor Guide]: https://github.com/flutter/flutter/wiki/Tree-hygiene#overview\r\n[Test Coverage]: https://github.com/flutter/flutter/wiki/Test-coverage-for-package%3Aflutter\r\n[Flutter Style Guide]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo\r\n[Features we expect every widget to implement]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#features-we-expect-every-widget-to-implement\r\n[CLA]: https://cla.developers.google.com/\r\n[Tree Hygiene]: https://github.com/flutter/flutter/wiki/Tree-hygiene\r\n[Handling breaking changes]: https://github.com/flutter/flutter/wiki/Tree-hygiene#handling-breaking-changes\r",
-    "createdAt": "2020-06-10T19:26:59Z"
+    "content": "## [Material] Redesign Time Picker\n\n## Description\r\n\r\nThis is a large PR that redesigns the time picker to match the upcoming Material spec. The main changes include:\r\n- Redesigned header with more obvious selection for hours/minutes/am/pm\r\n- Redesigned 24 hour layout with a single ring of numbers instead of the double ring\r\n- Text input mode\r\n- Theming capabilities\r\n- Updated screenreader experience to make the picker easier to use (require less swipes)\r\n\r\n| Before                                                                                                                                                                 |                                                                                  After                                                                                 |\r\n|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------:|\r\n| ![Simulator Screen Shot - iPhone 11 Pro - 2026-06-10 at 15 21 19](https://user-images.githubusercontent.com/2364772/84309744-89627d80-ab2e-11ea-9188-ef82a292d5d8.png) | ![Simulator Screen Shot - iPhone 11 Pro - 2026-06-10 at 15 18 34](https://user-images.githubusercontent.com/2364772/84309743-89627d80-ab2e-11ea-8b81-8798143ed0fd.png) |\r\n| No text input | ![Simulator Screen Shot - iPhone 11 Pro - 2026-06-12 at 11 52 56](https://user-images.githubusercontent.com/2364772/84521627-4d045e00-aca3-11ea-8da8-8c5f154d1137.png) |\r\n\r\n\r\n## Related Issues\r\n\r\nFixes #53905\r\nFixes #56465\r\n\r\n## Tests\r\n\r\nI added the following tests:\r\n\r\n- Updating existing tests to match new behavior\r\n- Adding tests for text input mode\r\n- Adding tests for theming\r\n\r\n## Checklist\r\n\r\nBefore you create this PR confirm that it meets all requirements listed below by checking the relevant checkboxes (`[x]`). This will ensure a smooth and quick review process.\r\n\r\n- [x] I read the [Contributor Guide] and followed the process outlined there for submitting PRs.\r\n- [x] I signed the [CLA].\r\n- [x] I read and followed the [Flutter Style Guide], including [Features we expect every widget to implement].\r\n- [x] I read the [Tree Hygiene] wiki page, which explains my responsibilities.\r\n- [x] I updated/added relevant documentation (doc comments with `///`).\r\n- [x] All existing and new tests are passing.\r\n- [x] The analyzer (`flutter analyze --flutter-repo`) does not report any problems on my PR.\r\n- [x] I am willing to follow-up on review comments in a timely manner.\r\n\r\n## Breaking Change\r\n\r\nDid any tests fail when you ran them? Please read [Handling breaking changes].\r\n\r\n- [x] No, no existing tests failed, so this is *not* a breaking change.\r\n- [ ] Yes, this is a breaking change. *If not, delete the remainder of this section.*\r\n   - [ ] I wrote a design doc: https://flutter.dev/go/template *Replace this with a link to your design doc's short link*\r\n   - [ ] I got input from the developer relations team, specifically from: *Replace with the names of who gave advice*\r\n   - [ ] I wrote a migration guide: https://flutter.dev/go/breaking-changes-template *Replace this with a link to a pull request that adds the migration guide to https://flutter.dev/docs/release/breaking-changes*\r\n\r\n<!-- Links -->\r\n[issue database]: https://github.com/flutter/flutter/issues\r\n[Contributor Guide]: https://github.com/flutter/flutter/wiki/Tree-hygiene#overview\r\n[Test Coverage]: https://github.com/flutter/flutter/wiki/Test-coverage-for-package%3Aflutter\r\n[Flutter Style Guide]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo\r\n[Features we expect every widget to implement]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#features-we-expect-every-widget-to-implement\r\n[CLA]: https://cla.developers.google.com/\r\n[Tree Hygiene]: https://github.com/flutter/flutter/wiki/Tree-hygiene\r\n[Handling breaking changes]: https://github.com/flutter/flutter/wiki/Tree-hygiene#handling-breaking-changes\r",
+    "createdAt": "2026-06-10T19:26:59Z"
   },
   {
     "id": 8418,
     "sender": "rami-a",
     "content": "The documentation for `showTimePicker` already includes several examples, and it's just one function you call, so I don't think a dart pad example would add much more\r\n\r\nhttps://api.flutter.dev/flutter/material/showTimePicker.html",
-    "createdAt": "2020-06-11T13:57:34Z"
+    "createdAt": "2026-06-11T13:57:34Z"
   },
   {
     "id": 8419,
     "sender": "jgluck93",
     "content": "When will this change be live? @rami-a ",
-    "createdAt": "2020-07-01T20:22:23Z"
+    "createdAt": "2026-07-01T20:22:23Z"
   },
   {
     "id": 8420,
     "sender": "Zazo032",
     "content": "> When will this change be live? @rami-a\r\n\r\nThis is already live on Flutter's `master` channel",
-    "createdAt": "2020-07-01T20:40:01Z"
+    "createdAt": "2026-07-01T20:40:01Z"
   },
   {
     "id": 8421,
     "sender": "jgluck93",
     "content": "So I'm guessing its not in the `stable` channel? @Zazo032 Thank you for the fast reply.",
-    "createdAt": "2020-07-01T20:42:51Z"
+    "createdAt": "2026-07-01T20:42:51Z"
   },
   {
     "id": 8422,
     "sender": "lalomartins",
     "content": "Uh, my users actually reported the 24h dial as a bug and I had to revert this locally.\r\n\r\n(If this is not the appropriate place to discuss it, which I think is very likely, I'd be grateful if someone could point me to the right venue.)\r\n\r\nThe point of the ring mode for the time picker is to emulate an analog clock; people are used to these, and can tell at a glance what hour it's pointing to. While there is such a thing as 24h analog clocks, those are novelties, and I've never seen someone actually use one. So a 24h ring makes very unintuitive UX, and is therefore basically useless.\r\n\r\nThe PR mentions it reflects the upcoming Material spec. Is that visible anywhere public, or is it internal to Google? Last I checked, the published guidelines said a time picker ‘is not under development’.",
-    "createdAt": "2020-07-31T10:25:26Z"
+    "createdAt": "2026-07-31T10:25:26Z"
   },
   {
     "id": 8423,
     "sender": "andrelabonte",
     "content": "hi @lalomartins \r\nThanks for reaching out! We always appreciate feedback from the community! \r\nOne of the main goals was to improve the accessibility of selecting time, since this was a commonly reported issue with the previous design.\r\nWe are continuing to study this component design to make sure it is usable and behaves as expected for most users.  \r\nIf you could share some details on the app use-cases you are targeting with the Time Picker and some info on the locale of the users, that would be very helpful. \r\n\r\n",
-    "createdAt": "2020-07-31T21:04:46Z"
+    "createdAt": "2026-07-31T21:04:46Z"
   },
   {
     "id": 8424,
     "sender": "lalomartins",
     "content": "@andrelabonte just here or do you want me to contact you by email? My address is… easy to find.\r\n\r\nIt's a private app with a very small audience, but quite international, and I'm very happy to give feedback.\r\n\r\nThe app in which I got feedback basically tracks events. It makes an usually correct guess about when it happened, but gives users the option to edit it. People who gave me feedback love the Material picker because they can type the number if they want, or pick from the dial when they prefer that, and the dial mimics an analog clock, so they know by reflex where the hours and minutes go. When I showed them a version built against Flutter dev, the only complaint I got was that the dial was no longer useful.",
-    "createdAt": "2020-07-31T21:15:26Z"
+    "createdAt": "2026-07-31T21:15:26Z"
   },
   {
     "id": 8425,
     "sender": "lalomartins",
     "content": "Now that 1.20 has been released and [the time picker spec](https://material.io/components/time-pickers) has actually been published, I can't help but make two observations:\r\n\r\n1. The spec doesn't actually state you should draw 24h on a single dial. Unfortunately, it also doesn't say you shouldn't, and all screenshots are in 12h mode.\r\n\r\n2. In ‘Principles’, it states the reason is that the dial is ‘Familiar’, which is exactly why I wanted to use it in the first place. I quote: “The analog clock face option provides an added level of assurance and confirmation when picking times.” To me, this heavily implies the 24h mode should stick to a clock layout, and keep 12h. Whether you do this by having two concentric dials as it was before, or a separate AM/PM switch, I'll have to leave to the designers; but clearly the ‘24h analog clock’ mode fails to fulfil this principle.",
-    "createdAt": "2020-08-13T02:06:57Z"
+    "createdAt": "2026-08-13T02:06:57Z"
   },
   {
     "id": 8426,

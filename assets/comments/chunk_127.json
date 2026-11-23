@@ -3,91 +3,91 @@
     "id": 8128,
     "sender": "Zhuinden",
     "content": "hvisser above has solved the issue though, now people just need to write the code that makes it work",
-    "createdAt": "2020-02-04T12:17:56Z"
+    "createdAt": "2026-02-04T12:17:56Z"
   },
   {
     "id": 8129,
     "sender": "goderbauer",
     "content": "I am making progress on providing a solution for this. For an early preview of how an app will be able to restore instance state once this is done check out this PR: https://github.com/flutter/samples/pull/433.\r\n\r\nUnfortunately, it will take a little more time until its all done.",
-    "createdAt": "2020-05-27T21:16:48Z"
+    "createdAt": "2026-05-27T21:16:48Z"
   },
   {
     "id": 8130,
     "sender": "goderbauer",
     "content": "The design document with details about how to do state restoration in Flutter is available here: http://flutter.dev/go/state-restoration-design",
-    "createdAt": "2020-06-09T18:45:47Z"
+    "createdAt": "2026-06-09T18:45:47Z"
   },
   {
     "id": 8131,
     "sender": "goderbauer",
     "content": "The PR with the general state restoration framework as outlined in the design above has been posted: https://github.com/flutter/flutter/pull/60375. I am still working on adding some more test coverage.",
-    "createdAt": "2020-06-30T22:59:28Z"
+    "createdAt": "2026-06-30T22:59:28Z"
   },
   {
     "id": 8132,
     "sender": "goderbauer",
     "content": "The general state restoration framework (https://github.com/flutter/flutter/pull/60375) has been submitted. I am now working on integrating it in our widgets. Going to start with scrollables, text fields, and the Navigator.",
-    "createdAt": "2020-07-29T21:38:58Z"
+    "createdAt": "2026-07-29T21:38:58Z"
   },
   {
     "id": 8133,
     "sender": "gaaclarke",
     "content": "You can implement this yourself by storing the data you want restored inside of a [sqlite](https://pub.dev/packages/sqlite3) database.  That's a technique that is used when writing servers.\r\n\r\nThat has the benefit of restoring an app even if the battery dies on the phone or there is a kernel panic or whatever.  I recommend making an OO wrapper around your SQLite calls.  Dart doesn't have something like SQLite.Net which does it automatically for you unfortunately.\r\n\r\nedit: It's also something we did in the early days of mobile development because memory was so limited and sqlite is a great way to swap things between memory and disk.",
-    "createdAt": "2020-07-31T17:30:09Z"
+    "createdAt": "2026-07-31T17:30:09Z"
   },
   {
     "id": 8134,
     "sender": "goderbauer",
     "content": "I am closing this issue since the general state restoration framework (and the Android embedding) has landed. The remaining work is tracked in separate issues:\r\n\r\n- https://github.com/flutter/flutter/issues/62916 - Migrate widgets to use state restoration framework\r\n- https://github.com/flutter/flutter/issues/62915 - Enable State Restoration in iOS embedder",
-    "createdAt": "2020-08-04T23:17:14Z"
+    "createdAt": "2026-08-04T23:17:14Z"
   },
   {
     "id": 8135,
     "sender": "luffyjie",
     "content": "Well Done!!!!! Thanks flutter!!!",
-    "createdAt": "2020-10-12T06:32:29Z"
+    "createdAt": "2026-10-12T06:32:29Z"
   },
   {
     "id": 8136,
     "sender": "jamesblasco",
     "content": "## [web] Scroll is not recognized by the browser\n\n## Steps to Reproduce\r\n\r\nFlutter is painted on a canvas and the browser doesn't detect the scroll.\r\n\r\nThis causes problems when the native browser uses the scroll to perform their own actions. \r\n\r\nCurrent problems:\r\n\r\n- Safari and Chrome iOS/Android address and bottom bar navigation doesn't collapse when scrolling:\r\nIssues: https://github.com/flutter/flutter/issues/64572 https://github.com/flutter/flutter/issues/68877\r\n\r\n|  Current behavior  |  Expected behavior (would also need to scroll) |\r\n|---|---|\r\n|   <img height=\"400\" src=\"https://user-images.githubusercontent.com/19904063/97805735-36fa3880-1c58-11eb-92ca-0c7436080c6f.gif\" />  |   <img height=\"400\" src=\"https://user-images.githubusercontent.com/19904063/97805757-52654380-1c58-11eb-95a5-8d747c560240.gif\" />  |\r\n- iOS scroll to top by tapping on the status bar doesn't work. A feature available for any website in any ios browser or WKWebView\r\n\r\n- iOS GoogleMaps, Google Assistant, Facebook & Facebook Messenger displays in-app websites inside a draggable modal. Because of scroll is not detected, the modal is closed instead of scrolling upwards.\r\n\r\n<img height=\"400\" src=\"https://user-images.githubusercontent.com/19904063/97805974-9efd4e80-1c59-11eb-941a-910518366ac0.gif\" />\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r",
-    "createdAt": "2020-11-01T14:49:03Z"
+    "createdAt": "2026-11-01T14:49:03Z"
   },
   {
     "id": 8137,
     "sender": "pedromassangocode",
-    "content": "Issue reproducible on latest `master` channel.\r\n\r\n<details><summary>flutter doctor -v</summary>\r\n\r\n```\r\n[✓] Flutter (Channel master, 1.24.0-7.0.pre.47, on Mac OS X 10.15.7 19H2 darwin-x64, locale en)\r\n    • Flutter version 1.24.0-7.0.pre.47 at /Users/pedromassango/dev/SDKs/flutter_master\r\n    • Framework revision 2f18e0b23d (20 hours ago), 2020-11-01 20:58:04 +0530\r\n    • Engine revision 3460519398\r\n    • Dart version 2.12.0 (build 2.12.0-3.0.dev)\r\n\r\n[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.1)\r\n    • Android SDK at /Users/pedromassango/Library/Android/sdk\r\n    • Platform android-30, build-tools 30.0.1\r\n    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)\r\n    • All Android licenses accepted.\r\n\r\n[✓] Xcode - develop for iOS and macOS (Xcode 12.1)\r\n    • Xcode at /Applications/Xcode.app/Contents/Developer\r\n    • Xcode 12.1, Build version 12A7403\r\n    • CocoaPods version 1.9.3\r\n\r\n[✓] Chrome - develop for the web\r\n    • Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome\r\n\r\n[✓] Android Studio (version 4.0)\r\n    • Android Studio at /Applications/Android Studio.app/Contents\r\n    • Flutter plugin can be installed from:\r\n      🔨 https://plugins.jetbrains.com/plugin/9212-flutter\r\n    • Dart plugin can be installed from:\r\n      🔨 https://plugins.jetbrains.com/plugin/6351-dart\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)\r\n\r\n[✓] IntelliJ IDEA Community Edition (version 2020.2.3)\r\n    • IntelliJ at /Applications/IntelliJ IDEA CE.app\r\n    • Flutter plugin version 50.0\r\n    • Dart plugin version 202.7319.5\r\n\r\n[✓] VS Code (version 1.50.1)\r\n    • VS Code at /Applications/Visual Studio Code.app/Contents\r\n    • Flutter extension version 3.16.0\r\n\r\n[✓] Connected device (4 available)\r\n    • iPhone 12 Pro Max (mobile) • ECCF5C4A-8BEC-411D-B23E-85A836C3847E • ios            • com.apple.CoreSimulator.SimRuntime.iOS-14-1 (simulator)\r\n    • macOS (desktop)            • macos                                • darwin-x64     • Mac OS X 10.15.7 19H2 darwin-x64\r\n    • Web Server (web)           • web-server                           • web-javascript • Flutter Tools\r\n    • Chrome (web)               • chrome                               • web-javascript • Google Chrome 86.0.4240.111\r\n\r\n• No issues found!\r\n```\r\n</details>",
-    "createdAt": "2020-11-02T11:11:09Z"
+    "content": "Issue reproducible on latest `master` channel.\r\n\r\n<details><summary>flutter doctor -v</summary>\r\n\r\n```\r\n[✓] Flutter (Channel master, 1.24.0-7.0.pre.47, on Mac OS X 10.15.7 19H2 darwin-x64, locale en)\r\n    • Flutter version 1.24.0-7.0.pre.47 at /Users/pedromassango/dev/SDKs/flutter_master\r\n    • Framework revision 2f18e0b23d (20 hours ago), 2026-11-01 20:58:04 +0530\r\n    • Engine revision 3460519398\r\n    • Dart version 2.12.0 (build 2.12.0-3.0.dev)\r\n\r\n[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.1)\r\n    • Android SDK at /Users/pedromassango/Library/Android/sdk\r\n    • Platform android-30, build-tools 30.0.1\r\n    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)\r\n    • All Android licenses accepted.\r\n\r\n[✓] Xcode - develop for iOS and macOS (Xcode 12.1)\r\n    • Xcode at /Applications/Xcode.app/Contents/Developer\r\n    • Xcode 12.1, Build version 12A7403\r\n    • CocoaPods version 1.9.3\r\n\r\n[✓] Chrome - develop for the web\r\n    • Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome\r\n\r\n[✓] Android Studio (version 4.0)\r\n    • Android Studio at /Applications/Android Studio.app/Contents\r\n    • Flutter plugin can be installed from:\r\n      🔨 https://plugins.jetbrains.com/plugin/9212-flutter\r\n    • Dart plugin can be installed from:\r\n      🔨 https://plugins.jetbrains.com/plugin/6351-dart\r\n    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)\r\n\r\n[✓] IntelliJ IDEA Community Edition (version 2026.2.3)\r\n    • IntelliJ at /Applications/IntelliJ IDEA CE.app\r\n    • Flutter plugin version 50.0\r\n    • Dart plugin version 202.7319.5\r\n\r\n[✓] VS Code (version 1.50.1)\r\n    • VS Code at /Applications/Visual Studio Code.app/Contents\r\n    • Flutter extension version 3.16.0\r\n\r\n[✓] Connected device (4 available)\r\n    • iPhone 12 Pro Max (mobile) • ECCF5C4A-8BEC-411D-B23E-85A836C3847E • ios            • com.apple.CoreSimulator.SimRuntime.iOS-14-1 (simulator)\r\n    • macOS (desktop)            • macos                                • darwin-x64     • Mac OS X 10.15.7 19H2 darwin-x64\r\n    • Web Server (web)           • web-server                           • web-javascript • Flutter Tools\r\n    • Chrome (web)               • chrome                               • web-javascript • Google Chrome 86.0.4240.111\r\n\r\n• No issues found!\r\n```\r\n</details>",
+    "createdAt": "2026-11-02T11:11:09Z"
   },
   {
     "id": 8138,
     "sender": "yjbanov",
     "content": "I thought we had a duplicate issue for this, but I failed to find one. I'm accepting this as a feature request.",
-    "createdAt": "2020-12-04T00:22:22Z"
+    "createdAt": "2026-12-04T00:22:22Z"
   },
   {
     "id": 8139,
     "sender": "yjbanov",
     "content": "I've been thinking about some ideas for fixing this. Leaving this idea before I forget: the web engine could use a signal from the framework that there's a scrollable area that the user is interacting with as well as when the start/end has been reached. We could then make the body element (or some other top-level element) scrollable while keeping the Flutter View in a fixed position. The browser will see the element scrolling and react appropriately.",
-    "createdAt": "2020-12-04T00:25:54Z"
+    "createdAt": "2026-12-04T00:25:54Z"
   },
   {
     "id": 8140,
     "sender": "yjbanov",
     "content": "@jamesblasco Curious how did you get it to behave correctly in the \"Expected behavior\" screen recording?",
-    "createdAt": "2020-12-04T00:26:52Z"
+    "createdAt": "2026-12-04T00:26:52Z"
   },
   {
     "id": 8141,
     "sender": "jamesblasco",
     "content": "Hey @yjbanov, you can see a detailed ex planation in this comment \r\n\r\nhttps://github.com/flutter/flutter/issues/68877#issuecomment-720091525\r\n\r\n**Update** -  Added comment:\r\n\r\nHere is some research I have been doing related to this problem:\r\n\r\n\r\nThe safari mobile WebKit uses the body scroll to handle this interaction. This requires the body `overflow-y` attribute to be set to `auto`/`scroll` and the body to have a size longer than 100%. Obviously, this is not the case for any flutter web as by default overflow is `hidden`.\r\nAfter changing that I couldn't make it work programmatically by calling `window.scrollTo(...)` or `windowScroll()`. Only user manual drag worked. \r\n\r\n\r\n\r\nBy overriding, some of the default CSS attributes added by the flutter framework I manage to hide the bars. But also it broke most of the hitTest inside the flutter framework.\r\n\r\nI also couldn't remove the scrollbar that appears after making these changes.\r\n\r\nYou have the demo here:  https://jamesblasco.github.io/flutter-web-scroll/\r\n\r\n<img height=\"400\"  src=\"https://user-images.githubusercontent.com/19904063/97804556-006cef80-1c51-11eb-90b4-c1e38c43b443.gif\" />\r\n\r\nYou can add this to the `<head>` of the `index.hml` file of any flutter project and try it also there.\r\n```html\r\n\r\n  <style>\r\n    body {\r\n      height: 500vh !important;  /* Bigger than 100% to allow scroll */\r\n      position: static !important;  /* Override absolute from flutter */\r\n      overflow-y: scroll !important; /* Allows verticall scrolling */\r\n      overflow-x: hidden !important;\r\n      touch-action: pan-y !important;  /* Allows vertical scrolling */\r\n      overscroll-behavior: none; /* Avoid bouncing scrolling on top/bottom edget */\r\n    }\r\n\r\n     /* Centers flutter canvas with a size of the viewport*/\r\n    flt-glass-pane {\r\n      position: fixed !important; /* Overrides absolute from flutter  */\r\n      top: 50vh  !important;\r\n      left: 50vw  !important;\r\n      max-width: 100vw  !important;\r\n      max-height: 100vh  !important;\r\n      transform: translate(-50vw, -50vh)  !important;\r\n    }\r\n\r\n    /* \r\n    Scrollbar hide doesn't work on iOS, they add a default one when overflow:true and  -webkit-overflow-scrolling: touch; \r\n    Sadly since iOS 13, this value is forced on iOS -> https://developer.apple.com/documentation/safari-release-notes/safari-13-release-notes\r\n    */\r\n    ::-webkit-scrollbar {\r\n      display: false;\r\n      width: 0px;\r\n      height: 0px;  /* Remove scrollbar space */\r\n      background: transparent;  /* Optional: just make scrollbar invisible */\r\n    }\r\n    \r\n  </style>\r\n```\r\n\r\n ",
-    "createdAt": "2020-12-04T00:43:02Z"
+    "createdAt": "2026-12-04T00:43:02Z"
   },
   {
     "id": 8142,
     "sender": "abar-75",
     "content": "Hi, is there any update on this? I have the same issue, the scroll isn't recognised when I open the app from a link in a facebook post or messenger.",
-    "createdAt": "2020-12-29T23:20:21Z"
+    "createdAt": "2026-12-29T23:20:21Z"
   },
   {
     "id": 8143,

@@ -285,102 +285,102 @@
     "id": 2095,
     "sender": "cmidt-veasna",
     "content": "@Hixie there is also a use case where svg icon need to have multiple color as it help the user to understand the meaning of the icon. So I hope the solution will include the ability to customize theme color as well.\r\n\r\nCurrently, some people suggest to convert SVG into font and use it the same way the icons package did however we cannot have multiple color in the icon in this case.",
-    "createdAt": "2020-01-02T15:25:50Z"
+    "createdAt": "2026-01-02T15:25:50Z"
   },
   {
     "id": 2096,
     "sender": "giaur500",
     "content": "4 years of various comments without any useful solution. In short - no, not, possible. No, not planned.",
-    "createdAt": "2020-01-08T09:28:56Z"
+    "createdAt": "2026-01-08T09:28:56Z"
   },
   {
     "id": 2097,
     "sender": "erperejildo",
     "content": "Can we at least know why is this so problematic/difficult?",
-    "createdAt": "2020-01-08T15:05:05Z"
+    "createdAt": "2026-01-08T15:05:05Z"
   },
   {
     "id": 2098,
     "sender": "dnfield",
     "content": "Flutter_svg has decent support for SVG in flutter.  Rive also supports a vector based format for flutter.\r\n\r\nThis issue is about creating a new vector based format.  That takes time :)",
-    "createdAt": "2020-01-08T15:08:48Z"
+    "createdAt": "2026-01-08T15:08:48Z"
   },
   {
     "id": 2099,
     "sender": "erperejildo",
     "content": "@dnfield there are some widget with background properties that we cannot pass svgs. Is there any way to archive this?",
-    "createdAt": "2020-01-08T15:11:20Z"
+    "createdAt": "2026-01-08T15:11:20Z"
   },
   {
     "id": 2100,
     "sender": "d-silveira",
     "content": "please add proper svg support instead of creating a new format. Svg is the de facto standard.\r\n\r\nWhenever I create an app, usually there's an associated website, and websites use svg, and they use beautifully animated svgs, which are lightweight and beautiful at any resolution. \r\nIt would really make sense to just reuse those animated svgs in Flutter so that consistency can be properly achieved instead of having images and animations be re-implemented!",
-    "createdAt": "2020-01-27T14:39:13Z"
+    "createdAt": "2026-01-27T14:39:13Z"
   },
   {
     "id": 2101,
     "sender": "stradicat",
     "content": "SVG already exists, works, and is widely available used and supported everywhere else. Focus on that is what we need.",
-    "createdAt": "2020-01-27T19:08:51Z"
+    "createdAt": "2026-01-27T19:08:51Z"
   },
   {
     "id": 2102,
     "sender": "giaur500",
     "content": "> This issue is about creating a new vector based format\r\n\r\nSo you mean, this issue is about reinventing the wheel, right? I agree with @d-silveira - better add built in, proper support for svg, we don't need any new vector based format.",
-    "createdAt": "2020-01-28T09:32:19Z"
+    "createdAt": "2026-01-28T09:32:19Z"
   },
   {
     "id": 2103,
     "sender": "Hixie",
     "content": "Yes, it's about inventing a better wheel. SVG is already supported in Flutter using flutter_svg.",
-    "createdAt": "2020-01-28T17:08:07Z"
+    "createdAt": "2026-01-28T17:08:07Z"
   },
   {
     "id": 2104,
     "sender": "giaur500",
     "content": "Better to be able to import svg and process them internally, either at build time or auto generate code during import. Similar as native Android - you can import svg and Android path definition xml will be generated from source svg. Import into Flutter project could generate dart code to be reused to draw vector asset. ",
-    "createdAt": "2020-01-28T20:14:08Z"
+    "createdAt": "2026-01-28T20:14:08Z"
   },
   {
     "id": 2105,
     "sender": "erperejildo",
     "content": "@Hixie is good to make things better, I won't discuss that, but how can we support some widgets that only allow non svg images in the meantime? (for example the ones with background properties)",
-    "createdAt": "2020-01-29T08:35:22Z"
+    "createdAt": "2026-01-29T08:35:22Z"
   },
   {
     "id": 2106,
     "sender": "Hixie",
     "content": "That would be a feature request for flutter_svg.",
-    "createdAt": "2020-01-29T16:49:02Z"
+    "createdAt": "2026-01-29T16:49:02Z"
   },
   {
     "id": 2107,
     "sender": "dnfield",
     "content": "@Hixie Flutter SVG could create an image there, but it would be nice if the framework were more tollerant of taking pictures rather than images in some cases.  Filed https://github.com/flutter/flutter/issues/49712",
-    "createdAt": "2020-01-29T17:31:06Z"
+    "createdAt": "2026-01-29T17:31:06Z"
   },
   {
     "id": 2108,
     "sender": "erperejildo",
     "content": "> flutter_svg\r\n\r\nWhy is that? This is not related at all with `flutter_svg` package:\r\n```\r\nCircleAvatar(\r\n  backgroundImage: MySVGImage(),\r\n)\r\n```",
-    "createdAt": "2020-01-29T19:04:22Z"
+    "createdAt": "2026-01-29T19:04:22Z"
   },
   {
     "id": 2109,
     "sender": "d-silveira",
     "content": "@Hixie flutter_svg will only ever work for some of the cases. Let me give you a practical example: I need to consume a REST API which in some of it's endpoints returns images urls. The images are user generated in a backoffice, hence some of them are png, some are jpg and some are svg. The backoffice doesn't include the file extension in the url, and does not support HEAD, so we have no way of knowing the image type ahead of time.\r\nThe expected behaviour of flutter would be to receive the url in image.network and handle it, instead of forcing me to jump through hoops to guess what type of image it is, and if it's svg switch to flutter_svg.\r\nAll of this doesn't even take into account the fact that the flutter_svg isn't a drop-in replacement for image in every case! :p",
-    "createdAt": "2020-01-31T14:25:32Z"
+    "createdAt": "2026-01-31T14:25:32Z"
   },
   {
     "id": 2110,
     "sender": "Hixie",
     "content": "SVG in general will only ever work for some use cases too. :-)\r\n\r\nThis specific issue is about having a non-SVG vector graphics format. If you have a different requirement, I recommend filing that as a separate issue.",
-    "createdAt": "2020-02-14T22:45:43Z"
+    "createdAt": "2026-02-14T22:45:43Z"
   },
   {
     "id": 2111,
     "sender": "apple-corps",
     "content": "> From earlier discussion, some important considerations are:\r\n> \r\n> * We don't want full SVG support.  There is too much in the spec that is expensive, heavyweight, and/or duplicates what we already have in Flutter.\r\n> * We should emphasize in our supported format those operations are effective/efficient/optimized in our graphics engine (Skia).\r\n> * We may want to process the format at build time rather than support a full run-time interpreter.\r\n\r\nSo how does someone go about creating a new vector format for images optimized for flutter? Based on above I think that's what is being suggested...",
-    "createdAt": "2020-04-19T01:07:02Z"
+    "createdAt": "2026-04-19T01:07:02Z"
   }
 ]

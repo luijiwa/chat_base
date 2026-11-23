@@ -249,7 +249,7 @@
     "id": 4265,
     "sender": "sicnet",
     "content": "> I tryed to compile and release one new version of one of my application (app) in \"Play Store\", but i had some troublems.\r\n> \r\n> 1-) When i upload 32 and 64 bits, the site recuses, becouse of 32 bits version.\r\n> \r\n> 2-) When i upload just 32 bits, the site recuses, becouse i need the 64 bits.\r\n> \r\n> 3-) When i upload just 64 bits, the site works, but my customers maybe don't have the 64 bits Android. In my cellphone by example, i use this same app, but in my cellphone just works when i use the apk 32 bits. When i intall the apk 64 bits in my cellphone it stop in splash screen.\r\n> \r\n> How i must to do now to release??\r\n\r\n@Tigerclaw1980 did you fix this error?",
-    "createdAt": "2020-02-03T21:59:50Z"
+    "createdAt": "2026-02-03T21:59:50Z"
   },
   {
     "id": 4266,

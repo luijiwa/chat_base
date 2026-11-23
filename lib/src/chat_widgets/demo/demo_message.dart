@@ -1,5 +1,7 @@
 import 'package:chatscrollview/src/chat_message.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_scroll_common.dart';
+import 'package:chatscrollview/src/domain/message_send_status.dart';
+import 'package:chatscrollview/src/domain/sent_message.dart';
 import 'package:material_ui/material_ui.dart';
 
 /// Builds a demo message widget for the widget-based [ChatScrollView].
@@ -71,7 +73,8 @@ const Set<String> _teamMembers = {
   'ColdPaleLight',
 };
 
-bool _isOutgoing(String sender) => _teamMembers.contains(sender);
+bool _isOutgoing(IChatMessage message) =>
+    message is SentMessage || _teamMembers.contains(message.sender);
 
 const List<Color> _senderColors = <Color>[
   Color(0xFF42A5F5),
@@ -141,15 +144,24 @@ const Color _kShimmer = Color(0xFF2C2C2E);
 /// a run carries an avatar, a sender label, and a bubble "tail" pointing
 /// toward its column; subsequent messages omit the avatar / label, drop the
 /// tail, and indent to keep the run visually aligned.
+///
+/// [sendStatus] — delivery status for outgoing messages (`pending`, `sent`,
+/// `failed`). When `null`, no status icon is shown.
+/// [onRetry] — callback invoked when the user taps "Retry" on a failed
+/// message. Only rendered when [sendStatus] is [MessageSendStatus.failed].
 class DemoMessageBubble extends StatelessWidget {
   const DemoMessageBubble({
     required this.message,
     this.isFirstInRun = true,
+    this.sendStatus,
+    this.onRetry,
     super.key,
   });
 
   final IChatMessage message;
   final bool isFirstInRun;
+  final MessageSendStatus? sendStatus;
+  final VoidCallback? onRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -158,13 +170,15 @@ class DemoMessageBubble extends StatelessWidget {
       SystemChatMessage(:final content) => content,
       _ => 'Message #${message.id}',
     };
-    final outgoing = _isOutgoing(message.sender);
+    final outgoing = _isOutgoing(message);
     final bubble = _Bubble(
       sender: isFirstInRun ? message.sender : null,
       content: content,
       createdAt: message.createdAt,
       isOutgoing: outgoing,
       hasTail: isFirstInRun,
+      sendStatus: outgoing ? sendStatus : null,
+      onRetry: outgoing && sendStatus == MessageSendStatus.failed ? onRetry : null,
     );
 
     final Widget row;
@@ -240,6 +254,8 @@ class _Bubble extends StatelessWidget {
     required this.createdAt,
     required this.isOutgoing,
     required this.hasTail,
+    this.sendStatus,
+    this.onRetry,
   });
 
   /// `null` suppresses the sender label — non-first messages in a run.
@@ -248,6 +264,8 @@ class _Bubble extends StatelessWidget {
   final DateTime createdAt;
   final bool isOutgoing;
   final bool hasTail;
+  final MessageSendStatus? sendStatus;
+  final VoidCallback? onRetry;
 
   /// Border radius — asymmetric on the corner that points at the column the
   /// sender writes from (tail effect, without an actual tail glyph).
@@ -319,6 +337,8 @@ class _Bubble extends StatelessWidget {
                 createdAt: createdAt,
                 color: metaColor,
                 showStatus: isOutgoing,
+                sendStatus: sendStatus,
+                onRetry: onRetry,
               ),
             ],
           ),
@@ -331,6 +351,11 @@ class _Bubble extends StatelessWidget {
 /// "12:34 ✓✓" row at the bottom-right of a bubble. The double-check is a
 /// "delivered" hint for outgoing messages; incoming bubbles show just time.
 ///
+/// For outgoing messages, [sendStatus] controls the status icon:
+/// * `pending` — alarm icon (⏳)
+/// * `sent` — double check (✓✓)
+/// * `failed` — error icon (⚠) plus a "Retry" button when [onRetry] is set.
+///
 /// The whole row is wrapped in a [Tooltip] showing the full date and time —
 /// on desktop / web a hover over the time pops the precise send timestamp,
 /// on mobile a long-press does the same. Long-press on the bubble itself is
@@ -342,11 +367,15 @@ class _MetaRow extends StatelessWidget {
     required this.createdAt,
     required this.color,
     required this.showStatus,
+    this.sendStatus,
+    this.onRetry,
   });
 
   final DateTime createdAt;
   final Color color;
   final bool showStatus;
+  final MessageSendStatus? sendStatus;
+  final VoidCallback? onRetry;
 
   @override
   Widget build(BuildContext context) => Align(
@@ -383,12 +412,52 @@ class _MetaRow extends StatelessWidget {
           ),
           if (showStatus) ...<Widget>[
             const SizedBox(width: 4),
-            Icon(Icons.done_all_rounded, size: 14, color: color),
+            _statusIcon,
+            if (onRetry != null) ...<Widget>[
+              const SizedBox(width: 6),
+              TextButton(
+                onPressed: onRetry,
+                style: TextButton.styleFrom(
+                  foregroundColor: color,
+                  visualDensity: VisualDensity.compact,
+                  minimumSize: Size.zero,
+                  padding: EdgeInsets.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                child: const Text('Повтор', style: TextStyle(fontSize: 11)),
+              ),
+            ],
           ],
         ],
       ),
     ),
   );
+
+  /// Delivery status icon based on [sendStatus].
+  Widget get _statusIcon {
+    switch (sendStatus) {
+      case MessageSendStatus.pending:
+        return Icon(
+          Icons.access_alarm_rounded,
+          size: 14,
+          color: color.withValues(alpha: 0.6),
+        );
+      case MessageSendStatus.sent:
+        return Icon(
+          Icons.done_all_rounded,
+          size: 14,
+          color: color,
+        );
+      case MessageSendStatus.failed:
+        return Icon(
+          Icons.error_outline_rounded,
+          size: 14,
+          color: color,
+        );
+      case null:
+        return const SizedBox.shrink();
+    }
+  }
 }
 
 // --- Shimmer placeholder --------------------------------------------------

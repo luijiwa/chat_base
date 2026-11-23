@@ -15,37 +15,37 @@
     "id": 5122,
     "sender": "a14n",
     "content": "## migrate rendering to nullsafety\n\n## Description\r\n\r\nNNBD migration for rendering\r\n\r\n## Related Issues\r\n\r\n* dart-lang/sdk#40146\r\n\r\n## Tests\r\n\r\nI added the following tests:\r\n\r\nNone\r\n\r\n## Checklist\r\n\r\nBefore you create this PR confirm that it meets all requirements listed below by checking the relevant checkboxes (`[x]`). This will ensure a smooth and quick review process.\r\n\r\n- [x] I read the [Contributor Guide] and followed the process outlined there for submitting PRs.\r\n- [x] I signed the [CLA].\r\n- [x] I read and followed the [Flutter Style Guide], including [Features we expect every widget to implement].\r\n- [x] I read the [Tree Hygiene] wiki page, which explains my responsibilities.\r\n- [x] I updated/added relevant documentation (doc comments with `///`).\r\n- [x] All existing and new tests are passing.\r\n- [x] The analyzer (`flutter analyze --flutter-repo`) does not report any problems on my PR.\r\n- [x] I am willing to follow-up on review comments in a timely manner.\r\n\r\n## Breaking Change\r\n\r\nDid any tests fail when you ran them? Please read [Handling breaking changes].\r\n\r\n- [x] No, no existing tests failed, so this is *not* a breaking change.\r\n- [ ] Yes, this is a breaking change. *If not, delete the remainder of this section.*\r\n   - [ ] I wrote a design doc: https://flutter.dev/go/template *Replace this with a link to your design doc's short link*\r\n   - [ ] I got input from the developer relations team, specifically from: *Replace with the names of who gave advice*\r\n   - [ ] I wrote a migration guide: https://flutter.dev/go/breaking-changes-template *Replace this with a link to a pull request that adds the migration guide to https://flutter.dev/docs/release/breaking-changes*\r\n\r\n<!-- Links -->\r\n[issue database]: https://github.com/flutter/flutter/issues\r\n[Contributor Guide]: https://github.com/flutter/flutter/wiki/Tree-hygiene#overview\r\n[Test Coverage]: https://github.com/flutter/flutter/wiki/Test-coverage-for-package%3Aflutter\r\n[Flutter Style Guide]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo\r\n[Features we expect every widget to implement]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#features-we-expect-every-widget-to-implement\r\n[CLA]: https://cla.developers.google.com/\r\n[Tree Hygiene]: https://github.com/flutter/flutter/wiki/Tree-hygiene\r\n[Handling breaking changes]: https://github.com/flutter/flutter/wiki/Tree-hygiene#handling-breaking-changes\r",
-    "createdAt": "2020-08-24T12:15:58Z"
+    "createdAt": "2026-08-24T12:15:58Z"
   },
   {
     "id": 5123,
     "sender": "skia-gold",
     "content": "Gold has detected about 3 untriaged digest(s) on patchset 1.\nView them at https://flutter-gold.skia.org/cl/github/64456",
-    "createdAt": "2020-08-24T12:23:01Z"
+    "createdAt": "2026-08-24T12:23:01Z"
   },
   {
     "id": 5124,
     "sender": "skia-gold",
     "content": "Gold has detected about 3 untriaged digest(s) on patchset 1.\nView them at https://flutter-gold.skia.org/cl/github/64456",
-    "createdAt": "2020-08-24T13:35:01Z"
+    "createdAt": "2026-08-24T13:35:01Z"
   },
   {
     "id": 5125,
     "sender": "Hixie",
     "content": "In addition to my comments above, the following changes would also be good to do at the same time (some are required by some of the changes I suggested):\r\n\r\nhttps://github.com/flutter/flutter/pull/64476/files#diff-acd2b473dd8ae3b5cab347ba47c55c94R902 until the end of the PR",
-    "createdAt": "2020-08-24T23:32:48Z"
+    "createdAt": "2026-08-24T23:32:48Z"
   },
   {
     "id": 5126,
     "sender": "Hixie",
     "content": "I applied the rest of my review comments and uploaded https://github.com/flutter/flutter/pull/64621, please feel free to continue from there if there's more work to be done.",
-    "createdAt": "2020-08-26T07:37:04Z"
+    "createdAt": "2026-08-26T07:37:04Z"
   },
   {
     "id": 5127,
     "sender": "a14n",
     "content": "Continued in #64621",
-    "createdAt": "2020-08-27T07:21:47Z"
+    "createdAt": "2026-08-27T07:21:47Z"
   },
   {
     "id": 5128,
@@ -327,13 +327,13 @@
     "id": 5174,
     "sender": "lukepighetti",
     "content": "@xster and which PR is that?",
-    "createdAt": "2020-03-10T23:39:33Z"
+    "createdAt": "2026-03-10T23:39:33Z"
   },
   {
     "id": 5175,
     "sender": "lukepighetti",
-    "content": "I just pulled down the ContinuousRectangleBorder and ContinuousStadiumBorder classes from this PR and they are fantastic. Nothing else I've been able to find comes close.\r\n\r\n<img width=\"481\" alt=\"Screen Shot 2020-03-10 at 7 47 03 PM\" src=\"https://user-images.githubusercontent.com/666539/76368858-ee2bf300-6307-11ea-91a0-bc93f3548a4c.png\">\r\n",
-    "createdAt": "2020-03-10T23:45:28Z"
+    "content": "I just pulled down the ContinuousRectangleBorder and ContinuousStadiumBorder classes from this PR and they are fantastic. Nothing else I've been able to find comes close.\r\n\r\n<img width=\"481\" alt=\"Screen Shot 2026-03-10 at 7 47 03 PM\" src=\"https://user-images.githubusercontent.com/666539/76368858-ee2bf300-6307-11ea-91a0-bc93f3548a4c.png\">\r\n",
+    "createdAt": "2026-03-10T23:45:28Z"
   },
   {
     "id": 5176,

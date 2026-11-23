@@ -3,91 +3,91 @@
     "id": 3136,
     "sender": "AlexV525",
     "content": "> There is one analyzer error now\r\n\r\nYou mean the one in gallery's test? I've filed a PR and wait until this lands.",
-    "createdAt": "2020-11-04T00:29:40Z"
+    "createdAt": "2026-11-04T00:29:40Z"
   },
   {
     "id": 3137,
     "sender": "justinmc",
     "content": "I think it's an old usage of `maxLengthEnforced` in lib/demos/material/text_field_demo.dart that you can update now, but let me know if I'm wrong.\r\n\r\nAlso, there are some conflicts now FYI.",
-    "createdAt": "2020-11-04T01:13:20Z"
+    "createdAt": "2026-11-04T01:13:20Z"
   },
   {
     "id": 3138,
     "sender": "AlexV525",
     "content": "> I think it's an old usage of `maxLengthEnforced` in lib/demos/material/text_field_demo.dart that you can update now, but let me know if I'm wrong.\r\n\r\nI'm pretty sure this is the fix you're looking for. 😄 https://github.com/flutter/gallery/pull/358\r\n\r\nI'll solve those conflicts again once the doc is good to go.",
-    "createdAt": "2020-11-04T01:25:26Z"
+    "createdAt": "2026-11-04T01:25:26Z"
   },
   {
     "id": 3139,
     "sender": "justinmc",
     "content": "Ah sorry you're right, I didn't realize those tests were in the gallery repo.",
-    "createdAt": "2020-11-04T16:44:11Z"
+    "createdAt": "2026-11-04T16:44:11Z"
   },
   {
     "id": 3140,
     "sender": "justinmc",
     "content": "Hey @AlexV525, I'm checking back in on this after being on leave for awhile.  Is there anything blocking you here, or are you able to fix the conflicts and move forward with the PR?",
-    "createdAt": "2020-11-30T18:57:02Z"
+    "createdAt": "2026-11-30T18:57:02Z"
   },
   {
     "id": 3141,
     "sender": "AlexV525",
     "content": "> Hey @AlexV525, I'm checking back in on this after being on leave for awhile. Is there anything blocking you here, or are you able to fix the conflicts and move forward with the PR?\r\n\r\nJust seeking for potential solutions. :D",
-    "createdAt": "2020-12-01T13:11:14Z"
+    "createdAt": "2026-12-01T13:11:14Z"
   },
   {
     "id": 3142,
     "sender": "justinmc",
     "content": "Sorry, I was missing so much context after being out.  Let's continue the discussion in the issue.  I've made a proposal: https://github.com/flutter/flutter/issues/67898#issuecomment-737546617",
-    "createdAt": "2020-12-02T23:00:00Z"
+    "createdAt": "2026-12-02T23:00:00Z"
   },
   {
     "id": 3143,
     "sender": "AlexV525",
     "content": "The implementation has been updated according to @justinmc 's suggestion, provide behavior according to platforms by default. Those behaviors are added to the description, and will be updated to the doc and the migration guide.\r\n\r\n\r\n* Android, Windows: `MaxLengthEnforcement.enforced`. The native behavior of these platforms is enforced. The composing will be handled by the IME while users are entering CJK characters.\r\n* iOS: `MaxLengthEnforcement.truncateAfterCompositionEnds`. iOS has no default behavior and it requires users implement the behavior themselves. Allow the composition exceed to avoid breaking CJK input.\r\n* Web / macOS / linux / fuchsia: `MaxLengthEnforcement.truncateAfterCompositionEnds`. These platforms allow the composition exceed by default.",
-    "createdAt": "2020-12-04T10:37:02Z"
+    "createdAt": "2026-12-04T10:37:02Z"
   },
   {
     "id": 3144,
     "sender": "AlexV525",
     "content": "One thing needs to point out is Windows have different behaviors when you're using different IMEs. For example _Microsoft PinYin IME_ cannot exceed the limit when it's composing, but _Sogou PinYin_ can while it holds the composition inside itself like Gboard with CJK's on Android.",
-    "createdAt": "2020-12-04T10:40:58Z"
+    "createdAt": "2026-12-04T10:40:58Z"
   },
   {
     "id": 3145,
     "sender": "justinmc",
     "content": "Also I think there may be a legitimate test failure due to a deprecated use of maxLengthEnforced at: lib/demos/material/text_field_demo.dart:218:19.",
-    "createdAt": "2020-12-04T18:15:09Z"
+    "createdAt": "2026-12-04T18:15:09Z"
   },
   {
     "id": 3146,
     "sender": "justinmc",
     "content": "In order to get around the customer test failures (which are coming from the gallery), this is what we'll have to do:\r\n\r\n  1. Remove the `@Deprecated` flags from this PR, then merge it when it goes green.\r\n  1. Submit a PR in the Flutter gallery to migrate from maxLengthEnforced to maxLengthEnforcement [here](https://github.com/flutter/gallery/blob/86b2ac2f3491ab1d10236da73588f2250bacc274/lib/demos/material/text_field_demo.dart#L217).\r\n  1. Submit another PR here to add back the deprecation.",
-    "createdAt": "2020-12-07T18:12:04Z"
+    "createdAt": "2026-12-07T18:12:04Z"
   },
   {
     "id": 3147,
     "sender": "AlexV525",
     "content": "There is another serious issue with characters calculation when I was testing \"Composing range handled correctly when it's overflowed\" in editable text tests.\r\n\r\n![image](https://user-images.githubusercontent.com/15884415/101442612-a8639000-3956-11eb-9465-254a56192859.png?)\r\n\r\nThe calculation of `newValue.text` is resulting a wrong length, which should be *6*. This will cause the test fail but not related to the current PR. /cc @LongCatIsLooong @justinmc \r\n\r\nPreviously the test won't failed because the range is completely overflowed, but when I tried with a shorter text this happened. So I'm going to keep the current working test and separate this to another issue or PR.",
-    "createdAt": "2020-12-08T05:11:48Z"
+    "createdAt": "2026-12-08T05:11:48Z"
   },
   {
     "id": 3148,
     "sender": "justinmc",
     "content": "Which test is it that fails like that?  I don't follow exactly why it's failing now.\r\n\r\nIn general though I think that's a good plan, if this is unrelated.  You should create a new issue and then add a TODO in the code with a link to the issue.",
-    "createdAt": "2020-12-08T05:53:54Z"
+    "createdAt": "2026-12-08T05:53:54Z"
   },
   {
     "id": 3149,
     "sender": "AlexV525",
     "content": "> Which test is it that fails like that? I don't follow exactly why it's failing now.\r\n> \r\n> In general though I think that's a good plan, if this is unrelated. You should create a new issue and then add a TODO in the code with a link to the issue.\r\n\r\n\"Composing range handled correctly when it's overflowed\" in `editable_text_tests`. I've saw some related issues before, I'll file a new one if it doesn't exist.",
-    "createdAt": "2020-12-08T05:55:26Z"
+    "createdAt": "2026-12-08T05:55:26Z"
   },
   {
     "id": 3150,
     "sender": "AlexV525",
     "content": "Thanks for everyone that make efforts to this PR to make it solid! It's a huge change and hope it can truly solve composing issues.",
-    "createdAt": "2020-12-09T23:30:23Z"
+    "createdAt": "2026-12-09T23:30:23Z"
   },
   {
     "id": 3151,
@@ -153,97 +153,97 @@
     "id": 3161,
     "sender": "chunhtai",
     "content": "## Implement Router widget and widgets app api\n\n## Description\r\n\r\nIntroduce router widget and widgets app api, I will include the stock app rewrite in a separate pr once we agree on the api details\r\n\r\nstock app rewrite draft https://github.com/chunhtai/flutter/pull/2\r\n\r\n## Related Issues\r\n\r\nhttps://github.com/flutter/flutter/issues/45938\r\n\r\n## Tests\r\n\r\nI added the following tests:\r\n\r\nSee files\r\n\r\n## Checklist\r\n\r\nBefore you create this PR confirm that it meets all requirements listed below by checking the relevant checkboxes (`[x]`). This will ensure a smooth and quick review process.\r\n\r\n- [ ] I read the [Contributor Guide] and followed the process outlined there for submitting PRs.\r\n- [ ] I signed the [CLA].\r\n- [ ] I read and followed the [Flutter Style Guide], including [Features we expect every widget to implement].\r\n- [ ] I read the [Tree Hygiene] wiki page, which explains my responsibilities.\r\n- [ ] I updated/added relevant documentation (doc comments with `///`).\r\n- [ ] All existing and new tests are passing.\r\n- [ ] The analyzer (`flutter analyze --flutter-repo`) does not report any problems on my PR.\r\n- [ ] I am willing to follow-up on review comments in a timely manner.\r\n\r\n## Breaking Change\r\n\r\nDid any tests fail when you ran them? Please read [Handling breaking changes].\r\n\r\n- [ ] No, no existing tests failed, so this is *not* a breaking change.\r\n- [ ] Yes, this is a breaking change. *If not, delete the remainder of this section.*\r\n   - [ ] I wrote a design doc: https://flutter.dev/go/template *Replace this with a link to your design doc's short link*\r\n   - [ ] I got input from the developer relations team, specifically from: *Replace with the names of who gave advice*\r\n   - [ ] I wrote a migration guide: https://flutter.dev/go/breaking-changes-template *Replace this with a link to a pull request that adds the migration guide to https://flutter.dev/docs/release/breaking-changes*\r\n\r\n<!-- Links -->\r\n[issue database]: https://github.com/flutter/flutter/issues\r\n[Contributor Guide]: https://github.com/flutter/flutter/wiki/Tree-hygiene#overview\r\n[Test Coverage]: https://github.com/flutter/flutter/wiki/Test-coverage-for-package%3Aflutter\r\n[Flutter Style Guide]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo\r\n[Features we expect every widget to implement]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#features-we-expect-every-widget-to-implement\r\n[CLA]: https://cla.developers.google.com/\r\n[Tree Hygiene]: https://github.com/flutter/flutter/wiki/Tree-hygiene\r\n[Handling breaking changes]: https://github.com/flutter/flutter/wiki/Tree-hygiene#handling-breaking-changes\r",
-    "createdAt": "2020-06-25T18:08:26Z"
+    "createdAt": "2026-06-25T18:08:26Z"
   },
   {
     "id": 3162,
     "sender": "chunhtai",
     "content": "a friendly bump",
-    "createdAt": "2020-07-13T16:53:35Z"
+    "createdAt": "2026-07-13T16:53:35Z"
   },
   {
     "id": 3163,
     "sender": "Hixie",
     "content": "FWIW, it's hard for me to evaluate the API really without the stocks app migration as well.",
-    "createdAt": "2020-07-14T17:04:44Z"
+    "createdAt": "2026-07-14T17:04:44Z"
   },
   {
     "id": 3164,
     "sender": "chunhtai",
     "content": "> FWIW, it's hard for me to evaluate the API really without the stocks app migration as well.\r\n\r\nCheck out this link https://github.com/chunhtai/flutter/pull/2",
-    "createdAt": "2020-07-14T17:06:38Z"
+    "createdAt": "2026-07-14T17:06:38Z"
   },
   {
     "id": 3165,
     "sender": "Hixie",
     "content": "Can you talk about the RouteInformation stuff and how it corresponds to what was in the original design? I'm trying to understand how the old design maps to this one.",
-    "createdAt": "2020-07-16T18:24:45Z"
+    "createdAt": "2026-07-16T18:24:45Z"
   },
   {
     "id": 3166,
     "sender": "chunhtai",
     "content": "The RouteInformation is trying to support the browser history entry(which contains both url and a state object), https://docs.google.com/document/d/1QodTFmwVr1yk8dyQvoqkeILxvm92oikB1bVhHTtp6R4/edit#heading=h.4bauy8cp70w0\r\n\r\nThe reason why we don't want to use the url alone is that something like scroll offset and textfield value do not usually store into query parameter. They are commonly stored into the state of a browser history.\r\n\r\nThere are also discussions about how do we utilize state restoration. https://docs.google.com/document/d/1d25VJmHJIqoh5Hw4PyvCcl9R4GYdF4AmBRUy-UwB2dQ/edit#heading=h.4qsx9pjitde1\r\nfor the lake of a better name, i changed the name RoutePackage in the document into RouteInformation",
-    "createdAt": "2020-07-16T18:36:30Z"
+    "createdAt": "2026-07-16T18:36:30Z"
   },
   {
     "id": 3167,
     "sender": "chunhtai",
     "content": "ready for another look @goderbauer @Hixie @mdebbar \r\n\r\nI moved the serialization method into route information provider, and makes the router only report the route information back if the **RouteInformation.location** has changed. The changes to RouteInformation.configuration alone will not trigger the reporting.",
-    "createdAt": "2020-07-24T20:27:41Z"
+    "createdAt": "2026-07-24T20:27:41Z"
   },
   {
     "id": 3168,
     "sender": "chunhtai",
     "content": "I had to squash all previous commits to resolve merge conflict otherwise it is a nightmare to try to reapply all commits. The changes that aim to address the last review comments from @goderbauer are in the last commit. Beside that, i also choose to rename RouteInformation.configuration back to `state` because we are already using the name `configuration` in the route information parser and router delegate. This pr is ready for another look.",
-    "createdAt": "2020-07-29T22:32:32Z"
+    "createdAt": "2026-07-29T22:32:32Z"
   },
   {
     "id": 3169,
     "sender": "Hixie",
     "content": "This is looking great. My comments are mere minor nits.",
-    "createdAt": "2020-07-30T16:52:03Z"
+    "createdAt": "2026-07-30T16:52:03Z"
   },
   {
     "id": 3170,
     "sender": "chunhtai",
     "content": "This is ready for another look. @goderbauer  changes are in the last commit",
-    "createdAt": "2020-08-05T21:28:54Z"
+    "createdAt": "2026-08-05T21:28:54Z"
   },
   {
     "id": 3171,
     "sender": "Hixie",
     "content": "Some of my earlier comments, in particular for example the one about how we should not be using JSON, do not seem to yet have been taken into account.",
-    "createdAt": "2020-08-06T17:13:16Z"
+    "createdAt": "2026-08-06T17:13:16Z"
   },
   {
     "id": 3172,
     "sender": "chunhtai",
     "content": "> Some of my earlier comments, in particular for example the one about how we should not be using JSON, do not seem to yet have been taken into account.\r\n\r\nI didn't use any json encode or decode in the router, the only place that uses it is navigation system channel that use json codec. If we want to get rid of it, we can either convert navigation channel to use standard codec or create a different channel.\r\n\r\nI am not sure which is more desirable. also cc @goderbauer ",
-    "createdAt": "2020-08-06T17:19:03Z"
+    "createdAt": "2026-08-06T17:19:03Z"
   },
   {
     "id": 3173,
     "sender": "Hixie",
     "content": "We should convert it to use the standard codec, if we can. I just don't want to be adding any more places where we're converting data to JSON, it's highly inefficient.",
-    "createdAt": "2020-08-06T17:22:56Z"
+    "createdAt": "2026-08-06T17:22:56Z"
   },
   {
     "id": 3174,
     "sender": "chunhtai",
     "content": "@Hixie I opened a separate issue about converting navigation channel https://github.com/flutter/flutter/issues/63121\r\nI would not do it as part of this pr because it may involve multiple stage migration and this pr is already massive\r\n\r\nin the meanwhile, I addressed all other comments. This pr is ready for another look @goderbauer and @Hixie ",
-    "createdAt": "2020-08-06T20:54:39Z"
+    "createdAt": "2026-08-06T20:54:39Z"
   },
   {
     "id": 3175,
     "sender": "goderbauer",
     "content": "Looks like there are some doc errors.\r\n\r\nThe StandartMessageCodec/JSON question aside, this LGTM.",
-    "createdAt": "2020-08-07T19:41:52Z"
+    "createdAt": "2026-08-07T19:41:52Z"
   },
   {
     "id": 3176,
     "sender": "chunhtai",
     "content": "addressed all comments, and also updated the stock app rewrite pr https://github.com/chunhtai/flutter/pull/2/files",
-    "createdAt": "2020-08-07T22:08:40Z"
+    "createdAt": "2026-08-07T22:08:40Z"
   },
   {
     "id": 3177,

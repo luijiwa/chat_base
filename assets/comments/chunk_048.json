@@ -261,126 +261,126 @@
     "id": 3115,
     "sender": "AlexV525",
     "content": "## Introduce `MaxLengthEnforcement`\n\n## Description\r\n\r\nIn #63754 a new behavior about the composing `TextEditingValue` for the `LengthLimitingTextInputFormatter` was introduced, but it's not optional which somehow breaks the original behavior for the limiting. \r\n\r\nThis PR: \r\n* brings a new enum `MaxLengthEnforcement`.\r\n* deprecate `maxLengthEnforced` that exist in text fields.\r\n\r\nNew behaviors for different platforms: \r\n* Android, Windows: `MaxLengthEnforcement.enforced`. The native behavior of these platforms is enforced. The composing will be handled by the IME while users are entering CJK characters.\r\n* iOS: `MaxLengthEnforcement.truncateAfterCompositionEnds`. iOS has no default behavior and it requires users implement the behavior themselves. Allow the composition to exceed to avoid breaking CJK input.\r\n* Web, macOS, linux, fuchsia: `MaxLengthEnforcement.truncateAfterCompositionEnds`. These platforms allow the composition to exceed by default.\r\n\r\n## Related Issues\r\n\r\nFixes #67898 .\r\n\r\n## Tests\r\n\r\nI added the following tests:\r\n\r\n* Grouped max length tests in editable text test.\r\n* `MaxLengthEnforcement` tests in cupertino/material text field tests.\r\n* \"enforced composing truncated\" in editable text test.\r\n* \"composing range removed if it's overflowed the truncated value's length\" in editable text test.\r\n* truncate behaviors on different platforms.\r\n\r\n## Checklist\r\n\r\nBefore you create this PR, confirm that it meets all requirements listed below by checking the relevant checkboxes (`[x]`). This will ensure a smooth and quick review process.\r\n\r\n- [x] I read the [Contributor Guide] and followed the process outlined there for submitting PRs.\r\n- [x] I signed the [CLA].\r\n- [x] I read and followed the [Flutter Style Guide], including [Features we expect every widget to implement].\r\n- [x] I read the [Tree Hygiene] wiki page, which explains my responsibilities.\r\n- [x] I updated/added relevant documentation (doc comments with `///`).\r\n- [x] All existing and new tests are passing.\r\n- [x] The analyzer (`flutter analyze --flutter-repo`) does not report any problems on my PR.\r\n- [x] I am willing to follow-up on review comments in a timely manner.\r\n\r\n## Breaking Change\r\n\r\nDid any tests fail when you ran them? Please read [Handling breaking changes].\r\n\r\n- [ ] No, no existing tests failed, so this is *not* a breaking change.\r\n- [x] Yes, this is a breaking change.\r\n   - [x] I wrote a design doc: https://docs.google.com/document/d/1S900lQaTPOsePnIeE7o3-Ia8f39VZaSv0JnjNyBfCvU\r\n   - [x] I got input from the developer relations team, specifically from: @LongCatIsLooong @justinmc \r\n   - [x] I wrote a migration guide: https://github.com/flutter/website/pull/4883\r\n\r\n\r\n<!-- Links -->\r\n[issue database]: https://github.com/flutter/flutter/issues\r\n[Contributor Guide]: https://github.com/flutter/flutter/wiki/Tree-hygiene#overview\r\n[Test Coverage]: https://github.com/flutter/flutter/wiki/Test-coverage-for-package%3Aflutter\r\n[Flutter Style Guide]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo\r\n[Features we expect every widget to implement]: https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#features-we-expect-every-widget-to-implement\r\n[CLA]: https://cla.developers.google.com/\r\n[Tree Hygiene]: https://github.com/flutter/flutter/wiki/Tree-hygiene\r\n[Handling breaking changes]: https://github.com/flutter/flutter/wiki/Tree-hygiene#handling-breaking-changes",
-    "createdAt": "2020-10-14T07:30:53Z"
+    "createdAt": "2026-10-14T07:30:53Z"
   },
   {
     "id": 3116,
     "sender": "AlexV525",
     "content": "Should we move these tests into text formatter test?",
-    "createdAt": "2020-10-15T03:01:47Z"
+    "createdAt": "2026-10-15T03:01:47Z"
   },
   {
     "id": 3117,
     "sender": "justinmc",
     "content": "I think I'm in favor of this solution to the problems discussed in https://github.com/flutter/flutter/issues/67898. Limiting length with/without composing characters both seem to have valid uses, so it makes sense to let developers choose which they want.  I'm also interested in what @LongCatIsLooong thinks.\r\n\r\nMaybe instead of a bool, this should be combined with maxLengthEnforced and made into an enum?  Like `maxLengthEnforcement` or something like that.  Then deprecate maxLengthEnforced.  Then we don't have to worry about both bools being true, and it's future-proof if more cases appear later.",
-    "createdAt": "2020-10-16T00:41:35Z"
+    "createdAt": "2026-10-16T00:41:35Z"
   },
   {
     "id": 3118,
     "sender": "AlexV525",
     "content": "> Maybe instead of a bool, this should be combined with maxLengthEnforced and made into an enum?\r\n\r\nBefore, `maxLengthEnforced` in `TextField` controls whether a `LengthLimitingTextInputFormatter` will be inserted or not. If not, it will be only an error tip when the value reached limitation.\r\n\r\nIf it can convert to enum, I prefer `maxLengthEnforcement ` too, and there will be three values for it:\r\n* `none` or `regular`: Same as the current truncate behavior, as default.\r\n* `warningOnly`: Same as `maxLength == x && maxLengthEnforced == false`.\r\n* `truncateComposing`: Apply length limit on composing value too.\r\n\r\nDoes it seems valid?\r\n",
-    "createdAt": "2020-10-16T01:44:48Z"
+    "createdAt": "2026-10-16T01:44:48Z"
   },
   {
     "id": 3119,
     "sender": "AlexV525",
     "content": "> This doesn't seem to be a breaking change? See https://github.com/flutter/flutter/wiki/Tree-hygiene#1-determine-if-your-change-is-a-breaking-change, the tests seem to be passing?\r\n\r\nIt was suggested from https://github.com/flutter/flutter/issues/67898#issuecomment-707335793",
-    "createdAt": "2020-10-16T04:31:42Z"
+    "createdAt": "2026-10-16T04:31:42Z"
   },
   {
     "id": 3120,
     "sender": "LongCatIsLooong",
     "content": "@AlexV525 Ah I meant this PR per se is not breaking (at least customer_testing is not failing).\r\n\r\nMaking `maxLengthEnforced` an enum sounds good to me.\r\n\r\n> none or regular: Same as the current truncate behavior, as default.\r\nI think `none` is already covered by setting `maxLength` to null or -1?",
-    "createdAt": "2020-10-16T04:36:13Z"
+    "createdAt": "2026-10-16T04:36:13Z"
   },
   {
     "id": 3121,
     "sender": "AlexV525",
     "content": "> I think `none` is already covered by setting `maxLength` to null or -1?\r\n\r\nSo maybe `regular` is more fit for the case, which means truncated while it's not composing.",
-    "createdAt": "2020-10-16T04:43:48Z"
+    "createdAt": "2026-10-16T04:43:48Z"
   },
   {
     "id": 3122,
     "sender": "AlexV525",
     "content": "> Ah I meant this PR per se is not breaking (at least customer_testing is not failing).\r\n\r\n😕 Then how should we announce this...? Or not?",
-    "createdAt": "2020-10-16T04:46:41Z"
+    "createdAt": "2026-10-16T04:46:41Z"
   },
   {
     "id": 3123,
     "sender": "LongCatIsLooong",
     "content": "> confused Then how should we announce this...? Or not?\r\n\r\nSorry I got ahead of myself in that issue. If we deprecate the `maxLengthEnforced` parameter then it will be a breaking change (when we eventually remove the parameter it's going to break code that's still using it).  ",
-    "createdAt": "2020-10-16T04:59:54Z"
+    "createdAt": "2026-10-16T04:59:54Z"
   },
   {
     "id": 3124,
     "sender": "AlexV525",
     "content": "Both `TextField` and `CupertinoTextField` have `maxLengthEnforced`, is it okay to put the enum in `editable_text.dart` ? Maybe `text_formatter.dart` ?",
-    "createdAt": "2020-10-17T03:19:56Z"
+    "createdAt": "2026-10-17T03:19:56Z"
   },
   {
     "id": 3125,
     "sender": "LongCatIsLooong",
     "content": "Yeah makes sense to put it in `text_formatter.dart` since that's where the length limiting formatter is.",
-    "createdAt": "2020-10-17T05:53:12Z"
+    "createdAt": "2026-10-17T05:53:12Z"
   },
   {
     "id": 3126,
     "sender": "AlexV525",
     "content": "It should need more test in API reference, hold on a sec.",
-    "createdAt": "2020-10-17T11:41:42Z"
+    "createdAt": "2026-10-17T11:41:42Z"
   },
   {
     "id": 3127,
     "sender": "AlexV525",
     "content": "It's breaking gallery's tests, with usages of `maxLengthEnforced` 👍 ",
-    "createdAt": "2020-10-17T16:05:14Z"
+    "createdAt": "2026-10-17T16:05:14Z"
   },
   {
     "id": 3128,
     "sender": "justinmc",
     "content": "Also, the test failures are due to a usage of maxLengthEnforced in lib/demos/material/text_field_demo.dart that we will need to update to use maxLengthEnforcement.",
-    "createdAt": "2020-10-23T18:08:41Z"
+    "createdAt": "2026-10-23T18:08:41Z"
   },
   {
     "id": 3129,
     "sender": "AlexV525",
     "content": "> Also, the test failures are due to a usage of maxLengthEnforced in lib/demos/material/text_field_demo.dart that we will need to update to use maxLengthEnforcement.\r\n\r\nShould we update tests ourselves or contact people that tests referred?",
-    "createdAt": "2020-10-24T02:45:01Z"
+    "createdAt": "2026-10-24T02:45:01Z"
   },
   {
     "id": 3130,
     "sender": "AlexV525",
     "content": "By reviewing previous changes to the formatter, I found no behaviors update patched, yet seems need to be change too. I think we can make another PR to gathered them together. So I'm going to revert selection behavior change in here.",
-    "createdAt": "2020-10-24T06:05:44Z"
+    "createdAt": "2026-10-24T06:05:44Z"
   },
   {
     "id": 3131,
     "sender": "AlexV525",
     "content": "@justinmc @LongCatIsLooong Take the last review then let's start the rest process. 🤣 ",
-    "createdAt": "2020-10-26T01:40:58Z"
+    "createdAt": "2026-10-26T01:40:58Z"
   },
   {
     "id": 3132,
     "sender": "AlexV525",
     "content": "> I see that you already have a migration guide. Should I review that yet?\r\n\r\nDefinitely. 😄 \r\n\r\n> We'll also have to create a design doc and get that reviewed, and get Hixie to look at the migration guide.\r\n\r\nWill update the description once it's finished.",
-    "createdAt": "2020-10-27T05:28:24Z"
+    "createdAt": "2026-10-27T05:28:24Z"
   },
   {
     "id": 3133,
     "sender": "AlexV525",
     "content": "@Hixie A design doc has added (see description), could you help me review the doc?",
-    "createdAt": "2020-10-27T05:59:31Z"
+    "createdAt": "2026-10-27T05:59:31Z"
   },
   {
     "id": 3134,
     "sender": "justinmc",
     "content": "Thanks for all the work on this.  The test failures looked like infrastructure problems to me (not problems with the PR), so I re-ran them.  If they don't turn green in an hour or so, then you might have to merge master into this to get them to turn green.",
-    "createdAt": "2020-11-02T19:31:58Z"
+    "createdAt": "2026-11-02T19:31:58Z"
   },
   {
     "id": 3135,
     "sender": "justinmc",
     "content": "There is one analyzer error now:\r\n\r\n```\r\ninfo • 'maxLengthEnforced' is deprecated and shouldn't be used. Use maxLengthEnforcement parameter which provides more specific behavior related to the maxLength limit. This feature was deprecated after v1.23.0-19.0.pre. • lib/demos/material/text_field_demo.dart:218:19\r\n```",
-    "createdAt": "2020-11-03T16:53:35Z"
+    "createdAt": "2026-11-03T16:53:35Z"
   }
 ]

@@ -14,7 +14,7 @@ import 'package:chatscrollview/src/chat_scroll/chat_scroll_common.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_scroll_controller.dart';
 import 'package:chatscrollview/src/chat_widgets/chat_scroll_view.dart';
 import 'package:chatscrollview/src/chat_widgets/render_chat_scroll_view.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -23,7 +23,13 @@ import 'package:integration_test/integration_test.dart';
 // Test data (identical content distribution to benchmark_test.dart)
 // ---------------------------------------------------------------------------
 
-const _kShort = ['Hello!', 'Sure thing.', 'Got it, thanks.', 'On my way.', 'OK'];
+const _kShort = [
+  'Hello!',
+  'Sure thing.',
+  'Got it, thanks.',
+  'On my way.',
+  'OK',
+];
 const _kMedium = [
   'The quick brown fox jumps over the lazy dog near the riverbank.',
   'I was thinking we could meet up tomorrow at the coffee shop downtown.',
@@ -138,8 +144,9 @@ class _FrameTimingCollector {
   List<int> get rasterTimesUs =>
       timings.map((t) => t.rasterDuration.inMicroseconds).toList();
   List<int> get totalTimesUs => timings
-      .map((t) =>
-          t.buildDuration.inMicroseconds + t.rasterDuration.inMicroseconds)
+      .map(
+        (t) => t.buildDuration.inMicroseconds + t.rasterDuration.inMicroseconds,
+      )
       .toList();
   int get jankCount => timings
       .where((t) => t.totalSpan > const Duration(milliseconds: 16))
@@ -176,15 +183,16 @@ class _FrameTimingCollector {
   return (ds: ds, ctrl: ctrl);
 }
 
-Widget _widgetApp(_BenchDataSource ds, ChatScrollController ctrl) => MaterialApp(
-  home: Scaffold(
-    body: ChatScrollView(
-      dataSource: ds,
-      controller: ctrl,
-      messageBuilder: _benchBuilder,
-    ),
-  ),
-);
+Widget _widgetApp(_BenchDataSource ds, ChatScrollController ctrl) =>
+    MaterialApp(
+      home: Scaffold(
+        body: ChatScrollView(
+          dataSource: ds,
+          controller: ctrl,
+          messageBuilder: _benchBuilder,
+        ),
+      ),
+    );
 
 RenderChatScrollView _ro(WidgetTester tester) =>
     tester.renderObject<RenderChatScrollView>(find.byType(ChatScrollView));
@@ -285,8 +293,9 @@ void main() {
       final avgLayoutUs = layoutFrames > 0 ? totalLayoutUs / layoutFrames : 0.0;
       final avgPaintUs = paintFrames > 0 ? totalPaintUs / paintFrames : 0.0;
       final avgTotalUs = avgLayoutUs + avgPaintUs;
-      final rawFps =
-          avgTotalUs > 0 ? (1000000.0 / avgTotalUs).toStringAsFixed(0) : '∞';
+      final rawFps = avgTotalUs > 0
+          ? (1000000.0 / avgTotalUs).toStringAsFixed(0)
+          : '∞';
 
       debugPrint(
         'WIDGET raw compute ($count msgs): '

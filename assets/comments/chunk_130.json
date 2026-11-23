@@ -327,60 +327,60 @@
     "id": 8374,
     "sender": "keitheyre",
     "content": "I have come across this issue when entering in an email address with the following:\r\n\r\n`TextFormField(\r\n            autocorrect: false,\r\n            keyboardType: TextInputType.emailAddress,\r\n            textInputAction: TextInputAction.done,\r\n...),`\r\n\r\nAs soon as I enter anything after the @ symbol, it duplicates the previous text with the new text appended...\r\n\r\nThis is present on the Samsung Tab A 10.1\" (2019)\r\n\r\n",
-    "createdAt": "2020-01-02T10:18:21Z"
+    "createdAt": "2026-01-02T10:18:21Z"
   },
   {
     "id": 8375,
     "sender": "escamoteur",
     "content": "I stumbled upon the same problem on a Samsung Fold too. ",
-    "createdAt": "2020-01-05T11:03:02Z"
+    "createdAt": "2026-01-05T11:03:02Z"
   },
   {
     "id": 8376,
     "sender": "MilesAdamson",
     "content": "\r\n![ezgif-6-5b5717cd0b38](https://user-images.githubusercontent.com/29047682/72007589-4020a180-320f-11ea-87fc-4393229842e8.gif)\r\n",
-    "createdAt": "2020-01-08T19:06:29Z"
+    "createdAt": "2026-01-08T19:06:29Z"
   },
   {
     "id": 8377,
     "sender": "CoreyCole",
     "content": "How are flutter customers like realtor.com, tencent, alibaba, ebay, capitalone working around this in their production flutter applications? Combined, these companies probably have hundreds of millions of users with samsung phone that would be impacted by this text input bug.\r\n\r\nDid they design their own text inputs from the ground up?",
-    "createdAt": "2020-01-08T19:20:40Z"
+    "createdAt": "2026-01-08T19:20:40Z"
   },
   {
     "id": 8378,
     "sender": "MilesAdamson",
     "content": "> How are flutter customers like realtor.com, tencent, alibaba, ebay, capitalone working around this in their production flutter applications? Combined, these companies probably have hundreds of millions of users with samsung phone that would be impacted by this text input bug.\r\n> \r\n> Did they design their own text inputs from the ground up?\r\n\r\nNo idea what they are doing, but I have all email fields as a stateful widget which use a device info package to check if it's samsung. Add this to email entry text fields:\r\n\r\n```\r\nkeyboardType: samsungKeyboard ? TextInputType.visiblePassword : TextInputType.emailAddress,\r\nautoFocus: false,\r\n```\r\n\r\nAutofocus usually needs to be off. If the keyboard goes up before the `setState` to make `samsungKeyboard` is true, it won't actually change the keyboard type until it's closed and open again\r\n\r\nIf they try to type anything with a website, email, or anything with a special character then letters into other plain text fields, the text duplicates and it's horrible",
-    "createdAt": "2020-01-08T22:45:24Z"
+    "createdAt": "2026-01-08T22:45:24Z"
   },
   {
     "id": 8379,
     "sender": "Kiboom",
     "content": "Is there any progress on the issue?\r\n\r\nMost of the complaints from our users are related to this issue.\r\nHuge number of our users use Samsung devices and are suffering from just writing the text.\r\nWriting text is the most basic function of the app.\r\nIf it doesn't function well, it can adversely affect not only our app, but also the reputation of Flutter.\r\n\r\nI know you're working on it, but please resolve this issue as soon as possible.\r\nNumber of developers and users are waiting.",
-    "createdAt": "2020-01-15T10:50:31Z"
+    "createdAt": "2026-01-15T10:50:31Z"
   },
   {
     "id": 8380,
     "sender": "GaryQian",
     "content": "@Kiboom Yes, completely understand. Apologize for any blockages/delays/pain this is causing. Trying my best to get this sorted out, but it is one of those problems where all I can do is poke at a black box that is Samsung's keyboard implementation, which is caching certain values differently than every other keyboard. I can only control the way Flutter handles Samsung's invocation of the keyboard API so there is a very limited set of tools/places I can work with. Right now, the key issue is that on Samsung, we are missing an invocation of setComposingRegion, and there is no reliable way that I can see (yet) to obtain that piece of information. It also varies greatly between versions, so different fixes/workarounds only work for a subset of devices.\r\n\r\nJust as a note here for reference, the punctuation duplication occurs on a S9 but not on Galaxy Tab.",
-    "createdAt": "2020-01-15T23:05:43Z"
+    "createdAt": "2026-01-15T23:05:43Z"
   },
   {
     "id": 8381,
     "sender": "GaryQian",
     "content": "The punctuation duplication part of this bug is caused by Samsung not resetting their internally cached composing region after calling `finishComposingText()`, which is a method that commits and resets the composing region. I was able to work around it by manually sending an empty composing region in an overridden `finishComposingText()` back to the keyboard. https://github.com/flutter/engine/pull/15701 implements this.",
-    "createdAt": "2020-01-17T01:09:41Z"
+    "createdAt": "2026-01-17T01:09:41Z"
   },
   {
     "id": 8382,
     "sender": "GaryQian",
     "content": "Have confirmed text no longer duplicates on punctuation. The change has made it into master channel via https://github.com/flutter/flutter/commit/fbb2f07497868a2b63c23abaa31aed02fc13d057\r\n\r\nThere is still the second half of the bug where text duplicates when the keyboard is hidden+unhidden+type. This does not pass through the `finishComposingText` codepath and requires a different workaround.",
-    "createdAt": "2020-01-21T19:11:31Z"
+    "createdAt": "2026-01-21T19:11:31Z"
   },
   {
     "id": 8383,
     "sender": "markmoskalenko",
     "content": "Are there any news?",
-    "createdAt": "2020-01-30T13:53:07Z"
+    "createdAt": "2026-01-30T13:53:07Z"
   }
 ]

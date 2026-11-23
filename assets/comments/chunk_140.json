@@ -297,90 +297,90 @@
     "id": 9009,
     "sender": "premtemp1",
     "content": "Any solution... I am seeing this error on LG --OS9",
-    "createdAt": "2020-01-16T20:52:56Z"
+    "createdAt": "2026-01-16T20:52:56Z"
   },
   {
     "id": 9010,
     "sender": "tmatrai",
     "content": "I have an app in Google Play with some thousand users, and I still have one star reviews related with black screen issues. On 95% of the devices is okkey, but on others it is still an issue. \r\n\r\nMy latest app release is built on Flutter 1.12.13+hotfix5 (stable channel).",
-    "createdAt": "2020-01-17T08:04:10Z"
+    "createdAt": "2026-01-17T08:04:10Z"
   },
   {
     "id": 9011,
     "sender": "LuizLeite",
     "content": "Hi. In my case, i removed the \"get_ip\" package, and the black screen is gone, the app is back up and running.",
-    "createdAt": "2020-01-23T01:32:58Z"
+    "createdAt": "2026-01-23T01:32:58Z"
   },
   {
     "id": 9012,
     "sender": "dumplings",
-    "content": "![WechatIMG71](https://user-images.githubusercontent.com/16367785/73610087-cb266900-460e-11ea-9dba-b8c305b46c32.jpeg)\r\nthe same issues with me.\r\n\r\n ~ flutter --version\r\nFlutter 1.12.13+hotfix.7 • channel stable • https://github.com/flutter/flutter.git\r\nFramework • revision 9f5ff2306b (6 days ago) • 2020-01-26 22:38:26 -0800\r\nEngine • revision a67792536c\r\nTools • Dart 2.7.0",
-    "createdAt": "2020-02-02T14:55:14Z"
+    "content": "![WechatIMG71](https://user-images.githubusercontent.com/16367785/73610087-cb266900-460e-11ea-9dba-b8c305b46c32.jpeg)\r\nthe same issues with me.\r\n\r\n ~ flutter --version\r\nFlutter 1.12.13+hotfix.7 • channel stable • https://github.com/flutter/flutter.git\r\nFramework • revision 9f5ff2306b (6 days ago) • 2026-01-26 22:38:26 -0800\r\nEngine • revision a67792536c\r\nTools • Dart 2.7.0",
+    "createdAt": "2026-02-02T14:55:14Z"
   },
   {
     "id": 9013,
     "sender": "campioncino",
     "content": "Do you know if the v1.12.13+hotfix.7 solve the Huawei problem?",
-    "createdAt": "2020-02-04T07:59:36Z"
+    "createdAt": "2026-02-04T07:59:36Z"
   },
   {
     "id": 9014,
     "sender": "LuizLeite",
-    "content": "Hi.I am trying to believe that these are packages that have not been upgraded to version 1.12.xx of Flutter. Try to remove them and test. If the problem persists, then it’s up to the folks at Google.\n\nLuiz Leite\n \n\n    Em terça-feira, 4 de fevereiro de 2020 04:59:41 BRT, campioncino <notifications@github.com> escreveu:  \n \n \nDo you know if the v1.12.13+hotfix.7 solve the Huawei problem?\n\n—\nYou are receiving this because you commented.\nReply to this email directly, view it on GitHub, or unsubscribe.\n  ",
-    "createdAt": "2020-02-04T11:34:16Z"
+    "content": "Hi.I am trying to believe that these are packages that have not been upgraded to version 1.12.xx of Flutter. Try to remove them and test. If the problem persists, then it’s up to the folks at Google.\n\nLuiz Leite\n \n\n    Em terça-feira, 4 de fevereiro de 2026 04:59:41 BRT, campioncino <notifications@github.com> escreveu:  \n \n \nDo you know if the v1.12.13+hotfix.7 solve the Huawei problem?\n\n—\nYou are receiving this because you commented.\nReply to this email directly, view it on GitHub, or unsubscribe.\n  ",
+    "createdAt": "2026-02-04T11:34:16Z"
   },
   {
     "id": 9015,
     "sender": "liyuqian",
     "content": "@tmatrai : v1.12.13+hotfix.5 is known to have some blackscreen issues and it's fixed in v1.12.13+hotfix.7. Please see https://github.com/flutter/flutter/issues/47164\r\n\r\n@dumplings : what device did you see the blackscreen problem with v1.12.13+hotfix.7 ?\r\n\r\n@GaryQian : can you please double check v1.12.13+hotfix.7 with the Huawei devices that we recently purchased, and the Samsung J6+ device (probably in my drawer)? I believe they should be fixed in v1.12.13+hotfix.7.",
-    "createdAt": "2020-02-05T04:49:28Z"
+    "createdAt": "2026-02-05T04:49:28Z"
   },
   {
     "id": 9016,
     "sender": "costarf",
     "content": "Updated to v1.12.13+hotfix.7 and still get the error on J4 and Huawei.\r\n\r\nAny estimate when this will be really fixed?",
-    "createdAt": "2020-02-10T11:02:02Z"
+    "createdAt": "2026-02-10T11:02:02Z"
   },
   {
     "id": 9017,
     "sender": "GaryQian",
     "content": "@costarf What devices exactly are you testing on? I just verified that this crash is fixed on Huawei Y7Pro/Enjoy9 (DUB AL20) and Huawei Honor8C (BKK AL10) as well as Samsung J6+ (SM-J610G) using 1.12.13+hotfix.7\r\n\r\nAlso, is this happening with a minimal app such as the hello world app from `flutter create`?",
-    "createdAt": "2020-02-11T23:14:54Z"
+    "createdAt": "2026-02-11T23:14:54Z"
   },
   {
     "id": 9018,
     "sender": "Bernardomrf",
     "content": "I had some problems like this, after I migrated my flutter project to AndroidX. On some android devices the app wouldn't pass the splash screen.\r\n\r\n**Solution:**\r\nI discovered that I had the _android:hardwareAccelerated_ variable set to false, in AndroidManifest.xml. After I set it to true, I got the app working on those android devices.\r\n\r\nI'm using the Stable channel - v1.12.13+hotfix.8.\r\n",
-    "createdAt": "2020-02-12T12:14:03Z"
+    "createdAt": "2026-02-12T12:14:03Z"
   },
   {
     "id": 9019,
     "sender": "liyuqian",
     "content": "@xster : according to https://github.com/flutter/flutter/issues/37155#issuecomment-585177594, we might have issues when android:hardwareAccelerated is set to false. Do we support setting android:hardwareAccelerated to false? If so, there seems to be a bug. If not, maybe we should make it impossible to set it to false.",
-    "createdAt": "2020-02-13T20:24:20Z"
+    "createdAt": "2026-02-13T20:24:20Z"
   },
   {
     "id": 9020,
     "sender": "xster",
     "content": "@liyuqian this is probably a question for @jason-simmons or @chinmaygarde what our official level of support is for software rendering on Android for debug or in general. \r\n\r\nThis is also probably the same question as ramifications to https://github.com/flutter/flutter/issues/47804 and whether it could cause more obscure issues down the line.",
-    "createdAt": "2020-02-16T08:45:07Z"
+    "createdAt": "2026-02-16T08:45:07Z"
   },
   {
     "id": 9021,
     "sender": "liyuqian",
     "content": "@xster : the software backend should be quite solid as all Google-internal golden tests are running with software rendering. The only downside of using software rendering is the performance hit as far as I know.\r\n\r\nDo you suggest to fallback to software if the GPU backend fails to initialize? If so, I think we first have to establish some alerting system so we won't let some GPU issues slip through and cause wide performance regressions without detections.",
-    "createdAt": "2020-02-16T19:08:40Z"
+    "createdAt": "2026-02-16T19:08:40Z"
   },
   {
     "id": 9022,
     "sender": "xster",
     "content": "Ah, good to know. Let's continue on https://github.com/flutter/flutter/issues/50900. Once we establish signaling like you're saying, we can just fail on benchmarks on software fallbacks. ",
-    "createdAt": "2020-02-16T22:45:24Z"
+    "createdAt": "2026-02-16T22:45:24Z"
   },
   {
     "id": 9023,
     "sender": "mohamed-saber21",
     "content": "> Hi. In my case, i removed the \"get_ip\" package, and the black screen is gone, the app is back up and running.\r\n\r\nhow i can do this?",
-    "createdAt": "2020-03-12T11:46:20Z"
+    "createdAt": "2026-03-12T11:46:20Z"
   }
 ]

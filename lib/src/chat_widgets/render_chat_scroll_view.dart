@@ -91,36 +91,22 @@ abstract interface class ChatChildManager {
 /// cached child layers.
 class RenderChatScrollView extends RenderBox implements ChatScrollAnimator {
   RenderChatScrollView({
-    required ChatDataSource dataSource,
-    required ChatScrollController controller,
-    required double cacheExtent,
-    double extraBuildExtent = 0.0,
-    bool ticking = true,
-    bool reverse = false,
-    ValueListenable<double>? bottomPadding,
-    ValueListenable<double>? topPadding,
-    Object Function(IChatMessage)? groupBy,
-    bool hasErrorBuilder = false,
-    bool hasEmptyBuilder = false,
-    bool hasLoadingBuilder = false,
-    Color highlightColor = const Color(0x402196F3),
-    Duration highlightDuration = const Duration(milliseconds: 1500),
-    TextDirection textDirection = TextDirection.ltr,
-  }) : _dataSource = dataSource,
-       _controller = controller,
-       _cacheExtent = cacheExtent,
-       _extraBuildExtent = extraBuildExtent,
-       _ticking = ticking,
-       _reverse = reverse,
-       _bottomPadding = bottomPadding,
-       _topPadding = topPadding,
-       _groupBy = groupBy,
-       _hasErrorBuilder = hasErrorBuilder,
-       _hasEmptyBuilder = hasEmptyBuilder,
-       _hasLoadingBuilder = hasLoadingBuilder,
-       _highlightColor = highlightColor,
-       _highlightDuration = highlightDuration,
-       _textDirection = textDirection;
+    required this._dataSource,
+    required this._controller,
+    required this._cacheExtent,
+    this._extraBuildExtent = 0.0,
+    this._ticking = true,
+    this._reverse = false,
+    this._bottomPadding,
+    this._topPadding,
+    this._groupBy,
+    this._hasErrorBuilder = false,
+    this._hasEmptyBuilder = false,
+    this._hasLoadingBuilder = false,
+    this._highlightColor = const Color(0x402196F3),
+    this._highlightDuration = const Duration(milliseconds: 1500),
+    this._textDirection = TextDirection.ltr,
+  });
 
   /// Set by `ChatScrollElement` in `mount`. Drives lazy child inflation.
   ChatChildManager? childManager;
@@ -415,8 +401,9 @@ class RenderChatScrollView extends RenderBox implements ChatScrollAnimator {
   Duration? _bouncebackStartTime;
   double _bouncebackInitialOverscroll = 0.0;
   _BouncebackSide _bouncebackSide = _BouncebackSide.top;
-  static const Duration _kOverscrollBounceDuration =
-      Duration(milliseconds: 200);
+  static const Duration _kOverscrollBounceDuration = Duration(
+    milliseconds: 200,
+  );
 
   // --- animateTo state ------------------------------------------------------
 
@@ -943,10 +930,12 @@ class RenderChatScrollView extends RenderBox implements ChatScrollAnimator {
     // Both paths gate on `_wasAtTailLastLayout` — without it, the bottom
     // pin would yank content the user scrolled away from back to the tail.
     final newest = _dataSource.newestKnownId;
-    final tailAdvanced = _wasAtTailLastLayout &&
+    final tailAdvanced =
+        _wasAtTailLastLayout &&
         newest != null &&
         (_lastSeenNewestId == null || newest > _lastSeenNewestId!);
-    final repinBottom = _dataSource.reachedNewest &&
+    final repinBottom =
+        _dataSource.reachedNewest &&
         _wasAtTailLastLayout &&
         (_bottomPaddingDirty || tailAdvanced);
     _bottomPaddingDirty = false;
@@ -1308,16 +1297,14 @@ class RenderChatScrollView extends RenderBox implements ChatScrollAnimator {
     double bestOffset = double.infinity;
     for (final entry in _children.entries) {
       final cpd = _parentData(entry.value);
-      if (cpd.offset + entry.value.size.height > 0 &&
-          cpd.offset < bestOffset) {
+      if (cpd.offset + entry.value.size.height > 0 && cpd.offset < bestOffset) {
         bestId = entry.key;
         bestOffset = cpd.offset;
       }
     }
     for (final entry in _chunkErrors.entries) {
       final cpd = _parentData(entry.value);
-      if (cpd.offset + entry.value.size.height > 0 &&
-          cpd.offset < bestOffset) {
+      if (cpd.offset + entry.value.size.height > 0 && cpd.offset < bestOffset) {
         // Reassign to the chunk's first id — the next fan-out will detect
         // the chunk-error tile via `_isChunkErrored`.
         bestId = ChatScrollChunk.firstIdOf(entry.key);
@@ -1911,7 +1898,8 @@ class RenderChatScrollView extends RenderBox implements ChatScrollAnimator {
 
     // Skip the scroll path entirely on highlight-only frames so the fetch
     // poll's debounce isn't constantly reset by `_markScrollActive`.
-    final hasScrollWork = _pendingScrollDelta != 0.0 ||
+    final hasScrollWork =
+        _pendingScrollDelta != 0.0 ||
         _simulation != null ||
         _animateCompleter != null ||
         _bouncebackActive;
@@ -2607,7 +2595,10 @@ class RenderChatScrollView extends RenderBox implements ChatScrollAnimator {
     // message — no scrollbar, no floating header, no per-message cull.
     final overlay = _overlay;
     if (_overlayKind != ChatOverlayKind.none && overlay != null) {
-      context.paintChild(overlay, offset + Offset(0, _parentData(overlay).offset));
+      context.paintChild(
+        overlay,
+        offset + Offset(0, _parentData(overlay).offset),
+      );
       return;
     }
 
