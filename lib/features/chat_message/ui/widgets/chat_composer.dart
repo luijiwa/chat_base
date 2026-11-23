@@ -1,19 +1,12 @@
-import 'package:chatscrollview/src/chat_message.dart';
+import 'package:chatscrollview/core/models/chat_message.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_data_source.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_scroll_common.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_selection_controller.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
-/// Max width of the composer content column — the bar background still spans
-/// the full width, but the input field / action buttons are centered within.
 const double _kComposerMaxWidth = 620.0;
 
-/// Bottom bar for the widget-based chat demo.
-///
-/// Idle: a rounded multi-line input field pinned to the bottom.
-/// Selection mode: the input field slides down out of view while
-/// copy / favorite / share icon buttons fly in from the sides.
 class ChatComposer extends StatefulWidget {
   const ChatComposer({
     required this.selection,
@@ -22,13 +15,8 @@ class ChatComposer extends StatefulWidget {
     super.key,
   });
 
-  /// Drives the input ⇄ actions transition.
   final ChatSelectionController selection;
-
-  /// Source for message text when copying a selection to the clipboard.
   final ChatDataSource dataSource;
-
-  /// Вызывается с текстом сообщения, когда пользователь нажимает «Отправить».
   final ValueChanged<String> onSend;
 
   @override
@@ -37,12 +25,10 @@ class ChatComposer extends StatefulWidget {
 
 class _ChatComposerState extends State<ChatComposer>
     with SingleTickerProviderStateMixin {
-  /// 0 → input field shown, 1 → action buttons shown.
   late final AnimationController _t;
   final TextEditingController _text = TextEditingController();
   final FocusNode _focus = FocusNode();
 
-  /// Every [CurvedAnimation] built off [_t] — disposed together.
   final List<CurvedAnimation> _curves = <CurvedAnimation>[];
 
   late final Animation<Offset> _inputSlide;
@@ -67,7 +53,6 @@ class _ChatComposerState extends State<ChatComposer>
       vsync: this,
       duration: const Duration(milliseconds: 340),
     );
-    // Input field: drops straight down and fades out early.
     _inputSlide = Tween<Offset>(
       begin: Offset.zero,
       end: const Offset(0, 1.4),
@@ -76,8 +61,6 @@ class _ChatComposerState extends State<ChatComposer>
       begin: 1,
       end: 0,
     ).animate(_curve(const Interval(0.0, 0.5, curve: Curves.easeIn)));
-    // Action buttons: copy from the left, share from the right, favorite pops
-    // up in the middle — all slightly staggered with an ease-out overshoot.
     _copySlide = Tween<Offset>(
       begin: const Offset(-2.6, 0),
       end: Offset.zero,
@@ -201,7 +184,6 @@ class _ChatComposerState extends State<ChatComposer>
                     child: Stack(
                       alignment: Alignment.bottomCenter,
                       children: <Widget>[
-                        // Input layer — sizes the bar.
                         SlideTransition(
                           position: _inputSlide,
                           child: FadeTransition(
@@ -217,7 +199,6 @@ class _ChatComposerState extends State<ChatComposer>
                             ),
                           ),
                         ),
-                        // Action layer — overlaid, fades / flies in.
                         Positioned.fill(
                           child: IgnorePointer(
                             ignoring: !_mode,

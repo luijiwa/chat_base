@@ -1,7 +1,7 @@
-import 'package:chatscrollview/src/data/local_message_data_source.dart';
-import 'package:chatscrollview/src/domain/message_repository.dart';
-import 'package:chatscrollview/src/domain/message_send_status.dart';
-import 'package:chatscrollview/src/domain/sent_message.dart';
+import 'package:chatscrollview/features/chat_message/data/local_message_data_source.dart';
+import 'package:chatscrollview/features/chat_message/domain/message_repository.dart';
+import 'package:chatscrollview/features/chat_message/domain/message_send_status.dart';
+import 'package:chatscrollview/features/chat_message/domain/sent_message.dart';
 
 /// Реализация [MessageRepository] поверх локального асинхронного источника.
 class MessageRepositoryImpl implements MessageRepository {

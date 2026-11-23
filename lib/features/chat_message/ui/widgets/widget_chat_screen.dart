@@ -1,26 +1,22 @@
 import 'dart:async';
 
-import 'package:chatscrollview/src/chat_message.dart';
+import 'package:chatscrollview/core/models/chat_message.dart';
+import 'package:chatscrollview/features/chat_message/domain/message_send_status.dart';
+import 'package:chatscrollview/features/chat_message/domain/sent_message.dart';
+import 'package:chatscrollview/features/chat_message/ui/bloc/chat_message_bloc.dart';
+import 'package:chatscrollview/features/chat_message/ui/widgets/chat_composer.dart';
+import 'package:chatscrollview/features/chat_message/ui/widgets/date_separator.dart';
+import 'package:chatscrollview/features/chat_message/ui/widgets/demo_message.dart';
+import 'package:chatscrollview/features/chat_message/ui/widgets/measure_size.dart';
+import 'package:chatscrollview/features/chat_message/ui/widgets/new_messages_pill.dart';
+import 'package:chatscrollview/features/chat_message/ui/widgets/selection_app_bar.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_data_source.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_scroll_common.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_scroll_controller.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_selection_controller.dart';
 import 'package:chatscrollview/src/chat_widgets/chat_keyboard_shortcuts.dart';
 import 'package:chatscrollview/src/chat_widgets/chat_scroll_view.dart';
-import 'package:chatscrollview/src/bloc/chat_message_bloc.dart';
-import 'package:chatscrollview/src/chat_widgets/demo/chat_composer.dart';
-import 'package:chatscrollview/src/chat_widgets/demo/date_separator.dart';
-import 'package:chatscrollview/src/chat_widgets/demo/demo_message.dart';
-import 'package:chatscrollview/src/chat_widgets/demo/measure_size.dart';
-import 'package:chatscrollview/src/chat_widgets/demo/new_messages_pill.dart';
-import 'package:chatscrollview/src/chat_widgets/demo/selection_app_bar.dart';
 import 'package:chatscrollview/src/comments_data_source.dart';
-import 'package:chatscrollview/src/data/local_message_data_source.dart';
-import 'package:chatscrollview/src/data/message_repository_impl.dart';
-import 'package:chatscrollview/src/domain/message_repository.dart';
-import 'package:chatscrollview/src/domain/message_send_status.dart';
-import 'package:chatscrollview/src/domain/send_message_use_case.dart';
-import 'package:chatscrollview/src/domain/sent_message.dart';
 import 'package:material_ui/material_ui.dart';
 
 /// Demo screen for the widget-based [ChatScrollView] — the chat viewport,
@@ -43,9 +39,6 @@ class _WidgetChatScreenState extends State<WidgetChatScreen> {
   bool _loading = true;
 
   /// Доменный/дата стек отправки сообщений.
-  LocalMessageDataSource? _localDataSource;
-  MessageRepository? _messageRepository;
-  SendMessageUseCase? _sendMessageUseCase;
 
   /// BLoC, владеющий состоянием отправки сообщений.
   ChatMessageBloc? _chatBloc;
@@ -58,9 +51,6 @@ class _WidgetChatScreenState extends State<WidgetChatScreen> {
     _selection = ChatSelectionController();
 
     // Доменный/дата стек отправки сообщений.
-    _localDataSource = LocalMessageDataSource();
-    _messageRepository = MessageRepositoryImpl(_localDataSource!);
-    _sendMessageUseCase = SendMessageUseCase(_messageRepository!);
 
     _init();
   }
@@ -91,7 +81,7 @@ class _WidgetChatScreenState extends State<WidgetChatScreen> {
       _configure(comments.manifest.totalMessages);
     } on Object {
       if (!mounted) return;
-      const count = 4000;
+      const count = 8;
       _dataSource = _DemoDataSource(messageCount: count);
       _configure(count);
     }
@@ -109,10 +99,7 @@ class _WidgetChatScreenState extends State<WidgetChatScreen> {
     _controller.jumpTo(count - 1);
 
     // Создаём BLoC отправки, как только известно начальное значение id.
-    _chatBloc = ChatMessageBloc(
-      sendMessageUseCase: _sendMessageUseCase!,
-      initialNextOutgoingId: count,
-    );
+    _chatBloc = ChatMessageBloc(initialNextOutgoingId: count);
     _blocSubscription = _chatBloc!.stream.listen((_) {
       if (mounted) setState(() {});
     });
@@ -155,6 +142,7 @@ class _WidgetChatScreenState extends State<WidgetChatScreen> {
     final pending = SentMessage(
       id: id,
       sender: 'Me',
+      chatId: 'room1',
       createdAt: now,
       updatedAt: now,
       content: trimmed,
@@ -278,7 +266,7 @@ class _WidgetChatScreenState extends State<WidgetChatScreen> {
 /// Fallback data source generating messages on demand (used when the bundled
 /// `assets/comments` data fails to load).
 class _DemoDataSource extends ChatDataSource {
-  _DemoDataSource({required this.messageCount});
+  _DemoDataSource({this.messageCount = 8});
 
   final int messageCount;
   final DateTime _baseTime = DateTime.now();
@@ -296,6 +284,7 @@ class _DemoDataSource extends ChatDataSource {
         UserChatMessage(
           id: i,
           sender: 'User',
+          chatId: 'room1',
           // Spread messages across days so the date separators have something
           // to mark — roughly 21 minutes apart.
           createdAt: _baseTime.subtract(

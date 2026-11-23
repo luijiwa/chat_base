@@ -8,7 +8,7 @@
 
 import 'dart:math';
 
-import 'package:chatscrollview/src/chat_message.dart';
+import 'package:chatscrollview/core/models/chat_message.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_data_source.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_scroll_common.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_scroll_controller.dart';
@@ -55,6 +55,7 @@ List<IChatMessage> _generateMessages(int count) {
       UserChatMessage(
         id: i,
         sender: 'User',
+        chatId: 'room1',
         createdAt: now.add(Duration(minutes: i)),
         updatedAt: now.add(Duration(minutes: i)),
         content: () {

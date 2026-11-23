@@ -1,7 +1,7 @@
-import 'package:chatscrollview/src/chat_message.dart';
+import 'package:chatscrollview/core/models/chat_message.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_scroll_common.dart';
-import 'package:chatscrollview/src/domain/message_send_status.dart';
-import 'package:chatscrollview/src/domain/sent_message.dart';
+import 'package:chatscrollview/features/chat_message/domain/message_send_status.dart';
+import 'package:chatscrollview/features/chat_message/domain/sent_message.dart';
 import 'package:material_ui/material_ui.dart';
 
 /// Builds a demo message widget for the widget-based [ChatScrollView].

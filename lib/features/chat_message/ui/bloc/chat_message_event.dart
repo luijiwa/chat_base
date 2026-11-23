@@ -3,7 +3,7 @@ part of 'chat_message_bloc.dart';
 /// Sealed hierarchy of chat-message events emitted by the UI layer.
 ///
 /// The [ChatMessageBloc] translates these events into state transitions
-/// (pending → sent / failed) and owns all message-sending state so that
+/// (pending -> sent / failed) and owns all message-sending state so that
 /// widgets stay purely presentational.
 sealed class ChatMessageEvent extends Equatable {
   const ChatMessageEvent();

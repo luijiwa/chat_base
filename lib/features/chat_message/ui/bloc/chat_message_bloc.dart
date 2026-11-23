@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 
-import 'package:chatscrollview/src/domain/message_send_status.dart';
-import 'package:chatscrollview/src/domain/send_message_use_case.dart';
-import 'package:chatscrollview/src/domain/sent_message.dart';
+import 'package:chatscrollview/features/chat_message/data/local_message_data_source.dart';
+import 'package:chatscrollview/features/chat_message/data/message_repository_impl.dart';
+import 'package:chatscrollview/features/chat_message/domain/message_repository.dart';
+import 'package:chatscrollview/features/chat_message/domain/message_send_status.dart';
+import 'package:chatscrollview/features/chat_message/domain/sent_message.dart';
 import 'package:equatable/equatable.dart';
 
 part 'chat_message_event.dart';
@@ -13,22 +15,24 @@ part 'chat_message_state.dart';
 /// Responsibilities:
 /// * mint stable ids for outgoing messages,
 /// * create `SentMessage` records with `pending` status,
-/// * delegate the actual send to [SendMessageUseCase],
+/// * delegate the actual send to [MessageRepository],
 /// * transition statuses to `sent` or `failed` on completion,
 /// * support retry of failed messages.
 ///
 /// Widgets only `add` events and read `state` — they never touch
-/// `SendMessageUseCase`, `MessageRepository`, or raw status maps directly.
+/// repositories or raw status maps directly.
 class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
   ChatMessageBloc({
-    required this._sendMessageUseCase,
+    MessageRepository? repository,
     required int initialNextOutgoingId,
-  }) : super(ChatMessageState.initial(initialNextOutgoingId)) {
+  }) : _repository =
+           repository ?? MessageRepositoryImpl(LocalMessageDataSource()),
+       super(ChatMessageState.initial(initialNextOutgoingId)) {
     on<ChatMessageSendRequested>(_onSendRequested);
     on<ChatMessageRetryRequested>(_onRetryRequested);
   }
 
-  final SendMessageUseCase _sendMessageUseCase;
+  final MessageRepository _repository;
 
   Future<void> _onSendRequested(
     ChatMessageSendRequested event,
@@ -42,6 +46,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
     final pending = SentMessage(
       id: id,
       sender: 'Me',
+      chatId: 'room1',
       createdAt: now,
       updatedAt: now,
       content: trimmed,
@@ -57,7 +62,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       ),
     );
 
-    final result = await _sendMessageUseCase.send(pending);
+    final result = await _repository.sendMessage(pending);
     if (isClosed) return;
     emit(
       state.copyWith(
@@ -88,7 +93,7 @@ class ChatMessageBloc extends Bloc<ChatMessageEvent, ChatMessageState> {
       ),
     );
 
-    final result = await _sendMessageUseCase.send(retrying);
+    final result = await _repository.sendMessage(retrying);
     if (isClosed) return;
     emit(
       state.copyWith(

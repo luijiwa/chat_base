@@ -1,4 +1,4 @@
-import 'package:chatscrollview/src/chat_message.dart';
+import 'package:chatscrollview/core/models/chat_message.dart';
 import 'package:meta/meta.dart';
 
 import 'message_send_status.dart';
@@ -12,6 +12,7 @@ class SentMessage extends UserChatMessage {
   const SentMessage({
     required super.id,
     required super.sender,
+    required super.chatId,
     required super.createdAt,
     required super.updatedAt,
     required super.content,
@@ -38,6 +39,7 @@ class SentMessage extends UserChatMessage {
     return SentMessage(
       id: id ?? this.id,
       sender: sender ?? this.sender,
+      chatId: chatId,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       content: content ?? this.content,

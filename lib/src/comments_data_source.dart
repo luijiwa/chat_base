@@ -2,13 +2,12 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 
-import 'package:chatscrollview/src/chat_message.dart';
+import 'package:chatscrollview/core/models/chat_message.dart';
+import 'package:chatscrollview/core/utils/load_asset.dart'
+    if (dart.library.js_interop) 'package:chatscrollview/core/utils/load_asset_web.dart'
+    if (dart.library.io) 'package:chatscrollview/core/utils/load_asset_native.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_data_source.dart';
-import 'package:chatscrollview/src/chat_scroll/chat_scroll_chunk.dart';
 import 'package:chatscrollview/src/chat_scroll/chat_scroll_common.dart';
-import 'package:chatscrollview/src/load_asset.dart'
-    if (dart.library.js_interop) 'package:chatscrollview/src/load_asset_web.dart'
-    if (dart.library.io) 'package:chatscrollview/src/load_asset_native.dart';
 
 /// Manifest for asset-based chat data.
 class CommentsManifest {
@@ -20,13 +19,14 @@ class CommentsManifest {
     required this.senders,
   });
 
-  factory CommentsManifest.fromJson(Map<String, Object?> json) => CommentsManifest._(
-    title: json['title']! as String,
-    totalMessages: json['totalMessages']! as int,
-    chunkSize: json['chunkSize']! as int,
-    chunks: (json['chunks']! as List<Object?>).cast<String>(),
-    senders: (json['senders']! as List<Object?>).cast<String>(),
-  );
+  factory CommentsManifest.fromJson(Map<String, Object?> json) =>
+      CommentsManifest._(
+        title: json['title']! as String,
+        totalMessages: json['totalMessages']! as int,
+        chunkSize: json['chunkSize']! as int,
+        chunks: (json['chunks']! as List<Object?>).cast<String>(),
+        senders: (json['senders']! as List<Object?>).cast<String>(),
+      );
 
   final String title;
   final int totalMessages;
@@ -78,8 +78,7 @@ class CommentsDataSource extends ChatDataSource {
 
   /// On native — loads from bundled assets via rootBundle.
   /// On web — fetches on demand via HTTP (assets excluded from service worker).
-  static Future<String> _loadString(String assetPath) =>
-      loadAsset(assetPath);
+  static Future<String> _loadString(String assetPath) => loadAsset(assetPath);
 
   final CommentsManifest manifest;
   final String assetPrefix;
@@ -135,7 +134,8 @@ class CommentsDataSource extends ChatDataSource {
 
     final fileName = manifest.chunks[assetChunkIndex];
     final raw = await _loadString('$assetPrefix/$fileName');
-    final list = (jsonDecode(raw) as List<Object?>).cast<Map<String, Object?>>();
+    final list = (jsonDecode(raw) as List<Object?>)
+        .cast<Map<String, Object?>>();
 
     final baseTime = DateTime.now();
     final messages = <IChatMessage>[
@@ -143,10 +143,11 @@ class CommentsDataSource extends ChatDataSource {
         UserChatMessage(
           id: item['id']! as int,
           sender: item['sender']! as String,
-          createdAt: DateTime.tryParse(item['createdAt'] as String? ?? '') ??
-              baseTime,
-          updatedAt: DateTime.tryParse(item['createdAt'] as String? ?? '') ??
-              baseTime,
+          chatId: 'room1',
+          createdAt:
+              DateTime.tryParse(item['createdAt'] as String? ?? '') ?? baseTime,
+          updatedAt:
+              DateTime.tryParse(item['createdAt'] as String? ?? '') ?? baseTime,
           content: item['content'] as String? ?? '',
         ),
     ];

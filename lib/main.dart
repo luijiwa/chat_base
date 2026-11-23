@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:chatscrollview/src/chat_widgets/demo/widget_chat_screen.dart';
+import 'package:chatscrollview/features/chat_message/ui/widgets/widget_chat_screen.dart';
 import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:l/l.dart';
@@ -33,6 +33,6 @@ class ChatDemoApp extends StatelessWidget {
       GlobalCupertinoLocalizations.delegate,
     ],
     showPerformanceOverlay: false,
-    home: const WidgetChatScreen(),
+    home: WidgetChatScreen(),
   );
 }
