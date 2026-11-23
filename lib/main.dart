@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:chatscrollview/src/chat_widgets/demo/widget_chat_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:flutter/widgets.dart';
 import 'package:l/l.dart';
 
 /// Entry point for the widget-based [ChatScrollView] demo
@@ -27,7 +29,10 @@ class ChatDemoApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
     ),
-    debugShowCheckedModeBanner: false,
+    localizationsDelegates: const [
+      GlobalMaterialLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ],
     showPerformanceOverlay: false,
     home: const WidgetChatScreen(),
   );

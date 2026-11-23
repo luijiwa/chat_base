@@ -1,5 +1,5 @@
 import 'package:chatscrollview/src/chat_scroll/chat_selection_controller.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Contextual top bar shown while selection mode is active.
 ///

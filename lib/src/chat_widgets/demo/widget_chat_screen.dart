@@ -12,7 +12,7 @@ import 'package:chatscrollview/src/chat_widgets/demo/measure_size.dart';
 import 'package:chatscrollview/src/chat_widgets/demo/new_messages_pill.dart';
 import 'package:chatscrollview/src/chat_widgets/demo/selection_app_bar.dart';
 import 'package:chatscrollview/src/comments_data_source.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Demo screen for the widget-based [ChatScrollView] — the chat viewport,
 /// a bottom composer, and a contextual selection bar, wired together.
@@ -96,10 +96,7 @@ class _WidgetChatScreenState extends State<WidgetChatScreen> {
     if (message == null) return const DemoShimmerBubble();
     final prev = _dataSource?.getMessage(id - 1);
     final isFirstInRun = prev?.sender != message.sender;
-    return DemoMessageBubble(
-      message: message,
-      isFirstInRun: isFirstInRun,
-    );
+    return DemoMessageBubble(message: message, isFirstInRun: isFirstInRun);
   }
 
   Widget _buildChunkError(
